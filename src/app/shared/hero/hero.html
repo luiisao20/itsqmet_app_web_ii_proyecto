@@ -1,0 +1,92 @@
+<section class="relative w-full h-[80vh] min-h-150 overflow-hidden">
+  <div
+    class="absolute inset-0 bg-cover bg-center"
+    data-alt=""
+    style="
+      background-image:
+        linear-gradient(to top, #053345 0%, rgba(34, 16, 19, 0.4) 50%, rgba(34, 16, 19, 0) 100%),
+        url('https://images.pexels.com/photos/7234215/pexels-photo-7234215.jpeg');
+    "
+  ></div>
+  <div class="relative h-full max-w-7xl mx-auto px-6 lg:px-20 flex flex-col justify-end pb-20">
+    <div class="flex flex-col gap-6 max-w-2xl">
+      <div class="flex gap-2">
+        @for (badge of badges; track $index) {
+          <app-badge title="badge.name" [select]="badge.select"></app-badge>
+        }
+      </div>
+      <h2 class="text-6xl lg:text-8xl font-black text-white leading-none">NOMBRE PELICULA</h2>
+      <p class="text-lg text-slate-300 max-w-lg leading-relaxed">
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur dicta vero explicabo
+        similique ea reiciendis ut veniam nulla repellendus a? Neque mollitia quos dolore provident
+        debitis saepe cum temporibus dolorum.
+      </p>
+
+      <ng-template #ticketIcon>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6 text-white"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z"
+          />
+        </svg>
+      </ng-template>
+      <ng-template #playIcon>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6 text-white"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z"
+          />
+        </svg>
+      </ng-template>
+
+      <div class="flex items-center gap-4 mt-4">
+        <app-button
+          title="COMPRAR ENTRADAS"
+          [prefixIcon]="ticketIcon"
+          shadow="shadow-xl shadow-cyan-500/40"
+          [animation]="true"
+          background="bg-(--main-color) hover:bg-(--main-color)/90"
+        ></app-button>
+        <app-button
+          title="VER TRAILER"
+          [prefixIcon]="playIcon"
+          [animation]="false"
+          background="bg-white/10 hover:bg-white/20 backdrop-blur-md"
+          [border]="true"
+          borderColor="border-white/30"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute right-20 bottom-20 flex flex-col gap-4">
+    <div class="w-1 h-12 bg-(--main-color) rounded-full"></div>
+    <div
+      class="w-1 h-8 bg-white/20 hover:bg-white/40 cursor-pointer rounded-full transition-all"
+    ></div>
+    <div
+      class="w-1 h-8 bg-white/20 hover:bg-white/40 cursor-pointer rounded-full transition-all"
+    ></div>
+  </div>
+</section>

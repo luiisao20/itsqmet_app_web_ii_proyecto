@@ -1,0 +1,9 @@
+<span
+  class="px-3 py-1 rounded-full text-xs font-bold tracking-widest uppercase"
+  [ngClass]="
+    select
+      ? 'bg-(--main-color)/20 text-(--main-color) border border-(--main-color)/30'
+      : 'bg-white/10 backdrop-blur-sm text-white border border-white/30'
+  "
+  >{{ title }}</span
+>

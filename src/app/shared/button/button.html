@@ -1,0 +1,24 @@
+<button
+  class="group rounded-xl flex items-center gap-3 transition-transform cursor-pointer"
+  [ngClass]="[
+    shadow || '',
+    animation ? 'hover:scale-105 active:scale-95' : '',
+    background || '',
+    border ? 'border' : '',
+    border && borderColor ? borderColor : '',
+    paddingVertical || 'px-10',
+    paddingHorizontal || 'py-4',
+  ]"
+>
+  @if (prefixIcon) {
+    <ng-container [ngTemplateOutlet]="prefixIcon"></ng-container>
+  }
+
+  <span [ngClass]="[textStyle || 'text-white font-extrabold']">
+    {{ title }}
+  </span>
+
+  @if (suffixIcon) {
+    <ng-container [ngTemplateOutlet]="suffixIcon"></ng-container>
+  }
+</button>

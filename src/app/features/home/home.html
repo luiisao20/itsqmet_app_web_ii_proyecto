@@ -1,1 +1,40 @@
-<p>home works!</p>
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+  <app-hero></app-hero>
+  <app-categories></app-categories>
+  <div class="w-full py-16 max-w-7xl mx-auto px-6 lg:px-20">
+    <div class="flex items-center justify-between">
+      <div>
+        <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-3">
+          <span class="w-2 h-8 bg-(--main-color) rounded-full"></span>
+          EN CARTELERA
+        </h2>
+        <p class="text-slate-500 mt-2 font-medium">
+          Mira los últimos éxitos de taquilla en la pantalla grande
+        </p>
+      </div>
+      <a
+        class="text-(--main-color) font-bold hover:underline flex items-center justify-center gap-1 group"
+        href="#"
+      >
+        Ver todos los estrenos
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6 text-(--main-color) transition-transform group-hover:translate-x-1"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+  <app-movies-grid></app-movies-grid>
+  <div class="my-10"></div>
+  <app-footer></app-footer>
+</div>
