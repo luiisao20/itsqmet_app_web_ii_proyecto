@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MoviesCard } from '../movies-card/movies-card';
 import { Movie } from '../../models/movie';
 
@@ -39,4 +39,6 @@ export class MoviesGrid {
       time: '2h 30m',
     },
   ];
+
+  @Input() nowCard?: boolean;
 }

@@ -1,1 +1,119 @@
-<p>contact-us works!</p>
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+  <div class="w-full pt-12 pb-6 px-4">
+    <h1 class="text-white text-center text-4xl lg:text-5xl font-bold tracking-tight mb-2">
+      Contáctanos
+    </h1>
+    <p class="text-center text-white/60 max-w-lg mx-auto">
+      ¿Tienes alguna pregunta o comentario? Nos encantaría saber de ti. Nuestro equipo está aquí
+      para ayudarte.
+    </p>
+  </div>
+  <section class="max-w-7xl mx-auto px-6 py-10 grid lg:grid-cols-2 gap-12 items-start">
+    <app-contact-form></app-contact-form>
+
+    <div class="space-y-8">
+      <div class="rounded-xl overflow-hidden border border-cyan-500/20 h-80 relative shadow-2xl">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31918.29487361483!2d-78.53764112568359!3d-0.22753519999999272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d5998d2298ce15%3A0xd4d5bf5a2c231ef9!2sInstituto%20Tecnol%C3%B3gico%20Universitario%20Quito%20Metropolitano%20-%20ITSQMET%20-%20Campus%20Matriz!5e0!3m2!1ses-419!2sec!4v1770782182284!5m2!1ses-419!2sec"
+          class="absolute inset-0 w-full h-full"
+          style="border: 0; filter: contrast(1.2) brightness(0.5)"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+        <div
+          class="absolute inset-0 bg-linear-to-t from-background-dark/80 to-transparent pointer-events-none"
+        ></div>
+        <div class="absolute bottom-4 left-4 flex flex-col gap-1 pointer-events-none">
+          <h4 class="text-white font-bold text-lg">ITSQMET</h4>
+          <p class="text-white/70 text-xs">Campus Matriz</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-center gap-4 p-4 rounded-lg bg-cyan-500/5 border border-cyan-500/10">
+          <div class="text-cyan-500 p-2 bg-cyan-500/20 rounded-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="size-6"
+            >
+              <path
+                fill-rule="evenodd"
+                d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+
+          <div>
+            <p class="text-sm font-bold">Ubicación</p>
+            <p class="text-xs text-white/60 leading-tight">Quito, Ecuador</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg bg-cyan-500/5 border border-cyan-500/10">
+          <div class="text-cyan-500 p-2 bg-cyan-500/20 rounded-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="size-6"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+
+          <div>
+            <p class="text-sm font-bold">Teléfono</p>
+            <p class="text-xs text-white/60 leading-tight">+593 000 123 4567</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg bg-cyan-500/5 border border-cyan-500/10">
+          <div class="text-cyan-500 p-2 bg-cyan-500/20 rounded-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="size-6"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+
+          <div>
+            <p class="text-sm font-bold">Horarios</p>
+            <p class="text-xs text-white/60 leading-tight">Lun-Dom: 10AM - 1AM</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg bg-cyan-500/5 border border-cyan-500/10">
+          <div class="text-cyan-500 p-2 bg-cyan-500/20 rounded-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="size-6"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-bold">Soporte</p>
+            <p class="text-xs text-white/60 leading-tight">soporte@cinemaapp.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

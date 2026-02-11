@@ -1,0 +1,50 @@
+<div class="bg-cyan-950/20 p-8 rounded-xl border border-cyan-500/10 shadow-2xl">
+  <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+      <path
+        d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"
+      />
+      <path
+        d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"
+      />
+    </svg>
+
+    Enviar un mensaje
+  </h3>
+  <form class="space-y-6">
+    <div class="grid md:grid-cols-2 gap-4">
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Nombre completo</p>
+        <input
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white p-4 h-14 placeholder:text-white/30"
+          placeholder="Nombre completo"
+          type="text"
+        />
+      </label>
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Correo electrónico</p>
+        <input
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white p-4 h-14 placeholder:text-white/30"
+          placeholder="usuario@correo.com"
+          type="email"
+        />
+      </label>
+    </div>
+    <label class="flex flex-col gap-2">
+      <p class="text-white/80 text-sm font-medium">Mensaje</p>
+      <textarea
+        class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white p-4 min-h-40 placeholder:text-white/30"
+        placeholder="¿Cómo podemos ayudarte hoy?"
+      ></textarea>
+    </label>
+    <app-button
+      [title]="'Enviar mensaje'"
+      [shadow]="'shadow-lg shadow-cyan-500/20'"
+      [background]="'bg-cyan-500 hover:bg-cyan-500/90'"
+      paddingHorizontal="px-6"
+      paddingVertical="py-2"
+      [textStyle]="'text-sm text-white font-bold uppercase tracking-wide'"
+      paddingVertical="py-4"
+    ></app-button>
+  </form>
+</div>
