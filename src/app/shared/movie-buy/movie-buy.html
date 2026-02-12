@@ -62,7 +62,7 @@
   <div class="flex justify-between mx-6">
     <p class="text-cyan-50 text-lg">Total a pagar</p>
     <p class="text-cyan-500 text-xl font-semibold">
-      $ {{ (selectedSeats.length * 6.5 + 3.5).toFixed(2) }}
+      $ {{ (selectedSeats.length * 6.5 + 3).toFixed(2) }}
     </p>
   </div>
   <ng-template #goIcon>
@@ -71,14 +71,16 @@
   <div class="my-8 flex justify-center items-center">
     <app-button
       title="Proceder al pago"
+      [animation]="false"
       [suffixIcon]="goIcon"
-      shadow="shadow-xl shadow-cyan-500/40"
+      [shadow]="selectedSeats.length > 0 ? 'shadow-xl shadow-cyan-500/40' : 'shadow-none'"
       [animation]="true"
-      background="bg-(--main-color) hover:bg-(--main-color)/90"
+      [background]="
+        selectedSeats.length > 0 ? 'bg-(--main-color) hover:bg-(--main-color)/90' : 'bg-gray-600'
+      "
     ></app-button>
   </div>
   <p class="text-xs text-center text-cyan-50/50">
-    Al presionar en "Proceder al pago" estás aceptando nuestros términos y condiciiones de
-    cancelación
+    Al presionar en "Proceder al pago" estás aceptando nuestros términos y políticas de cancelación
   </p>
 </div>

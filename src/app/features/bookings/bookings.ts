@@ -3,6 +3,7 @@ import { Seat } from '../../shared/seat/seat';
 import { Movie } from '../../models/movie';
 import { SeatsType } from '../../shared/seats-type/seats-type';
 import { MovieBuy } from '../../shared/movie-buy/movie-buy';
+import { Footer } from "../../shared/footer/footer";
 
 export interface SeatNumber {
   row: string;
@@ -16,7 +17,7 @@ interface SeatType {
 
 @Component({
   selector: 'app-bookings',
-  imports: [Seat, SeatsType, MovieBuy],
+  imports: [Seat, SeatsType, MovieBuy, Footer],
   templateUrl: './bookings.html',
   styleUrl: './bookings.css',
 })
