@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Hero } from '../../shared/hero/hero';
-import { Categories } from '../../shared/categories/categories';
-import { MoviesGrid } from '../../shared/movies-grid/movies-grid';
+import { MovieForm } from '../../shared/movie-form/movie-form';
+import { Button } from '../../shared/button/button';
+import { MovieTable } from '../../shared/movie-table/movie-table';
 
 @Component({
   selector: 'app-movies',
-  imports: [Hero, Categories, MoviesGrid],
+  imports: [MovieForm, Button, MovieTable],
   templateUrl: './movies.html',
   styleUrl: './movies.css',
 })
