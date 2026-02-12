@@ -1,0 +1,122 @@
+<div class="bg-cyan-950/20 p-8 rounded-xl border border-cyan-500/10 shadow-2xl mb-10">
+  <form action="">
+    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="size-6"
+      >
+        <path
+          d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"
+        />
+        <path
+          d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"
+        />
+      </svg>
+
+      Informacion general
+    </h3>
+    <div class="flex flex-col gap-4">
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Titulo</p>
+        <input
+          name="title"
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+          placeholder="Titulo de la pelicula"
+          type="text"
+        />
+      </label>
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Imagen</p>
+        <input
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+          placeholder="URL de imagen"
+          type="imageUrl"
+        />
+      </label>
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Sinopsis</p>
+        <textarea
+          name="overview"
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 min-h-40 placeholder:text-white/30"
+          placeholder="Sinopsis de la pelicula"
+        ></textarea>
+      </label>
+    </div>
+    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2 mt-6">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="size-6"
+      >
+        <path
+          d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"
+        />
+        <path
+          d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"
+        />
+      </svg>
+
+      Detalles
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Categoria</p>
+        <select
+          name="category"
+          class="w-full bg-cyan-950/20 dark:bg-cyan-950/20 border-transparent rounded-lg focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2.5 outline-none transition-all"
+        >
+          <option class="text-gray-600">Accion</option>
+          <option class="text-gray-600">Drama</option>
+          <option class="text-gray-600">Sci-Fi</option>
+          <option class="text-gray-600">Terror</option>
+          <option class="text-gray-600">Comedia</option>
+          <option class="text-gray-600">Animada</option>
+        </select>
+      </label>
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Estado</p>
+        <select
+          name="status"
+          class="w-full bg-cyan-950/20 dark:bg-cyan-950/20 border-transparent rounded-lg focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2.5 outline-none transition-all"
+        >
+          <option class="text-gray-600">Disponible</option>
+          <option class="text-gray-600">Muy pronto</option>
+          <option class="text-gray-600">Cancelada</option>
+        </select>
+      </label>
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Fecha de estreno</p>
+        <input
+          name="release_date"
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+          type="date"
+        />
+      </label>
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Duracion</p>
+        <input
+          name="time"
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+          placeholder="Duracion"
+          type="number"
+          min="1"
+          max="300"
+        />
+      </label>
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Puntuacion</p>
+        <input
+          name="rating"
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+          placeholder="Puntuacion"
+          type="number"
+          max="5"
+          min="1"
+        />
+      </label>
+    </div>
+  </form>
+</div>
