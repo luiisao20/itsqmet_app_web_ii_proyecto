@@ -1,1 +1,38 @@
-<p>movies works!</p>
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+  <app-hero></app-hero>
+  <section class="py-8 bg-(--background)">
+    <div class="max-w-7xl mx-auto px-6 lg:px-20">
+      <div class="flex flex-wrap items-center justify-between gap-6">
+        <app-categories></app-categories>
+        <div class="flex items-center gap-4">
+          <button
+            class="flex items-center gap-2 bg-white dark:bg-white/5 px-4 py-2 rounded-lg text-sm border border-slate-200 dark:border-white/10 cursor-pointer"
+          >
+            <span class="font-bold">Calificación: 5</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-4 text-white"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="w-full py-8 max-w-7xl mx-auto px-6 lg:px-20">
+    <div class="flex items-center justify-between">
+      <div>
+        <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-3">
+          <span class="w-2 h-8 bg-(--main-color) rounded-full"></span>
+          Ahora en cines
+        </h2>
+      </div>
+    </div>
+  </div>
+  <app-movies-grid [nowCard]="true"></app-movies-grid>
+</div>
