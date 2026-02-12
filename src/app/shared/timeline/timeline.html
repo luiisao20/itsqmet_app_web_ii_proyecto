@@ -1,0 +1,23 @@
+<div class="w-1/2 mx-auto mb-10">
+  <h2 class="font-extrabold text-3xl mb-10">Nuestro avance a través del tiempo</h2>
+  <ol class="relative border-s border-gray-200 dark:border-gray-700">
+    @for (item of timeline; track $index) {
+      <li class="mb-10 ms-6">
+        <span
+          class="absolute flex items-center justify-center w-6 h-6 rounded-full -start-3 ring-4 ring-cyan-500 bg-cyan-800 dark:"
+        >
+          <ng-icon [name]="`${item.icon}`" class="icon-main" size="16"></ng-icon>
+        </span>
+        <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+          {{ item.title }}
+        </h3>
+        <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500"
+          >{{ item.year }}</time
+        >
+        <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+          {{ item.description }}
+        </p>
+      </li>
+    }
+  </ol>
+</div>

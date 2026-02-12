@@ -1,1 +1,70 @@
-<p>about-us works!</p>
+<section class="relative w-full h-[60vh] overflow-hidden">
+  <div
+    class="absolute inset-0 bg-cover bg-center"
+    data-alt=""
+    style="
+      background-image:
+        linear-gradient(to top, #053345 0%, rgba(34, 16, 19, 0.4) 50%, rgba(34, 16, 19, 0) 100%),
+        url('/images/cinema.jpg');
+    "
+  ></div>
+  <div class="relative h-full max-w-7xl mx-auto px-6 lg:px-20 flex flex-col pb-20 justify-end">
+    <h2 class="text-center text-cyan-500 font-semibold">Desde 2020</h2>
+    <div class="md:w-3/4 mx-auto">
+      <h2 class="text-cyan-50 font-extrabold text-4xl text-center">
+        Elevando la experiencia del cine
+      </h2>
+      <h2 class="text-cyan-500 font-extrabold text-4xl text-center">
+        Más que una sala, un espacio para compartir
+      </h2>
+      <p class="text-cyan-50/90 text-center mt-6">
+        En CineShare, nos apasiona el cine y creemos que cada película merece ser disfrutada en un
+        ambiente acogedor y emocionante.
+      </p>
+    </div>
+    <div class="flex items-center gap-4 mt-4 place-self-center">
+      <app-button
+        title="Nuestra misión y visión"
+        shadow="shadow-xl shadow-cyan-500/40"
+        [animation]="true"
+        background="bg-(--main-color) hover:bg-(--main-color)/90"
+      ></app-button>
+      <app-button
+        title="Nuestra historia"
+        [animation]="false"
+        background="bg-white/10 hover:bg-white/20 backdrop-blur-md"
+        [border]="true"
+        borderColor="border-white/30"
+      ></app-button>
+    </div>
+  </div>
+</section>
+
+<app-mission-vision></app-mission-vision>
+
+<div
+  class="h-1 mb-8 w-3/4 mx-auto rounded-full bg-linear-to-r from-cyan-500/10 via-cyan-500 to-blue-500/10"
+></div>
+
+<h2 class="text-center font-semibold text-cyan-50 text-3xl">Disfruta de grandes experiencias</h2>
+<p class="text-center w-1/2 mx-auto mt-4 text-sm text-cyan-50/60">
+  Más allá de las películas, ofrecemos una serie de beneficios que harán de tu visita al cine una
+  vivencia como ninguna otra
+</p>
+
+<div class="px-10 mx-auto">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch my-10">
+    @for (item of benefits; track $index) {
+      <app-benefits-card
+        [title]="item.title"
+        [description]="item.description"
+        [icon]="item.icon"
+        [image]="item.image"
+      ></app-benefits-card>
+    }
+  </div>
+</div>
+
+<app-timeline></app-timeline>
+
+<app-footer></app-footer>

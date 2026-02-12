@@ -1,0 +1,13 @@
+<div class="flex flex-row gap-4 p-2 bg-cyan-500/10 rounded-sm cursor-pointer hover:bg-cyan-500/20 border border-cyan-50/60">
+  @if (icon) {
+    <div class="p-2 bg-cyan-500/20 rounded-sm flex justify-center items-center">
+      <ng-container [ngTemplateOutlet]="icon"></ng-container>
+    </div>
+  }
+  <div>
+    <h2 class="font-semibold text-sm">{{ title }}</h2>
+    <p class="text-cyan-50/60 text-sm line-clamp-1">
+      {{ description }}
+    </p>
+  </div>
+</div>

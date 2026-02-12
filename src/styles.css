@@ -15,6 +15,10 @@
   --background: #221013;
 }
 
+.icon-main {
+  color: var(--color-main)
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
     --background: #0a0a0a;

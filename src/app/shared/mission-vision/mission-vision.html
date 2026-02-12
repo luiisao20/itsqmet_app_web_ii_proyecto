@@ -1,0 +1,26 @@
+<section class="grid grid-cols-1 md:grid-cols-2">
+  <div class="max-w-7xl mx-auto px-6 lg:px-20 py-16 flex flex-col space-y-6">
+    <h2 class="text-cyan-500 text-4xl font-semibold text-left">Nuestra {{ indexInfo === 0 ? 'misión' : 'visión' }}</h2>
+    <div class="bg-main h-1 rounded-full w-20"></div>
+    <p>
+      {{ indexInfo === 0 ? mission : vision }}
+    </p>
+    <ng-template #eye>
+      <ng-icon name="ionEye" class="icon-main" size="20"></ng-icon>
+    </ng-template>
+    <ng-template #heart>
+      <ng-icon name="ionHeart" class="icon-main" size="20"></ng-icon>
+    </ng-template>
+    <div class="flex flex-col space-y-2">
+      @for (item of infoButtons; track $index) {
+        <app-button-description
+          (click)="setIndex($index)"
+          [title]="item.title"
+          [description]="item.description"
+          [icon]="$index === 1 ? eye : heart"
+        ></app-button-description>
+      }
+    </div>
+  </div>
+  <img src="/images/cinema-1.jpg" alt="" class="h-64 object-cover rounded-2xl place-self-center">
+</section>
