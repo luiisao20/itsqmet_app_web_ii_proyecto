@@ -19,4 +19,5 @@ export class Button {
   @Input() textStyle!: string;
   @Input() prefixIcon?: TemplateRef<void>;
   @Input() suffixIcon?: TemplateRef<void>;
+  @Input() type?: string = 'button';
 }
