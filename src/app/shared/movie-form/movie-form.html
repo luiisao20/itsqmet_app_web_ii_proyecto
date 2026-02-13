@@ -7,7 +7,7 @@
   </div>
 </div>
 <div class="bg-cyan-950/20 p-8 rounded-xl border border-cyan-500/10 shadow-2xl mb-10">
-  <form (ngSubmit)="saveMovie()">
+  <form (ngSubmit)="mutation.mutate()">
     <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -148,6 +148,4 @@
   </form>
 </div>
 
-<app-movie-table
-  (selectMovieToEdit)="setMovieToEdit($event)"
-></app-movie-table>
+<app-movie-table (selectMovieToEdit)="setMovieToEdit($event)"></app-movie-table>

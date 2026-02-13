@@ -1,8 +1,10 @@
-import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroPencilSquare, heroTrash } from '@ng-icons/heroicons/outline';
 import { MovieService } from '../../service/movie-service';
 import { Movie } from '../../models/movie';
+import { injectMutation, injectQuery, QueryClient } from '@tanstack/angular-query-experimental';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-movie-table',
@@ -15,23 +17,24 @@ export class MovieTable {
   @Output() selectMovieToEdit = new EventEmitter<Movie>();
 
   private movieService = inject(MovieService);
+  private queryClient = inject(QueryClient);
 
-  movies = signal<Movie[]>([]);
+  private mutation = injectMutation(() => ({
+    mutationFn: (id: string) => this.movieService.deleteMovie(id),
+    onSuccess: () => {
+      this.queryClient.invalidateQueries({ queryKey: ['movies'] });
+      alert('El registro se ha eliminado exitosamente');
+    },
+  }));
 
-  ngOnInit() {
-    this.getMovies();
-  }
-
-  getMovies() {
-    this.movieService.getMovies().subscribe((data) => this.movies.set(data));
-  }
+  query = injectQuery(() => ({
+    queryKey: ['movies'],
+    queryFn: () => lastValueFrom(this.movieService.getMovies()),
+  }));
 
   deleteMovie(id: string) {
     if (confirm('¿Estás seguro de eliminar el registro?')) {
-      this.movieService.deleteMovie(id).subscribe(() => {
-        alert('La pelicula se ha eliminado con exito');
-        this.getMovies();
-      });
+      this.mutation.mutate(id);
     }
   }
 

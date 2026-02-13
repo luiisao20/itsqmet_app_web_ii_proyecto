@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { lastValueFrom, map, Observable } from 'rxjs';
 import { Movie } from '../models/movie';
 
 @Injectable({
@@ -27,15 +27,15 @@ export class MovieService {
     );
   }
 
-  postMovie(movie: Movie): Observable<Movie> {
-    return this.http.post<Movie>(`${this.API_MOVIES}.json`, movie);
+  postMovie(movie: Movie): Promise<Movie> {
+    return lastValueFrom(this.http.post<Movie>(`${this.API_MOVIES}.json`, movie));
   }
 
-  putMovie(id: string, movie: Movie): Observable<Movie> {
-    return this.http.put<Movie>(`${this.API_MOVIES}/${id}.json`, movie);
+  putMovie(id: string, movie: Movie): Promise<Movie> {
+    return lastValueFrom(this.http.put<Movie>(`${this.API_MOVIES}/${id}.json`, movie));
   }
 
-  deleteMovie(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.API_MOVIES}/${id}.json`);
+  deleteMovie(id: string): Promise<void> {
+    return lastValueFrom(this.http.delete<void>(`${this.API_MOVIES}/${id}.json`));
   }
 }
