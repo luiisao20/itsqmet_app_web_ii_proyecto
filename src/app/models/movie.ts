@@ -1,7 +1,11 @@
 export interface Movie {
-  id: number;
+  id?: string;
   title: string;
   imageUrl: string;
-  category: string;
   time: string;
+  overview?: string;
+  release_date?: string;
+  status?: string;
+  category?: string;
+  rating?: string;
 }

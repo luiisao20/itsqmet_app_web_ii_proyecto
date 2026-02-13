@@ -14,59 +14,58 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-slate-800">
-        <tr class="group hover:bg-cyan-500/5 transition-colors">
-          <td class="px-6 py-2">
-            <div class="flex items-center gap-4">
-              <div
-                class="w-12 h-16 rounded-lg overflow-hidden border border-slate-700 bg-slate-800"
-              >
-                <img
-                  class="w-full h-full object-cover"
-                  src="https://media.themoviedb.org/t/p/w220_and_h330_face/sLNy9Npu1YoK1ednpXUlUt9vCBj.jpg"
-                  alt="10Dance"
-                />
-              </div>
-              <div class="flex flex-col">
-                <span class="font-bold text-white group-hover:text-cyan-500 transition-colors"
-                  >10Dance</span
+        @for (item of query.data(); track item.id) {
+          <tr class="group hover:bg-cyan-500/5 transition-colors">
+            <td class="px-6 py-2">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-12 h-16 rounded-lg overflow-hidden border border-slate-700 bg-slate-800"
                 >
+                  <img class="w-full h-full object-cover" [src]="item.imageUrl" alt="10Dance" />
+                </div>
+                <div class="flex flex-col">
+                  <span class="font-bold text-white group-hover:text-cyan-500 transition-colors">{{
+                    item.title
+                  }}</span>
+                </div>
               </div>
-            </div>
-          </td>
-          <td class="px-6 py-2 text-center">
-            <span
-              class="px-2.5 py-1 bg-slate-800/90 text-slate-400 text-xs font-semibold rounded-md"
-              >Romance</span
-            >
-          </td>
-          <td class="px-6 py-2 text-sm text-slate-400 text-center">2025-12-03</td>
-          <td class="px-6 py-2 text-sm text-center">
-            <span
-              class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100"
-              >En producción</span
-            >
-          </td>
-          <td class="px-6 py-2 text-sm">
-            <div class="flex items-center justify-center gap-1">
-              <span class="text-sm font-bold">8.7</span>
-              <!-- TODO: icono -->
-            </div>
-          </td>
-          <td class="px-6 py-4">
-            <div class="flex items-center justify-evenly gap-2">
-              <button
-                class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all"
+            </td>
+            <td class="px-6 py-2 text-center">
+              <span
+                class="px-2.5 py-1 bg-slate-800/90 text-slate-400 text-xs font-semibold rounded-md"
+                >{{ item.category }}</span
               >
-                a
-              </button>
-              <button
-                class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all"
+            </td>
+            <td class="px-6 py-2 text-sm text-slate-400 text-center">{{ item.release_date }}</td>
+            <td class="px-6 py-2 text-sm text-center">
+              <span
+                class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100"
+                >{{ item.status }}</span
               >
-                a
-              </button>
-            </div>
-          </td>
-        </tr>
+            </td>
+            <td class="px-6 py-2 text-sm">
+              <div class="flex items-center justify-center gap-1">
+                <span class="text-sm font-bold">{{ item.rating }}</span>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex items-center justify-evenly gap-2">
+                <button
+                  (click)="onSelectMovieToEdit(item)"
+                  class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+                >
+                  <ng-icon name="heroPencilSquare" class="icon-main" size="20"></ng-icon>
+                </button>
+                <button
+                  (click)="deleteMovie(item.id!)"
+                  class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+                >
+                  <ng-icon name="heroTrash" color="red" size="20"></ng-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>

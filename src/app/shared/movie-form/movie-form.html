@@ -1,5 +1,13 @@
+<div class="flex justify-between items-center mb-8">
+  <div>
+    <h1 class="text-3xl font-bold tracking-tight">Agregar pelicula</h1>
+    <p class="text-slate-500 dark:text-slate-400 mt-1">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    </p>
+  </div>
+</div>
 <div class="bg-cyan-950/20 p-8 rounded-xl border border-cyan-500/10 shadow-2xl mb-10">
-  <form action="">
+  <form (ngSubmit)="mutation.mutate()">
     <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +22,6 @@
           d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"
         />
       </svg>
-
       Informacion general
     </h3>
     <div class="flex flex-col gap-4">
@@ -25,6 +32,7 @@
           class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
           placeholder="Titulo de la pelicula"
           type="text"
+          [(ngModel)]="newMovie.title"
         />
       </label>
       <label class="flex flex-col gap-2">
@@ -32,13 +40,16 @@
         <input
           class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
           placeholder="URL de imagen"
-          type="imageUrl"
+          name="imageUrl"
+          type="text"
+          [(ngModel)]="newMovie.imageUrl"
         />
       </label>
       <label class="flex flex-col gap-2">
         <p class="text-white/80 text-sm font-medium">Sinopsis</p>
         <textarea
           name="overview"
+          [(ngModel)]="newMovie.overview"
           class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 min-h-40 placeholder:text-white/30"
           placeholder="Sinopsis de la pelicula"
         ></textarea>
@@ -65,6 +76,7 @@
       <label class="flex flex-col gap-2">
         <p class="text-white/80 text-sm font-medium">Categoria</p>
         <select
+          [(ngModel)]="newMovie.category"
           name="category"
           class="w-full bg-cyan-950/20 dark:bg-cyan-950/20 border-transparent rounded-lg focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2.5 outline-none transition-all"
         >
@@ -79,6 +91,7 @@
       <label class="flex flex-col gap-2">
         <p class="text-white/80 text-sm font-medium">Estado</p>
         <select
+          [(ngModel)]="newMovie.status"
           name="status"
           class="w-full bg-cyan-950/20 dark:bg-cyan-950/20 border-transparent rounded-lg focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2.5 outline-none transition-all"
         >
@@ -90,6 +103,7 @@
       <label class="flex flex-col gap-2">
         <p class="text-white/80 text-sm font-medium">Fecha de estreno</p>
         <input
+          [(ngModel)]="newMovie.release_date"
           name="release_date"
           class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
           type="date"
@@ -98,6 +112,7 @@
       <label class="flex flex-col gap-2">
         <p class="text-white/80 text-sm font-medium">Duracion</p>
         <input
+          [(ngModel)]="newMovie.time"
           name="time"
           class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
           placeholder="Duracion"
@@ -109,6 +124,7 @@
       <label class="flex flex-col gap-2">
         <p class="text-white/80 text-sm font-medium">Puntuacion</p>
         <input
+          [(ngModel)]="newMovie.rating"
           name="rating"
           class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
           placeholder="Puntuacion"
@@ -117,6 +133,19 @@
           min="1"
         />
       </label>
+      <div class="flex gap-4 place-self-end">
+        <app-button
+          type="submit"
+          title="Guardar"
+          background="bg-cyan-500 hover:bg-cyan-500/90 transition-all"
+          shadow="shadow-lg shadow-cyan-500/20"
+          textStyle="text-white text-sm font-semibold"
+          paddingHorizontal="px-6"
+          paddingVertical="py-2.5"
+        ></app-button>
+      </div>
     </div>
   </form>
 </div>
+
+<app-movie-table (selectMovieToEdit)="setMovieToEdit($event)"></app-movie-table>

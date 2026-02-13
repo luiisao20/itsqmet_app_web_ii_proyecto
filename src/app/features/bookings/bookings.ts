@@ -28,7 +28,7 @@ export class Bookings {
   selectedSeats: SeatNumber[] = [];
 
   movie: Movie = {
-    id: 1,
+    id: '1',
     title: 'Dune: Part Two',
     imageUrl: 'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg',
     category: 'Ciencia Ficción',
