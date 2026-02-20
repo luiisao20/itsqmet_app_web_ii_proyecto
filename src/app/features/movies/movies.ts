@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { MovieForm } from '../../shared/movie-form/movie-form';
+import { Button } from '../../shared/button/button';
+import { RouterOutlet, RouterLinkWithHref } from '@angular/router';
 
 @Component({
   selector: 'app-movies',
-  imports: [MovieForm],
+  imports: [RouterOutlet, Button, RouterLinkWithHref],
   templateUrl: './movies.html',
   styleUrl: './movies.css',
 })
