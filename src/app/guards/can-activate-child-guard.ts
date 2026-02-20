@@ -11,8 +11,8 @@ export const canActivateChildGuard: CanActivateChildFn = (childRoute, state) => 
 
   const path = childRoute.routeConfig?.path;
 
-  if (path === 'register-movie' && rol === 'MODERATOR') return true;
-  if (path === 'user-list' && rol === 'ADMIN') return true;
+  if (path === 'movies' && rol === 'MODERATOR') return true;
+  if (path === 'users' && rol === 'ADMIN') return true;
 
   return false;
 };

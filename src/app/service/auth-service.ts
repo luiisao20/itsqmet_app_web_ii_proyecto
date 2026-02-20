@@ -12,7 +12,7 @@ export class AuthService {
   private userService = inject(UserService);
 
   isAuthenticated = signal<boolean>(localStorage.getItem('session') === 'true');
-  currentRol = signal<string | null>('rol');
+  currentRol = signal<string | null>(localStorage.getItem('rol'));
 
   login(email: string, password: string): Observable<boolean> {
     return this.userService.getUsers().pipe(
