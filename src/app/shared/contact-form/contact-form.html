@@ -11,33 +11,52 @@
 
     Enviar un mensaje
   </h3>
-  <form class="space-y-6">
+  <form [formGroup]="formContact" (ngSubmit)="submit()" class="space-y-6">
     <div class="grid md:grid-cols-2 gap-4">
-      <label class="flex flex-col gap-2">
+      <label for="name" class="flex flex-col gap-2">
         <p class="text-white/80 text-sm font-medium">Nombre completo</p>
         <input
           class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white p-4 h-14 placeholder:text-white/30"
           placeholder="Nombre completo"
           type="text"
+          formControlName="name"
+          id="name"
+          name="name"
         />
+        @if (formContact.get('name')?.invalid && formContact.get('name')?.touched) {
+          <p class="mt-2 text-sm text-red-500">El nombre esta muy corto</p>
+        }
       </label>
-      <label class="flex flex-col gap-2">
+      <label for="email" class="flex flex-col gap-2">
         <p class="text-white/80 text-sm font-medium">Correo electrónico</p>
         <input
           class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white p-4 h-14 placeholder:text-white/30"
           placeholder="usuario@correo.com"
           type="email"
+          formControlName="email"
+          id="email"
+          name="email"
         />
+        @if (formContact.get('email')?.invalid && formContact.get('email')?.touched) {
+          <p class="mt-2 text-sm text-red-500">No cumple el formato de email</p>
+        }
       </label>
     </div>
-    <label class="flex flex-col gap-2">
+    <label for="message" class="flex flex-col gap-2">
       <p class="text-white/80 text-sm font-medium">Mensaje</p>
       <textarea
+        formControlName="message"
+        id="message"
+        name="message"
         class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white p-4 min-h-40 placeholder:text-white/30"
         placeholder="¿Cómo podemos ayudarte hoy?"
       ></textarea>
+      @if (formContact.get('message')?.invalid && formContact.get('message')?.touched) {
+        <p class="mt-2 text-sm text-red-500">No cumple el formato de mensaje</p>
+      }
     </label>
     <app-button
+      type="submit"
       [title]="'Enviar mensaje'"
       [shadow]="'shadow-lg shadow-cyan-500/20'"
       [background]="'bg-cyan-500 hover:bg-cyan-500/90'"

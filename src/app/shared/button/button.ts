@@ -20,4 +20,5 @@ export class Button {
   @Input() prefixIcon?: TemplateRef<void>;
   @Input() suffixIcon?: TemplateRef<void>;
   @Input() type?: string = 'button';
+  @Input() disabled?: boolean = false;
 }

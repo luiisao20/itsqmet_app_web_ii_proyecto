@@ -9,18 +9,13 @@
       @if (isAuthenticated) {
         <button
           type="button"
-          class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300"
+          class="flex text-sm rounded-full md:me-0 cursor-pointer"
           id="user-menu-button"
           aria-expanded="false"
           data-dropdown-toggle="user-dropdown"
           data-dropdown-placement="bottom"
         >
-          <span class="sr-only">Open user menu</span>
-          <img
-            class="w-8 h-8 rounded-full"
-            src="/images/people/profile-picture-3.jpg"
-            alt="user photo"
-          />
+          <ng-icon name="ionPersonCircleOutline" color="white" size="40"></ng-icon>
         </button>
         <!-- Dropdown menu -->
         <div
@@ -48,9 +43,7 @@
               >
             </li>
             <li>
-              <a
-                (click)="logout()"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              <a (click)="logout()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >Sign out</a
               >
             </li>

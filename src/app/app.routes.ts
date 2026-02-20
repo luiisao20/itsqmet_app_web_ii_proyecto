@@ -10,11 +10,14 @@ import { RegisterMovie } from './features/register-movie/register-movie';
 import { UsersList } from './features/users-list/users-list';
 import { authGuard } from './guards/auth-guard';
 import { Login } from './features/login/login';
+import { ContactAdmin } from './features/contact-admin/contact-admin';
+import { matchContactGuard } from './guards/match-contact-guard';
 
 export const routes: Routes = [
   { path: '', component: Home },
   { path: 'about', component: AboutUs },
   { path: 'booking', component: Bookings, canActivate: [authGuard] },
+  { path: 'contact', component: ContactAdmin, canMatch: [matchContactGuard] },
   { path: 'contact', component: ContactUs },
   {
     path: 'panel',
