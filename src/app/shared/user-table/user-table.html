@@ -1,0 +1,65 @@
+<div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm mb-10">
+  <div class="overflow-x-auto">
+    <table class="w-full">
+      <thead>
+        <tr
+          class="bg-slate-800/50 text-slate-500 text-xs font-bold uppercase tracking-wide border-b border-slate-800"
+        >
+          <th class="px-6 py-4">Nombre</th>
+          <th class="px-6 py-4">Email</th>
+          <th class="px-6 py-4">Telefono</th>
+          <th class="px-6 py-4">Rol</th>
+          <th class="px-6 py-4">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-800">
+        @for (item of query.data(); track item.id) {
+          <tr class="group hover:bg-cyan-500/5 transition-colors">
+            <td class="px-6 py-2 text-center">
+              <span
+                class="px-2.5 py-1 bg-slate-800/90 text-slate-400 text-xs font-semibold rounded-md"
+                >{{ item.name }}</span
+              >
+            </td>
+            <td class="px-6 py-2 text-center">
+              <span
+                class="px-2.5 py-1 bg-slate-800/90 text-slate-400 text-xs font-semibold rounded-md"
+                >{{ item.email }}</span
+              >
+            </td>
+            <td class="px-6 py-2 text-sm text-slate-400 text-center">{{ item.phone }}</td>
+            <td class="px-6 py-2 text-sm text-center">
+              <span
+                class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100"
+                [ngClass]="
+                  item.rol === 'ADMIN'
+                    ? 'bg-sky-50 text-sky-700 border-sky-100'
+                    : item.rol === 'MODERATOR'
+                      ? 'bg-emerald-50-50 text-emebg-emerald-50-700 border-emebg-emerald-50-100'
+                      : 'bg-red-50 text-red-700 border-red-100'
+                "
+                >{{ item.rol }}</span
+              >
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex items-center justify-evenly gap-2">
+                <button
+                  (click)="onSelectUserToEdit(item)"
+                  class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+                >
+                  <ng-icon name="heroPencilSquare" class="icon-main" size="20"></ng-icon>
+                </button>
+                <!-- <button
+                  (click)="deleteUser(item.id!)"
+                  class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+                >
+                  <ng-icon name="heroTrash" color="red" size="20"></ng-icon>
+                </button> -->
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

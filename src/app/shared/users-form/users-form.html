@@ -1,0 +1,75 @@
+<div class="flex justify-between items-center mb-8">
+  <div>
+    <h1 class="text-3xl font-bold tracking-tight">Agregar usuario</h1>
+    <p class="text-slate-500 dark:text-slate-400 mt-1">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    </p>
+  </div>
+</div>
+<div class="bg-cyan-950/20 p-8 rounded-xl border border-cyan-500/10 shadow-2xl mb-10">
+  <form (ngSubmit)="mutation.mutate()">
+    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+      <ng-icon name="ionPerson" class="icon-main" size="20" class="mt-0.5"></ng-icon>
+      Informacion de usuario
+    </h3>
+    <div class="flex flex-col gap-4">
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Nombre completo</p>
+        <input
+          name="name"
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+          placeholder="Nombre completo del usuario"
+          type="text"
+          [(ngModel)]="newUser.name"
+        />
+      </label>
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Correo electronico</p>
+        <input
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+          placeholder="usuario@correo.com"
+          name="email"
+          type="text"
+          [(ngModel)]="newUser.email"
+        />
+      </label>
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Telefono</p>
+        <input
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+          placeholder="Telefono del usuario"
+          name="phone"
+          type="text"
+          [(ngModel)]="newUser.phone"
+        />
+      </label>
+
+      <label class="flex flex-col gap-2">
+        <p class="text-white/80 text-sm font-medium">Rol</p>
+        <select
+          [(ngModel)]="newUser.rol"
+          name="rol"
+          class="w-full bg-cyan-950/20 dark:bg-cyan-950/20 border-transparent rounded-lg focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2.5 outline-none transition-all"
+        >
+          <option class="text-gray-600">ADMIN</option>
+          <option class="text-gray-600">MODERATOR</option>
+          <option class="text-gray-600">CLIENT</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="flex gap-4 items-center justify-center mt-10">
+      <app-button
+        type="submit"
+        title="Guardar"
+        background="bg-cyan-500 hover:bg-cyan-500/90 transition-all"
+        shadow="shadow-lg shadow-cyan-500/20"
+        textStyle="text-white text-sm font-semibold"
+        paddingHorizontal="px-6"
+        paddingVertical="py-2.5"
+      ></app-button>
+    </div>
+  </form>
+</div>
+
+<app-user-table (selectUserToEdit)="setUserToEdit($event)"></app-user-table>
