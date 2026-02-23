@@ -1,7 +1,7 @@
 <section class="max-w-7xl mx-auto px-6 lg:px-20 pb-20">
   <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
     @for (movie of movies; track $index) {
-      <app-movies-card [movie]="movie" [nowCard]="nowCard"></app-movies-card>
+      <app-movies-card [movie]="movie"></app-movies-card>
     }
   </div>
 </section>

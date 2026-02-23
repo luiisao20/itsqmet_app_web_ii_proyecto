@@ -1,8 +1,16 @@
-@if (nowCard) {
+@if (isAuthenticated) {
   <div
-    class="group flex flex-col rounded-xl overflow-hidden border border-[#2a2a2a] hover:border-cyan-500/50 cursor-pointer transition-all duration-300 shadow-xl hover:-translate-y-2 hover:shadow-cyan-500/20"
+    class="relative group flex flex-col rounded-xl overflow-hidden border border-[#2a2a2a] hover:border-cyan-500/50 cursor-pointer transition-all duration-300 shadow-xl hover:-translate-y-2 hover:shadow-cyan-500/20"
   >
     <div class="relative aspect-2/3 overflow-hidden">
+      <a
+        href="https://www.youtube.com/watch?v=shW9i6k8cB0"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center hover:bg-gray-300/40 h-16 w-16"
+      >
+        <ng-icon name="ionPlayCircleOutline" class="white" size="60"></ng-icon>
+      </a>
       <img
         alt="{{ movie.title }} movie poster"
         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -65,6 +73,7 @@
         [prefixIcon]="ticketIcon"
         background="bg-(--main-color)/10 hover:bg-(--main-color)"
         textStyle="text-(--main-color) group-hover:text-white font-bold text-sm "
+        [routerLink]="['booking']"
       ></app-button>
     </div>
   </div>
@@ -73,11 +82,20 @@
     <div
       class="relative aspect-2/3 overflow-hidden rounded-xl bg-slate-200 dark:bg-white/5 mb-4 shadow-xl transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-cyan-500/20"
     >
-      <div
+      <a
+        href="https://www.youtube.com/watch?v=shW9i6k8cB0"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center hover:bg-gray-300/40 h-16 w-16"
+      >
+        <ng-icon name="ionPlayCircleOutline" class="white" size="60"></ng-icon>
+      </a>
+      <a
+        routerLink="/login"
         class="absolute inset-0 bg-cover bg-center"
         data-alt="High speed action movie poster with car chase"
         style="background-image: url('{{ movie.imageUrl }}')"
-      ></div>
+      ></a>
     </div>
     <h3 class="text-lg font-bold group-hover:text-(--main-color) transition-colors line-clamp-1">
       {{ movie.title }}

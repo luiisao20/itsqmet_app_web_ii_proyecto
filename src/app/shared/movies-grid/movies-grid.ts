@@ -40,5 +40,5 @@ export class MoviesGrid {
     },
   ];
 
-  @Input() nowCard?: boolean;
+  @Input() buyCard?: boolean;
 }
