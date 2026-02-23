@@ -1,0 +1,106 @@
+<form [formGroup]="registerForm" class="space-y-4 md:space-y-6">
+  <div>
+    <label for="email" class="block mb-2 text-sm font-medium text-gray-900"
+      >Escribe tu nombre completo</label
+    >
+    <input
+      type="text"
+      name="name"
+      formControlName="name"
+      id="name"
+      class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+      placeholder="Nombre completo"
+      required=""
+    />
+    @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
+      <p class="text-xs text-red-500">Campo obligatorio</p>
+    }
+  </div>
+  <div>
+    <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Telefono</label>
+    <input
+      type="text"
+      name="phone"
+      formControlName="phone"
+      id="phone"
+      class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+      placeholder="nombre@empresa.com"
+      required=""
+    />
+    @if (registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched) {
+      <p class="text-xs text-red-500">El teléfono no es valido</p>
+    }
+  </div>
+  <div>
+    <label for="email" class="block mb-2 text-sm font-medium text-gray-900"
+      >Escribe tu correo electrónico</label
+    >
+    <input
+      type="email"
+      name="email"
+      formControlName="email"
+      id="email"
+      class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+      placeholder="nombre@empresa.com"
+      required=""
+    />
+    @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+      <p class="text-xs text-red-500">El correo no es valido</p>
+    }
+  </div>
+  <div>
+    <label for="password" class="block mb-2 text-sm font-medium text-gray-900"
+      >Escribe tu contraseña</label
+    >
+    <input
+      type="password"
+      name="password"
+      id="password"
+      formControlName="password"
+      placeholder="••••••••"
+      class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+      required=""
+    />
+    @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+      <p class="text-xs text-red-500">La contraseña no es valida</p>
+    }
+  </div>
+  <div>
+    <label for="confirmPassword" class="block mb-2 text-sm font-medium text-gray-900"
+      >Confirma tu contraseña</label
+    >
+    <input
+      type="password"
+      name="confirmPassword"
+      id="confirmPassword"
+      formControlName="confirmPassword"
+      placeholder="••••••••"
+      class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+      required=""
+    />
+    @if (
+      registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched
+    ) {
+      <p class="text-xs text-red-500">Las contraseñas no coinciden</p>
+    }
+  </div>
+  <button
+    [disabled]="registerForm.invalid"
+    (click)="onRegister()"
+    [ngClass]="
+      registerForm.valid
+        ? 'bg-main hover:bg-primary-700 cursor-pointer'
+        : 'bg-gray-400 cursor-not-allowed'
+    "
+    type="submit"
+    class="w-full text-white focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+  >
+    Registrarse
+  </button>
+  <p class="text-sm font-light text-gray-500">
+    ¿Ya tienes una cuenta?
+    <a routerLink="/login" class="font-medium text-primary-600 hover:underline cursor-pointer"
+      >Inicia sesion aquí</a
+    >
+  </p>
+</form>

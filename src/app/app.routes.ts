@@ -12,6 +12,8 @@ import { authGuard } from './guards/auth-guard';
 import { Login } from './features/login/login';
 import { ContactAdmin } from './features/contact-admin/contact-admin';
 import { matchContactGuard } from './guards/match-contact-guard';
+import { Register } from './features/register/register';
+import { guestGuard } from './guards/guest-guard';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -35,7 +37,8 @@ export const routes: Routes = [
       },
     ],
   },
-  { path: 'login', component: Login },
+  { path: 'login', component: Login, canActivate: [guestGuard] },
+  { path: 'register', component: Register, canActivate: [guestGuard] },
 
   { path: '**', component: NotFound },
 ];

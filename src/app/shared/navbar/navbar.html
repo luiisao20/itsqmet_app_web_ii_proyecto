@@ -23,28 +23,36 @@
           id="user-dropdown"
         >
           <div class="px-4 py-3">
-            <span class="block text-sm text-gray-900">Bonnie Green</span>
-            <span class="block text-sm text-gray-500 truncate">name@flowbite.com</span>
+            <span class="block text-sm text-gray-900">{{ user()?.name }}</span>
+            <span class="block text-sm text-gray-500 truncate">{{ user()?.email }}</span>
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
-            <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            <!-- <li>
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                 >Dashboard</a
               >
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                 >Settings</a
               >
             </li>
             <li>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                 >Earnings</a
               >
-            </li>
+            </li> -->
             <li>
-              <a (click)="logout()" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >Sign out</a
+              <a
+                (click)="logout()"
+                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                >Cerrar sesión</a
               >
             </li>
           </ul>
@@ -113,13 +121,15 @@
             >Contact Us</a
           >
         </li>
-        <li>
-          <a
-            routerLink="panel"
-            class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
-            >Panel</a
-          >
-        </li>
+        @if (rol === 'ADMIN' || rol === 'MODERATOR') {
+          <li>
+            <a
+              routerLink="panel"
+              class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
+              >Panel</a
+            >
+          </li>
+        }
         <li>
           <a
             routerLink="about"
