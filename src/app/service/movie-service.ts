@@ -35,6 +35,12 @@ export class MovieService {
     return lastValueFrom(this.http.put<Movie>(`${this.API_MOVIES}/${id}.json`, movie));
   }
 
+  getMovieById(id: string): Observable<Movie> {
+    return this.http
+      .get<Movie>(`${this.API_MOVIES}/${id}.json`)
+      .pipe(map((resp) => ({ ...resp, id })));
+  }
+
   deleteMovie(id: string): Promise<void> {
     return lastValueFrom(this.http.delete<void>(`${this.API_MOVIES}/${id}.json`));
   }

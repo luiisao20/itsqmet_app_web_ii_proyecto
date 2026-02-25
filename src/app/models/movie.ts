@@ -8,4 +8,5 @@ export interface Movie {
   status?: string;
   category?: string;
   rating?: string;
+  trailerUrl?: string;
 }

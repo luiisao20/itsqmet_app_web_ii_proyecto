@@ -30,9 +30,11 @@
     </div>
   </div>
 
-  <app-movie-buy
-    [movie]="movie"
-    [selectedSeats]="selectedSeats"
-    (deleteSeat)="deSelectSeat($event)"
-  ></app-movie-buy>
+  @if (movie(); as movieData) {
+    <app-movie-buy
+      [movie]="movieData"
+      [selectedSeats]="selectedSeats"
+      (deleteSeat)="deSelectSeat($event)"
+    ></app-movie-buy>
+  }
 </div>

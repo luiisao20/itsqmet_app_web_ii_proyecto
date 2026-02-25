@@ -4,7 +4,7 @@
   >
     <div class="relative aspect-2/3 overflow-hidden">
       <a
-        href="https://www.youtube.com/watch?v=shW9i6k8cB0"
+        href="{{ movie.trailerUrl }}"
         target="_blank"
         rel="noopener noreferrer"
         class="absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center hover:bg-gray-300/40 h-16 w-16"
@@ -34,7 +34,7 @@
             />
           </svg>
 
-          <span class="text-xs font-bold text-white">4.8</span>
+          <span class="text-xs font-bold text-white">{{ movie.rating }}</span>
         </div>
       </div>
       <div class="absolute bottom-3 left-3 flex gap-1">
@@ -50,7 +50,7 @@
       >
         {{ movie.title }}
       </h3>
-      <p class="text-xs text-gray-500 mb-4">Sci-Fi, Adventure • 2h 49m</p>
+      <p class="text-xs text-gray-500 mb-4">{{ movie.category }} • {{ movie.time }} min</p>
       <ng-template #ticketIcon>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +73,7 @@
         [prefixIcon]="ticketIcon"
         background="bg-(--main-color)/10 hover:bg-(--main-color)"
         textStyle="text-(--main-color) group-hover:text-white font-bold text-sm "
-        [routerLink]="['booking']"
+        [routerLink]="['booking', movie.id]"
       ></app-button>
     </div>
   </div>
@@ -83,7 +83,7 @@
       class="relative aspect-2/3 overflow-hidden rounded-xl bg-slate-200 dark:bg-white/5 mb-4 shadow-xl transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-cyan-500/20"
     >
       <a
-        href="https://www.youtube.com/watch?v=shW9i6k8cB0"
+        href="{{ movie.trailerUrl }}"
         target="_blank"
         rel="noopener noreferrer"
         class="absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full flex items-center justify-center hover:bg-gray-300/40 h-16 w-16"
@@ -100,6 +100,6 @@
     <h3 class="text-lg font-bold group-hover:text-(--main-color) transition-colors line-clamp-1">
       {{ movie.title }}
     </h3>
-    <p class="text-sm text-slate-500 font-medium">{{ movie.category }} • {{ movie.time }}</p>
+    <p class="text-sm text-slate-500 font-medium">{{ movie.category }} • {{ movie.time }} min</p>
   </div>
 }
