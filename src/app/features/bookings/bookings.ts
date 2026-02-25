@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Seat } from '../../shared/seat/seat';
 import { Movie } from '../../models/movie';
 import { SeatsType } from '../../shared/seats-type/seats-type';
 import { MovieBuy } from '../../shared/movie-buy/movie-buy';
+import { MovieService } from '../../service/movie-service';
 
 export interface SeatNumber {
   row: string;
@@ -21,18 +23,15 @@ interface SeatType {
   styleUrl: './bookings.css',
 })
 export class Bookings {
+  private route = inject(ActivatedRoute);
+  private movieService = inject(MovieService);
+
   rows: string[] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
   seatsPerRow: number = 10;
   seats: SeatNumber[] = [];
   selectedSeats: SeatNumber[] = [];
 
-  movie: Movie = {
-    id: '1',
-    title: 'Dune: Part Two',
-    imageUrl: 'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg',
-    category: 'Ciencia Ficción',
-    time: '2h 46m',
-  };
+  movie = signal<Movie | null>(null);
 
   seatsType: SeatType[] = [
     {
@@ -79,6 +78,13 @@ export class Bookings {
       for (let number = 1; number <= this.seatsPerRow; number++) {
         this.seats.push({ row, number });
       }
+    }
+
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.movieService.getMovieById(id).subscribe((movie) => {
+        this.movie.set(movie);
+      });
     }
   }
 }

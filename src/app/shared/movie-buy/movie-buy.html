@@ -5,6 +5,14 @@
       <app-badge title="IMAX 3D" [select]="true"></app-badge>
       <h2 class="font-semibold text-3xl">{{ movie.title }}</h2>
       <p class="text-cyan-50/60 text-sm">{{ movie.category }} • {{ movie.time }}</p>
+      <a
+        href="{{ movie.trailerUrl }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 cursor-pointer"
+      >
+        <ng-icon name="ionPlayCircleOutline" class="white" size="20"></ng-icon> Ver trailer</a
+      >
     </div>
     <div class="flex gap-4 col-span-3 items-center">
       <ng-icon name="ionLocation" color="" size="30"></ng-icon>

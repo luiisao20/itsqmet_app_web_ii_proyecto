@@ -25,6 +25,7 @@ export class MovieForm {
     time: '0',
     title: '',
     rating: '0',
+    trailerUrl: '',
   };
   edit: boolean = false;
 
@@ -38,7 +39,7 @@ export class MovieForm {
       this.queryClient.invalidateQueries({ queryKey: ['movies'] });
 
       if (this.edit) alert('El registro se ha actualizado exitosamente');
-      else alert('El registro se ha creado exitosamente')
+      else alert('El registro se ha creado exitosamente');
 
       this.resetForm();
     },
@@ -46,9 +47,9 @@ export class MovieForm {
 
   saveMovie() {
     if (this.edit && this.newMovie.id) {
-      this.movieService.putMovie(this.newMovie.id, this.newMovie)
+      this.movieService.putMovie(this.newMovie.id, this.newMovie);
     }
-    this.movieService.postMovie(this.newMovie)
+    this.movieService.postMovie(this.newMovie);
     this.resetForm();
   }
 
@@ -62,6 +63,7 @@ export class MovieForm {
       time: '0',
       title: '',
       rating: '0',
+      trailerUrl: '',
     };
   }
 

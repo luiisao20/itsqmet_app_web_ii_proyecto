@@ -18,7 +18,7 @@ import { guestGuard } from './guards/guest-guard';
 export const routes: Routes = [
   { path: '', component: Home },
   { path: 'about', component: AboutUs },
-  { path: 'booking', component: Bookings, canActivate: [authGuard] },
+  { path: 'booking/:id', component: Bookings, canActivate: [authGuard] },
   { path: 'contact', component: ContactAdmin, canMatch: [matchContactGuard] },
   { path: 'contact', component: ContactUs },
   {
