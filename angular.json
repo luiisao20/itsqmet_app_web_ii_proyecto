@@ -22,13 +22,7 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public",
-                "output": "/public"
-              },
-              {
-                "glob": "_redirects",
-                "input": "public",
-                "output": "/public/_redirects"
+                "input": "public"
               }
             ],
             "styles": ["src/styles.css"],
