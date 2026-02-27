@@ -31,7 +31,7 @@ export class RegisterForm {
     {
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern(this.regexEmail)]],
-      phone: ['', [Validators.pattern(this.regexPhone)]],
+      cellphone: ['', [Validators.pattern(this.regexPhone)]],
       password: ['', [Validators.required, Validators.pattern(this.regexPassword)]],
       confirmPassword: ['', [Validators.required]],
     },
@@ -57,8 +57,8 @@ export class RegisterForm {
         name: this.registerForm.value.name!,
         email: this.registerForm.value.email!,
         password: this.registerForm.value.password!,
-        rol: 'CLIENT',
-        phone: this.registerForm.value.phone || '',
+        role: 'ROLE_USER',
+        cellphone: this.registerForm.value.cellphone || '',
       };
 
       this.userService.postUser(user).then(() => {

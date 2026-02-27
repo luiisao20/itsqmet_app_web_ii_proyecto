@@ -52,7 +52,7 @@
           placeholder="URL de trailer"
           name="trailerUrl"
           type="text"
-          [(ngModel)]="newMovie.trailerUrl"
+          [(ngModel)]="newMovie.trailer"
         />
       </label>
       <label class="flex flex-col gap-2">
@@ -90,12 +90,12 @@
           name="category"
           class="w-full bg-cyan-950/20 dark:bg-cyan-950/20 border-transparent rounded-lg focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2.5 outline-none transition-all"
         >
-          <option class="text-gray-600">Accion</option>
-          <option class="text-gray-600">Drama</option>
-          <option class="text-gray-600">Sci-Fi</option>
-          <option class="text-gray-600">Terror</option>
-          <option class="text-gray-600">Comedia</option>
-          <option class="text-gray-600">Animada</option>
+          <option class="text-gray-600" value="Accion">Accion</option>
+          <option class="text-gray-600" value="Drama">Drama</option>
+          <option class="text-gray-600" value="Sci-Fi">Sci-Fi</option>
+          <option class="text-gray-600" value="Terror">Terror</option>
+          <option class="text-gray-600" value="Comedia">Comedia</option>
+          <option class="text-gray-600" value="Animada">Animada</option>
         </select>
       </label>
       <label class="flex flex-col gap-2">
@@ -105,15 +105,15 @@
           name="status"
           class="w-full bg-cyan-950/20 dark:bg-cyan-950/20 border-transparent rounded-lg focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2.5 outline-none transition-all"
         >
-          <option class="text-gray-600">Disponible</option>
-          <option class="text-gray-600">Muy pronto</option>
-          <option class="text-gray-600">Cancelada</option>
+          <option class="text-gray-600" value="Disponible">Disponible</option>
+          <option class="text-gray-600" value="Muy pronto">Muy pronto</option>
+          <option class="text-gray-600" value="Cancelada">Cancelada</option>
         </select>
       </label>
       <label class="flex flex-col gap-2">
         <p class="text-white/80 text-sm font-medium">Fecha de estreno</p>
         <input
-          [(ngModel)]="newMovie.release_date"
+          [(ngModel)]="newMovie.releaseDate"
           name="release_date"
           class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
           type="date"

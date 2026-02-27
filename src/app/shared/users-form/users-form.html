@@ -40,20 +40,20 @@
           placeholder="Telefono del usuario"
           name="phone"
           type="text"
-          [(ngModel)]="newUser.phone"
+          [(ngModel)]="newUser.cellphone"
         />
       </label>
 
       <label class="flex flex-col gap-2">
         <p class="text-white/80 text-sm font-medium">Rol</p>
         <select
-          [(ngModel)]="newUser.rol"
+          [(ngModel)]="newUser.role"
           name="rol"
           class="w-full bg-cyan-950/20 dark:bg-cyan-950/20 border-transparent rounded-lg focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2.5 outline-none transition-all"
         >
-          <option class="text-gray-600">ADMIN</option>
-          <option class="text-gray-600">MODERATOR</option>
-          <option class="text-gray-600">CLIENT</option>
+          <option class="text-gray-600">ROLE_ADMIN</option>
+          <option class="text-gray-600">ROLE_MODERATOR</option>
+          <option class="text-gray-600">ROLE_USER</option>
         </select>
       </label>
     </div>

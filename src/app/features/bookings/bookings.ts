@@ -82,7 +82,7 @@ export class Bookings {
 
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.movieService.getMovieById(id).subscribe((movie) => {
+      this.movieService.getMovieById(parseInt(id)).subscribe((movie) => {
         this.movie.set(movie);
       });
     }

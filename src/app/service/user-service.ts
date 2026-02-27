@@ -9,32 +9,21 @@ import { UserModel } from '../models/user';
 export class UserService {
   private http = inject(HttpClient);
 
-  private API_USER = 'https://aula-virtual-geapsi-default-rtdb.firebaseio.com';
+  private API_USER = 'http://localhost:8080/users';
 
   getUsers(): Observable<UserModel[]> {
-    return this.http.get<{ [key: string]: UserModel }>(`${this.API_USER}/users.json`).pipe(
-      map((respuesta) => {
-        if (!respuesta) {
-          return [];
-        }
-
-        return Object.keys(respuesta).map((id) => {
-          const usuarioConId = { ...respuesta[id], id };
-          return usuarioConId;
-        });
-      }),
-    );
+    return this.http.get<UserModel[]>(`${this.API_USER}`);
   }
 
   postUser(user: UserModel): Promise<UserModel> {
-    return lastValueFrom(this.http.post<UserModel>(`${this.API_USER}/users.json`, user));
+    return lastValueFrom(this.http.post<UserModel>(`${this.API_USER}/register`, user));
   }
 
   putUser(id: string, usuario: UserModel): Promise<UserModel> {
-    return lastValueFrom(this.http.put<UserModel>(`${this.API_USER}/users/${id}.json`, usuario));
+    return lastValueFrom(this.http.put<UserModel>(`${this.API_USER}/update/${id}`, usuario));
   }
 
   deleteUser(id: string): Promise<void> {
-    return lastValueFrom(this.http.delete<void>(`${this.API_USER}/users/${id}.json`));
+    return lastValueFrom(this.http.delete<void>(`${this.API_USER}/delete/${id}`));
   }
 }

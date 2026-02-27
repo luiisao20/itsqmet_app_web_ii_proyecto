@@ -18,15 +18,14 @@ export class Login {
   private router = inject(Router);
 
   onLogin() {
-    if (this.email && this.password) {
-      this.authService.login(this.email, this.password).subscribe((success) => {
-        if (success) {
-          alert('Inicio de sesión exitoso');
-          this.router.navigate(['']);
-        } else {
-          alert('Credenciales incorrectas');
-        }
-      });
-    }
+    this.authService.login(this.email ?? '', this.password ?? '').subscribe({
+      //Se activa si la respuesta de la api fue 200 OK.
+      next: () => {
+        alert('Inicio de sesión exitoso');
+        this.router.navigate(['']);
+      },
+      //Se activa si la api rechazó la petición 403, 404, 500.
+      error: () => alert('Usuario o contraseña incorrectos'),
+    });
   }
 }

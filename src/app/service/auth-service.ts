@@ -1,7 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { User } from 'firebase/auth';
 import { UserService } from './user-service';
-import { map, Observable } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -9,28 +10,30 @@ import { map, Observable } from 'rxjs';
 export class AuthService {
   user: User | null = null;
 
-  private userService = inject(UserService);
+  // private userService = inject(UserService);
 
-  isAuthenticated = signal<boolean>(localStorage.getItem('session') === 'true');
+  private API_URL = 'http://localhost:8080/auth';
+  private http = inject(HttpClient);
+
+  isAuthenticated = signal<boolean>(localStorage.getItem('token') !== null);
   currentRol = signal<string | null>(localStorage.getItem('rol'));
 
   login(email: string, password: string): Observable<boolean> {
-    return this.userService.getUsers().pipe(
-      map((users) => {
-        const userValidate = users.find((u) => u.email === email && u.password === password);
+    return this.http.post<any>(`${this.API_URL}/login`, { email, password }).pipe(
+      tap((res) => {
+        console.log(res);
 
-        if (userValidate) {
-          localStorage.setItem('session', 'true');
-          localStorage.setItem('user', JSON.stringify(userValidate));
-          localStorage.setItem('rol', userValidate.rol);
+        console.log(res.role);
+
+        if (res && res.jwt) {
+          localStorage.setItem('token', res.jwt);
+          localStorage.setItem('rol', res.role);
+          localStorage.setItem('email', res.email);
+          this.currentRol.set(res.role);
           this.isAuthenticated.set(true);
-          this.currentRol.set(userValidate.rol);
-
-          return true;
         }
-
-        return false;
       }),
+      map((res) => !!(res && res.token)),
     );
   }
 
@@ -38,6 +41,8 @@ export class AuthService {
     localStorage.removeItem('session');
     localStorage.removeItem('user');
     localStorage.removeItem('rol');
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
     this.isAuthenticated.set(false);
     this.currentRol.set(null);
   }

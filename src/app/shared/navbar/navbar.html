@@ -23,8 +23,8 @@
           id="user-dropdown"
         >
           <div class="px-4 py-3">
-            <span class="block text-sm text-gray-900">{{ user()?.name }}</span>
-            <span class="block text-sm text-gray-500 truncate">{{ user()?.email }}</span>
+            <!-- <span class="block text-sm text-gray-900">{{ user()?.name }}</span> -->
+            <span class="block text-sm text-gray-500 truncate">{{ email() }}</span>
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
             <!-- <li>
@@ -121,7 +121,7 @@
             >Contact Us</a
           >
         </li>
-        @if (rol === 'ADMIN' || rol === 'MODERATOR') {
+        @if (rol === 'ROLE_ADMIN' || rol === 'ROLE_MODERATOR') {
           <li>
             <a
               routerLink="panel"

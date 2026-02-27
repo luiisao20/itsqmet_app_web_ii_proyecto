@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Button } from '../button/button';
 import { FormsModule } from '@angular/forms';
 import { injectMutation, QueryClient } from '@tanstack/angular-query-experimental';
@@ -18,21 +18,22 @@ import { UserTable } from '../user-table/user-table';
 export class UsersForm {
   private userService = inject(UserService);
   private queryClient = inject(QueryClient);
+  private cdr = inject(ChangeDetectorRef);
 
   newUser: UserModel = {
     name: '',
     email: '',
-    password: 'Pass@123',
-    rol: 'CLIENT',
-    phone: '',
+    password: '',
+    role: 'ROLE_USER',
+    cellphone: '',
   };
 
   edit: boolean = false;
 
   mutation = injectMutation(() => ({
     mutationFn: () =>
-      this.newUser.id
-        ? this.userService.putUser(this.newUser.id, this.newUser)
+      this.newUser.uuid
+        ? this.userService.putUser(this.newUser.uuid, this.newUser)
         : this.userService.postUser(this.newUser),
 
     onSuccess: () => {
@@ -42,12 +43,13 @@ export class UsersForm {
       else alert('El registro se ha creado exitosamente');
 
       this.resetForm();
+      this.cdr.detectChanges();
     },
   }));
 
   saveUser() {
-    if (this.edit && this.newUser.id) {
-      this.userService.putUser(this.newUser.id, this.newUser);
+    if (this.edit && this.newUser.uuid) {
+      this.userService.putUser(this.newUser.uuid, this.newUser);
     }
     this.userService.postUser(this.newUser);
     this.resetForm();
@@ -57,14 +59,21 @@ export class UsersForm {
     this.newUser = {
       name: '',
       email: '',
-      password: 'Pass@123',
-      rol: 'CLIENT',
-      phone: '',
+      password: '',
+      role: 'ROLE_USER',
+      cellphone: '',
     };
   }
 
   setUserToEdit(user: UserModel) {
-    this.newUser = { ...user };
+    this.newUser = {
+      name: user.name,
+      email: user.email,
+      password: '',
+      role: user.role,
+      cellphone: user.cellphone,
+      uuid: user.uuid,
+    };
     this.edit = true;
   }
 }

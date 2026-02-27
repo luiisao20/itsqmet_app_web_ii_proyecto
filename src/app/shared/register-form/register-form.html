@@ -20,14 +20,14 @@
     <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Telefono</label>
     <input
       type="text"
-      name="phone"
-      formControlName="phone"
-      id="phone"
+      name="cellphone"
+      formControlName="cellphone"
+      id="cellphone"
       class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
       placeholder="nombre@empresa.com"
       required=""
     />
-    @if (registerForm.get('phone')?.invalid && registerForm.get('phone')?.touched) {
+    @if (registerForm.get('cellphone')?.invalid && registerForm.get('cellphone')?.touched) {
       <p class="text-xs text-red-500">El teléfono no es valido</p>
     }
   </div>

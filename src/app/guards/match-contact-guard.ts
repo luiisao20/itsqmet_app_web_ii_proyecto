@@ -6,7 +6,7 @@ export const matchContactGuard: CanMatchFn = (route, segments) => {
   const authService = inject(AuthService);
   const rol = authService.currentRol();
 
-  if (rol === 'MODERATOR') return true;
+  if (rol === 'ROLE_MODERATOR') return true;
 
   return false;
 };
