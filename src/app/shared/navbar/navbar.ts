@@ -16,7 +16,9 @@ import { UserModel } from '../../models/user';
 export class Navbar {
   private router = inject(Router);
   private authService = inject(AuthService);
-  rol = this.authService.currentRol();
+  get rol() {
+    return this.authService.currentRol();
+  }
 
   logout() {
     this.authService.logout();
@@ -26,8 +28,8 @@ export class Navbar {
     return this.authService.isAuthenticated();
   }
 
-  user = signal<UserModel | null>(
-    localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')!) : null,
+  email = signal<String | null>(
+    localStorage.getItem('email') ? localStorage.getItem('email') : null,
   );
 
   get isLogin(): boolean {

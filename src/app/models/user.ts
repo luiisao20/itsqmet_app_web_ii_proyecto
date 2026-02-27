@@ -1,8 +1,8 @@
 export interface UserModel {
-  id?: string;
+  uuid?: string;
   email: string;
   name: string;
-  phone: string;
+  cellphone: string;
   password: string;
-  rol: 'ADMIN' | 'MODERATOR' | 'CLIENT';
+  role: 'ROLE_ADMIN' | 'ROLE_MODERATOR' | 'ROLE_USER';
 }

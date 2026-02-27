@@ -17,15 +17,15 @@ export class MovieForm {
   private queryClient = inject(QueryClient);
 
   newMovie: Movie = {
-    category: '',
+    category: undefined,
     imageUrl: '',
     overview: '',
-    release_date: '',
-    status: '',
+    releaseDate: '',
+    status: undefined,
     time: '0',
     title: '',
     rating: '0',
-    trailerUrl: '',
+    trailer: '',
   };
   edit: boolean = false;
 
@@ -46,24 +46,26 @@ export class MovieForm {
   }));
 
   saveMovie() {
-    if (this.edit && this.newMovie.id) {
-      this.movieService.putMovie(this.newMovie.id, this.newMovie);
-    }
-    this.movieService.postMovie(this.newMovie);
-    this.resetForm();
+    console.log(this.newMovie);
+
+    // if (this.edit && this.newMovie.id) {
+    //   this.movieService.putMovie(this.newMovie.id, this.newMovie);
+    // }
+    // this.movieService.postMovie(this.newMovie);
+    // this.resetForm();
   }
 
   resetForm() {
     this.newMovie = {
-      category: '',
+      category: undefined,
       imageUrl: '',
       overview: '',
-      release_date: '',
-      status: '',
+      releaseDate: '',
+      status: undefined,
       time: '0',
       title: '',
       rating: '0',
-      trailerUrl: '',
+      trailer: '',
     };
   }
 

@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-slate-800">
-        @for (item of query.data(); track item.id) {
+        @for (item of query.data(); track item.uuid) {
           <tr class="group hover:bg-cyan-500/5 transition-colors">
             <td class="px-6 py-2 text-center">
               <span
@@ -27,18 +27,18 @@
                 >{{ item.email }}</span
               >
             </td>
-            <td class="px-6 py-2 text-sm text-slate-400 text-center">{{ item.phone }}</td>
+            <td class="px-6 py-2 text-sm text-slate-400 text-center">{{ item.cellphone }}</td>
             <td class="px-6 py-2 text-sm text-center">
               <span
                 class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100"
                 [ngClass]="
-                  item.rol === 'ADMIN'
+                  item.role === 'ROLE_ADMIN'
                     ? 'bg-sky-50 text-sky-700 border-sky-100'
-                    : item.rol === 'MODERATOR'
+                    : item.role === 'ROLE_MODERATOR'
                       ? 'bg-emerald-50-50 text-emebg-emerald-50-700 border-emebg-emerald-50-100'
                       : 'bg-red-50 text-red-700 border-red-100'
                 "
-                >{{ item.rol }}</span
+                >{{ item.role }}</span
               >
             </td>
             <td class="px-6 py-4">

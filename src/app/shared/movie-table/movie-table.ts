@@ -20,7 +20,7 @@ export class MovieTable {
   private queryClient = inject(QueryClient);
 
   private mutation = injectMutation(() => ({
-    mutationFn: (id: string) => this.movieService.deleteMovie(id),
+    mutationFn: (id: number) => this.movieService.deleteMovie(id),
     onSuccess: () => {
       this.queryClient.invalidateQueries({ queryKey: ['movies'] });
       alert('El registro se ha eliminado exitosamente');
@@ -32,7 +32,7 @@ export class MovieTable {
     queryFn: () => lastValueFrom(this.movieService.getMovies()),
   }));
 
-  deleteMovie(id: string) {
+  deleteMovie(id: number) {
     if (confirm('¿Estás seguro de eliminar el registro?')) {
       this.mutation.mutate(id);
     }

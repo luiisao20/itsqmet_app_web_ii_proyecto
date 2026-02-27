@@ -9,39 +9,26 @@ import { Movie } from '../models/movie';
 export class MovieService {
   private http = inject(HttpClient);
 
-  private API_MOVIES = 'https://aula-virtual-geapsi-default-rtdb.firebaseio.com/movies';
+  // private API_MOVIES = 'https://aula-virtual-geapsi-default-rtdb.firebaseio.com/movies';
+  private API_MOVIES = 'http://localhost:8080/movies';
 
   getMovies(): Observable<Movie[]> {
-    return this.http.get<{ [key: string]: Movie }>(`${this.API_MOVIES}.json`).pipe(
-      map((resp) => {
-        if (!resp) return [];
-
-        return Object.keys(resp).map((id) => {
-          const movieWithId: Movie = {
-            ...resp[id],
-            id,
-          };
-          return movieWithId;
-        });
-      }),
-    );
+    return this.http.get<Movie[]>(`${this.API_MOVIES}`);
   }
 
   postMovie(movie: Movie): Promise<Movie> {
-    return lastValueFrom(this.http.post<Movie>(`${this.API_MOVIES}.json`, movie));
+    return lastValueFrom(this.http.post<Movie>(`${this.API_MOVIES}`, movie));
   }
 
-  putMovie(id: string, movie: Movie): Promise<Movie> {
-    return lastValueFrom(this.http.put<Movie>(`${this.API_MOVIES}/${id}.json`, movie));
+  putMovie(id: number, movie: Movie): Promise<Movie> {
+    return lastValueFrom(this.http.put<Movie>(`${this.API_MOVIES}/${id}`, movie));
   }
 
-  getMovieById(id: string): Observable<Movie> {
-    return this.http
-      .get<Movie>(`${this.API_MOVIES}/${id}.json`)
-      .pipe(map((resp) => ({ ...resp, id })));
+  getMovieById(id: number): Observable<Movie> {
+    return this.http.get<Movie>(`${this.API_MOVIES}/${id}`).pipe(map((resp) => ({ ...resp, id })));
   }
 
-  deleteMovie(id: string): Promise<void> {
-    return lastValueFrom(this.http.delete<void>(`${this.API_MOVIES}/${id}.json`));
+  deleteMovie(id: number): Promise<void> {
+    return lastValueFrom(this.http.delete<void>(`${this.API_MOVIES}/${id}`));
   }
 }
