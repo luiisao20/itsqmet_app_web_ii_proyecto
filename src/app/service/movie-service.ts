@@ -13,15 +13,16 @@ export class MovieService {
   private API_MOVIES = 'http://localhost:8080/movies';
 
   getMovies(): Observable<Movie[]> {
+    const res = this.http.get<Movie[]>(`${this.API_MOVIES}`).subscribe(h => console.log(h));
     return this.http.get<Movie[]>(`${this.API_MOVIES}`);
   }
 
   postMovie(movie: Movie): Promise<Movie> {
-    return lastValueFrom(this.http.post<Movie>(`${this.API_MOVIES}`, movie));
+    return lastValueFrom(this.http.post<Movie>(`${this.API_MOVIES}/save`, movie));
   }
 
   putMovie(id: number, movie: Movie): Promise<Movie> {
-    return lastValueFrom(this.http.put<Movie>(`${this.API_MOVIES}/${id}`, movie));
+    return lastValueFrom(this.http.put<Movie>(`${this.API_MOVIES}/update/${id}`, movie));
   }
 
   getMovieById(id: number): Observable<Movie> {
@@ -29,6 +30,6 @@ export class MovieService {
   }
 
   deleteMovie(id: number): Promise<void> {
-    return lastValueFrom(this.http.delete<void>(`${this.API_MOVIES}/${id}`));
+    return lastValueFrom(this.http.delete<void>(`${this.API_MOVIES}/delete/${id}`));
   }
 }

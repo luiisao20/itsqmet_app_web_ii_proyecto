@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Movie } from '../../models/movie';
 import { Badge } from '../badge/badge';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
@@ -11,6 +11,9 @@ import {
 } from '@ng-icons/ionicons';
 import { SeatNumber } from '../../features/bookings/bookings';
 import { Button } from '../button/button';
+import { Ticket } from '../../models/ticket';
+import { TicketService } from '../../service/ticket-service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-movie-buy',
@@ -27,7 +30,36 @@ export class MovieBuy {
 
   @Output() deleteSeat = new EventEmitter<SeatNumber>();
 
+  private ticketService = inject(TicketService);
+  private router = inject(Router);
+
   onDeleteSeat(seat: SeatNumber) {
     this.deleteSeat.emit(seat);
+  }
+
+  buyTicket() {
+
+    if (this.selectedSeats.length === 0) {
+      alert('Debe seleccionar al menos un asiento para comprar el ticket');
+      return;
+    }
+
+    const ticket: Ticket = {
+      movie: { id: this.movie.id! },
+      seats: this.selectedSeats.map((s) => `${s.row}${s.number}`).join(','),
+      price: this.selectedSeats.length * 6.5 + 3,
+      room: 2,
+      user: { email: localStorage.getItem('email') ?? '' },
+    };
+
+    this.ticketService.postTicket(ticket).subscribe({
+      next: () => {
+        alert('El ticket se ha guardado exitosamente');
+        this.router.navigate(['']);
+      },
+      error: () => {
+        alert('Ha ocurrido un error inesperado');
+      },
+    });
   }
 }

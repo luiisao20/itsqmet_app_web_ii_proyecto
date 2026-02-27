@@ -9,30 +9,17 @@ import { map, Observable } from 'rxjs';
 export class ContactService {
   private http = inject(HttpClient);
 
-  private API_CONTACT = 'https://aula-virtual-geapsi-default-rtdb.firebaseio.com/contact';
+  private API_CONTACT = 'http://localhost:8080/contact';
 
   getContacts(): Observable<ContactInfo[]> {
-    return this.http.get<{ [key: string]: ContactInfo }>(`${this.API_CONTACT}.json`).pipe(
-      map((res) => {
-        if (!res) return [];
-
-        return Object.keys(res).map((id) => {
-          const contact: ContactInfo = {
-            id,
-            ...res[id],
-          };
-
-          return contact;
-        });
-      }),
-    );
+    return this.http.get<ContactInfo[]>(`${this.API_CONTACT}`);
   }
 
   postContact(info: ContactInfo): Observable<ContactInfo> {
-    return this.http.post<ContactInfo>(`${this.API_CONTACT}.json`, info);
+    return this.http.post<ContactInfo>(`${this.API_CONTACT}/save`, info);
   }
 
   deleteContact(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.API_CONTACT}/${id}.json`);
+    return this.http.delete<void>(`${this.API_CONTACT}/delete/${id}`);
   }
 }

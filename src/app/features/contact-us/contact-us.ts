@@ -7,4 +7,6 @@ import { ContactForm } from '../../shared/contact-form/contact-form';
   templateUrl: './contact-us.html',
   styleUrl: './contact-us.css',
 })
-export class ContactUs {}
+export class ContactUs {
+  
+}

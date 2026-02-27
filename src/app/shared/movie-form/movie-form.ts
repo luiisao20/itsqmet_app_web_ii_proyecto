@@ -4,7 +4,23 @@ import { Movie } from '../../models/movie';
 import { FormsModule } from '@angular/forms';
 import { Button } from '../button/button';
 import { MovieTable } from '../movie-table/movie-table';
-import { injectMutation, QueryClient } from '@tanstack/angular-query-experimental';
+import { injectMutation, injectQuery, QueryClient } from '@tanstack/angular-query-experimental';
+import { CategoryService } from '../../service/category-service';
+import { StatusService } from '../../service/status-service';
+import { lastValueFrom } from 'rxjs';
+
+interface MovieModel {
+  id?: number;
+  category: string;
+  imageUrl: string;
+  overview: string;
+  releaseDate: string;
+  status: string;
+  time: string;
+  title: string;
+  rating: string;
+  trailer: string;
+}
 
 @Component({
   selector: 'app-movie-form',
@@ -15,13 +31,15 @@ import { injectMutation, QueryClient } from '@tanstack/angular-query-experimenta
 export class MovieForm {
   private movieService = inject(MovieService);
   private queryClient = inject(QueryClient);
+  private categoryService = inject(CategoryService);
+  private statusService = inject(StatusService);
 
-  newMovie: Movie = {
-    category: undefined,
+  newMovie: MovieModel = {
+    category: '0',
     imageUrl: '',
     overview: '',
     releaseDate: '',
-    status: undefined,
+    status: '0',
     time: '0',
     title: '',
     rating: '0',
@@ -29,11 +47,41 @@ export class MovieForm {
   };
   edit: boolean = false;
 
+  queryCategory = injectQuery(() => ({
+    queryKey: ['categories'],
+    queryFn: () => lastValueFrom(this.categoryService.get()),
+  }));
+
+  queryStatus = injectQuery(() => ({
+    queryKey: ['statuses'],
+    queryFn: () => lastValueFrom(this.statusService.get()),
+  }));
+
   mutation = injectMutation(() => ({
-    mutationFn: () =>
-      this.newMovie.id
-        ? this.movieService.putMovie(this.newMovie.id, this.newMovie)
-        : this.movieService.postMovie(this.newMovie),
+    mutationFn: () => {
+      const movieToSave: Movie = {
+        id: this.newMovie.id,
+        category: {
+          id: parseInt(this.newMovie.category),
+        },
+        imageUrl: this.newMovie.imageUrl,
+        overview: this.newMovie.overview,
+        releaseDate: this.newMovie.releaseDate,
+        status: {
+          id: parseInt(this.newMovie.status),
+        },
+        time: this.newMovie.time,
+        title: this.newMovie.title,
+        rating: this.newMovie.rating,
+        trailer: this.newMovie.trailer,
+      };
+      if (this.newMovie.id) return this.movieService.putMovie(this.newMovie.id, movieToSave)
+      return this.movieService.postMovie(movieToSave);
+    },
+
+    onError: (error) => {
+      alert('Ha ocurrido un error');
+    },
 
     onSuccess: () => {
       this.queryClient.invalidateQueries({ queryKey: ['movies'] });
@@ -45,23 +93,13 @@ export class MovieForm {
     },
   }));
 
-  saveMovie() {
-    console.log(this.newMovie);
-
-    // if (this.edit && this.newMovie.id) {
-    //   this.movieService.putMovie(this.newMovie.id, this.newMovie);
-    // }
-    // this.movieService.postMovie(this.newMovie);
-    // this.resetForm();
-  }
-
   resetForm() {
     this.newMovie = {
-      category: undefined,
+      category: '0',
       imageUrl: '',
       overview: '',
       releaseDate: '',
-      status: undefined,
+      status: '0',
       time: '0',
       title: '',
       rating: '0',
@@ -70,7 +108,16 @@ export class MovieForm {
   }
 
   setMovieToEdit(movie: Movie) {
-    this.newMovie = { ...movie };
+    this.newMovie.id = movie.id;
+    this.newMovie.category = movie.category ? movie.category.id.toString() : '0';
+    this.newMovie.imageUrl = movie.imageUrl;
+    this.newMovie.overview = movie.overview || '';
+    this.newMovie.releaseDate = movie.releaseDate || '';
+    this.newMovie.status = movie.status ? movie.status.id.toString() : '0';
+    this.newMovie.time = movie.time;
+    this.newMovie.title = movie.title;
+    this.newMovie.rating = movie.rating || '0';
+    this.newMovie.trailer = movie.trailer || '';
     this.edit = true;
   }
 }

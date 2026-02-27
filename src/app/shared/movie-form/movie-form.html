@@ -90,12 +90,10 @@
           name="category"
           class="w-full bg-cyan-950/20 dark:bg-cyan-950/20 border-transparent rounded-lg focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2.5 outline-none transition-all"
         >
-          <option class="text-gray-600" value="Accion">Accion</option>
-          <option class="text-gray-600" value="Drama">Drama</option>
-          <option class="text-gray-600" value="Sci-Fi">Sci-Fi</option>
-          <option class="text-gray-600" value="Terror">Terror</option>
-          <option class="text-gray-600" value="Comedia">Comedia</option>
-          <option class="text-gray-600" value="Animada">Animada</option>
+          <option value="0" class="text-white" disabled>Escoge una opción</option>
+          @for (item of queryCategory.data(); track $index) {
+            <option [value]="item.id" class="text-gray-600">{{ item.name }}</option>
+          }
         </select>
       </label>
       <label class="flex flex-col gap-2">
@@ -105,9 +103,10 @@
           name="status"
           class="w-full bg-cyan-950/20 dark:bg-cyan-950/20 border-transparent rounded-lg focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2.5 outline-none transition-all"
         >
-          <option class="text-gray-600" value="Disponible">Disponible</option>
-          <option class="text-gray-600" value="Muy pronto">Muy pronto</option>
-          <option class="text-gray-600" value="Cancelada">Cancelada</option>
+          <option value="0" class="text-white" disabled>Escoge una opción</option>
+          @for (item of queryStatus.data(); track $index) {
+            <option [value]="item.id" class="text-gray-600">{{ item.name }}</option>
+          }
         </select>
       </label>
       <label class="flex flex-col gap-2">

@@ -1,6 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { User } from 'firebase/auth';
-import { UserService } from './user-service';
 import { Observable, map, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -9,8 +8,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
   user: User | null = null;
-
-  // private userService = inject(UserService);
 
   private API_URL = 'http://localhost:8080/auth';
   private http = inject(HttpClient);
@@ -21,9 +18,6 @@ export class AuthService {
   login(email: string, password: string): Observable<boolean> {
     return this.http.post<any>(`${this.API_URL}/login`, { email, password }).pipe(
       tap((res) => {
-        console.log(res);
-
-        console.log(res.role);
 
         if (res && res.jwt) {
           localStorage.setItem('token', res.jwt);

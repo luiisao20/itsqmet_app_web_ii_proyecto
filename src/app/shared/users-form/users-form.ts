@@ -47,14 +47,6 @@ export class UsersForm {
     },
   }));
 
-  saveUser() {
-    if (this.edit && this.newUser.uuid) {
-      this.userService.putUser(this.newUser.uuid, this.newUser);
-    }
-    this.userService.postUser(this.newUser);
-    this.resetForm();
-  }
-
   resetForm() {
     this.newUser = {
       name: '',

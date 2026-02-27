@@ -13,8 +13,10 @@ export interface Movie {
 
 export interface Category {
   id: number;
+  name?: string;
 }
 
 export interface Status {
   id: number;
+  name?: string;
 }

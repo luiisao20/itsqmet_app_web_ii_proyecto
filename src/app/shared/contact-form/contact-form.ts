@@ -45,9 +45,12 @@ export class ContactForm {
       message: this.formContact.get('message')?.value!,
     };
 
-    this.contactService.postContact(contact).subscribe(() => {
-      this.formContact.reset();
-      alert('Informacion enviada con exito');
+    this.contactService.postContact(contact).subscribe({
+      next: () => {
+        this.formContact.reset();
+        alert('Informacion enviada con exito');
+      },
+      error: () => alert('Ha ocurrido un error inesperado'),
     });
   }
 }
