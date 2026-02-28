@@ -144,9 +144,36 @@
       </label>
       <div class="flex gap-4 place-self-end">
         <app-button
+          [disabled]="
+            newMovie.title === '' ||
+            newMovie.overview === '' ||
+            newMovie.imageUrl === '' ||
+            newMovie.trailer === '' ||
+            newMovie.category === '0' ||
+            newMovie.status === '0' ||
+            !newMovie.rating ||
+            newMovie.rating === '0' ||
+            !newMovie.time ||
+            newMovie.time === '0' ||
+            newMovie.releaseDate === ''
+          "
           type="submit"
           title="Guardar"
-          background="bg-cyan-500 hover:bg-cyan-500/90 transition-all"
+          [background]="
+            newMovie.title === '' ||
+            newMovie.overview === '' ||
+            newMovie.imageUrl === '' ||
+            newMovie.trailer === '' ||
+            newMovie.category === '0' ||
+            newMovie.status === '0' ||
+            !newMovie.rating ||
+            newMovie.rating === '0' ||
+            !newMovie.time ||
+            newMovie.time === '0' ||
+            newMovie.releaseDate === ''
+              ? 'bg-gray-500 cursor-not-allowed'
+              : 'bg-cyan-500 hover:bg-cyan-500/90 transition-all'
+          "
           shadow="shadow-lg shadow-cyan-500/20"
           textStyle="text-white text-sm font-semibold"
           paddingHorizontal="px-6"
