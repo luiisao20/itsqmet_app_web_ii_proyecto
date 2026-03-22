@@ -1,0 +1,101 @@
+<div class="max-w-2xl mx-auto py-8 px-4">
+  <h1 class="text-2xl font-bold text-cyan-50 mb-8">Mi perfil</h1>
+
+  @if (loading()) {
+    <div class="bg-cyan-500/10 border-2 border-cyan-100/20 rounded-xl p-8 animate-pulse">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-20 h-20 rounded-full bg-white/10"></div>
+        <div>
+          <div class="h-5 w-40 bg-white/10 rounded mb-2"></div>
+          <div class="h-4 w-56 bg-white/10 rounded"></div>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <div class="h-4 w-full bg-white/10 rounded"></div>
+        <div class="h-4 w-3/4 bg-white/10 rounded"></div>
+      </div>
+    </div>
+  } @else if (user(); as u) {
+    <div class="bg-cyan-500/10 border-2 border-cyan-100/20 rounded-xl p-8 mb-8">
+      <div class="flex items-center gap-4 mb-6">
+        <div
+          class="w-20 h-20 rounded-full bg-(--main-color)/20 flex items-center justify-center"
+        >
+          <ng-icon name="ionPersonCircleOutline" color="#06b6d4" size="64"></ng-icon>
+        </div>
+        <div>
+          <h2 class="text-xl font-semibold text-cyan-50">{{ u.name }}</h2>
+          <p class="text-cyan-50/60 text-sm">{{ u.email }}</p>
+        </div>
+      </div>
+
+      <div class="h-0.5 bg-cyan-300/10 my-6"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-xs text-cyan-50/50 uppercase tracking-wider mb-1">Nombre</label>
+          <p class="text-cyan-50 font-medium">{{ u.name }}</p>
+        </div>
+        <div>
+          <label class="block text-xs text-cyan-50/50 uppercase tracking-wider mb-1">Correo electrónico</label>
+          <p class="text-cyan-50 font-medium">{{ u.email }}</p>
+        </div>
+        <div>
+          <label class="block text-xs text-cyan-50/50 uppercase tracking-wider mb-1">Teléfono</label>
+          <p class="text-cyan-50 font-medium">{{ u.cellphone || 'No registrado' }}</p>
+        </div>
+        <div>
+          <label class="block text-xs text-cyan-50/50 uppercase tracking-wider mb-1">Membresía</label>
+          <!-- TODO: Mostrar membresia asignada -->
+          <p class="text-cyan-50 font-medium">{{ u.cardId || 'No asignado' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-cyan-500/10 border-2 border-cyan-100/20 rounded-xl p-8">
+      <h2 class="text-lg font-semibold text-cyan-50 mb-6">Cambiar contraseña</h2>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm text-cyan-50/80 mb-2">Contraseña actual</label>
+          <input
+            type="password"
+            [(ngModel)]="currentPassword"
+            placeholder="Ingresa tu contraseña actual"
+            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-cyan-50 placeholder-cyan-50/30 focus:outline-none focus:border-cyan-500/50 transition-colors"
+          />
+        </div>
+        <div>
+          <label class="block text-sm text-cyan-50/80 mb-2">Nueva contraseña</label>
+          <input
+            type="password"
+            [(ngModel)]="newPassword"
+            placeholder="Mínimo 8 caracteres"
+            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-cyan-50 placeholder-cyan-50/30 focus:outline-none focus:border-cyan-500/50 transition-colors"
+          />
+        </div>
+        <div>
+          <label class="block text-sm text-cyan-50/80 mb-2">Confirmar nueva contraseña</label>
+          <input
+            type="password"
+            [(ngModel)]="confirmPassword"
+            placeholder="Repite la nueva contraseña"
+            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-cyan-50 placeholder-cyan-50/30 focus:outline-none focus:border-cyan-500/50 transition-colors"
+          />
+        </div>
+
+        <button
+          (click)="changePassword()"
+          [disabled]="changingPassword()"
+          class="bg-(--main-color) hover:bg-(--main-color)/90 text-white font-semibold px-6 py-2.5 rounded-lg transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+        >
+          @if (changingPassword()) {
+            Guardando...
+          } @else {
+            Cambiar contraseña
+          }
+        </button>
+      </div>
+    </div>
+  }
+</div>

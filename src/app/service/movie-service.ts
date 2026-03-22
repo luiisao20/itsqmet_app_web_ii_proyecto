@@ -13,7 +13,6 @@ export class MovieService {
   private API_MOVIES = 'http://localhost:8080/movies';
 
   getMovies(): Observable<Movie[]> {
-    const res = this.http.get<Movie[]>(`${this.API_MOVIES}`).subscribe(h => console.log(h));
     return this.http.get<Movie[]>(`${this.API_MOVIES}`);
   }
 

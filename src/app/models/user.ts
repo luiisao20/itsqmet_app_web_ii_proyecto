@@ -1,8 +1,9 @@
 export interface UserModel {
   uuid?: string;
-  email: string;
   name: string;
+  email: string;
+  role?: string;
   cellphone: string;
   password: string;
-  role: 'ROLE_ADMIN' | 'ROLE_MODERATOR' | 'ROLE_USER';
+  cardId?: number;
 }

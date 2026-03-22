@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { lastValueFrom, map, Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { UserModel } from '../models/user';
 
 @Injectable({
@@ -9,18 +9,23 @@ import { UserModel } from '../models/user';
 export class UserService {
   private http = inject(HttpClient);
 
-  private API_USER = 'http://localhost:8080/users';
+  private API_USER = 'http://localhost:8080/auth';
+  private API_USERS = 'http://localhost:8080/users';
 
   getUsers(): Observable<UserModel[]> {
     return this.http.get<UserModel[]>(`${this.API_USER}`);
   }
 
-  postUser(user: UserModel): Promise<UserModel> {
-    return lastValueFrom(this.http.post<UserModel>(`${this.API_USER}/register`, user));
+  getUserByUuid(uuid: string): Observable<UserModel> {
+    return this.http.get<UserModel>(`${this.API_USERS}/${uuid}`);
   }
 
-  putUser(id: string, usuario: UserModel): Promise<UserModel> {
-    return lastValueFrom(this.http.put<UserModel>(`${this.API_USER}/update/${id}`, usuario));
+  postUser(user: UserModel): Promise<string> {
+    return lastValueFrom(this.http.post(`${this.API_USER}/register`, user, { responseType: 'text' }));
+  }
+
+  putUser(id: string, usuario: UserModel): Promise<string> {
+    return lastValueFrom(this.http.put(`${this.API_USER}/update/${id}`, usuario, { responseType: 'text' }));
   }
 
   deleteUser(id: string): Promise<void> {

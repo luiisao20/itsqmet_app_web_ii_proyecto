@@ -1,5 +1,4 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { User } from 'firebase/auth';
 import { Observable, map, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -7,8 +6,6 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class AuthService {
-  user: User | null = null;
-
   private API_URL = 'http://localhost:8080/auth';
   private http = inject(HttpClient);
 
@@ -18,16 +15,16 @@ export class AuthService {
   login(email: string, password: string): Observable<boolean> {
     return this.http.post<any>(`${this.API_URL}/login`, { email, password }).pipe(
       tap((res) => {
-
         if (res && res.jwt) {
           localStorage.setItem('token', res.jwt);
           localStorage.setItem('rol', res.role);
           localStorage.setItem('email', res.email);
+          localStorage.setItem('uuid', res.uuid);
           this.currentRol.set(res.role);
           this.isAuthenticated.set(true);
         }
       }),
-      map((res) => !!(res && res.token)),
+      map((res) => !!(res && res.jwt)),
     );
   }
 
@@ -37,6 +34,7 @@ export class AuthService {
     localStorage.removeItem('rol');
     localStorage.removeItem('token');
     localStorage.removeItem('email');
+    localStorage.removeItem('uuid');
     this.isAuthenticated.set(false);
     this.currentRol.set(null);
   }

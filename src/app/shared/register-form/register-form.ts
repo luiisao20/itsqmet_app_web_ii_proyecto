@@ -57,7 +57,6 @@ export class RegisterForm {
         name: this.registerForm.value.name!,
         email: this.registerForm.value.email!,
         password: this.registerForm.value.password!,
-        role: 'ROLE_USER',
         cellphone: this.registerForm.value.cellphone || '',
       };
 

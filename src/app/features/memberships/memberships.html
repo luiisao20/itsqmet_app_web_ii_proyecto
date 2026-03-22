@@ -1,0 +1,84 @@
+<div class="max-w-5xl mx-auto py-12 px-4">
+  <div class="text-center mb-12">
+    <h1 class="text-3xl font-bold text-cyan-50 mb-3">Nuestras Membresías</h1>
+    <p class="text-cyan-50/60 max-w-xl mx-auto">
+      Elige el plan que mejor se adapte a ti y disfruta de beneficios exclusivos en todas nuestras
+      salas de cine.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    @for (plan of memberships; track plan.cardType) {
+      <div
+        class="relative bg-linear-to-b rounded-2xl border-2 p-6 flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+        [class]="plan.gradient + ' ' + plan.border"
+      >
+        <div class="text-center mb-6">
+          <div
+            class="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4"
+            [class]="plan.badge"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="size-8"
+            >
+              <path
+                d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"
+              />
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold" [class]="plan.color">{{ plan.cardType }}</h2>
+        </div>
+
+        <div class="space-y-4 flex-1">
+          <div class="bg-white/5 rounded-lg p-4">
+            <p class="text-xs text-cyan-50/50 uppercase tracking-wider mb-1">Visitas requeridas</p>
+            <p class="text-cyan-50 font-semibold">
+              @if (plan.minVisits === 0) {
+                Sin mínimo
+              } @else {
+                {{ plan.minVisits }} visitas mínimas
+              }
+            </p>
+          </div>
+
+          <div class="bg-white/5 rounded-lg p-4">
+            <p class="text-xs text-cyan-50/50 uppercase tracking-wider mb-1">Máximo de visitas</p>
+            <p class="text-cyan-50 font-semibold">Hasta {{ plan.topVisits }} visitas</p>
+          </div>
+
+          <div class="bg-white/5 rounded-lg p-4">
+            <p class="text-xs text-cyan-50/50 uppercase tracking-wider mb-1">Descuento en comida</p>
+            <p class="font-bold text-lg" [class]="plan.color">
+              {{ formatDiscount(plan.foodDiscount) }}
+            </p>
+          </div>
+
+          <div class="bg-white/5 rounded-lg p-4">
+            <p class="text-xs text-cyan-50/50 uppercase tracking-wider mb-2">Beneficios</p>
+            <p class="text-cyan-50/80 text-sm leading-relaxed">{{ plan.generalDiscounts }}</p>
+          </div>
+        </div>
+
+        <button
+          class="mt-6 w-full py-3 rounded-lg font-semibold text-sm transition-colors cursor-pointer"
+          [class]="
+            plan.cardType === 'GOLD'
+              ? 'bg-yellow-500 text-black hover:bg-yellow-400'
+              : 'bg-white/10 text-cyan-50 hover:bg-white/20 border border-white/10'
+          "
+        >
+          Elegir {{ plan.cardType }}
+        </button>
+      </div>
+    }
+  </div>
+
+  <div class="mt-12 text-center">
+    <p class="text-cyan-50/40 text-sm">
+      Las membresías se asignan automáticamente según tus visitas acumuladas.
+    </p>
+  </div>
+</div>

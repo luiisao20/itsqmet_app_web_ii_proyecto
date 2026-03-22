@@ -18,4 +18,4 @@ export const canActivateChildGuard: CanActivateChildFn = (childRoute, state) => 
 };
 
 //TODO: MODERATOR => CRUD DE PELICULAS
-//TODO: ADMIND => CRUD DE USUARIOS
+//TODO: ADMIN => CRUD DE USUARIOS

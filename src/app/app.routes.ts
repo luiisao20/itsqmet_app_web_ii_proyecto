@@ -14,11 +14,17 @@ import { ContactAdmin } from './features/contact-admin/contact-admin';
 import { matchContactGuard } from './guards/match-contact-guard';
 import { Register } from './features/register/register';
 import { guestGuard } from './guards/guest-guard';
+import { Reviews } from './features/reviews/reviews';
+import { Profile } from './features/profile/profile';
+import { Memberships } from './features/memberships/memberships';
 
 export const routes: Routes = [
   { path: '', component: Home },
   { path: 'about', component: AboutUs },
   { path: 'booking/:id', component: Bookings, canActivate: [authGuard] },
+  { path: 'reviews/:id', component: Reviews, canActivate: [authGuard] },
+  { path: 'profile', component: Profile, canActivate: [authGuard] },
+  { path: 'memberships', component: Memberships },
   { path: 'contact', component: ContactAdmin, canMatch: [matchContactGuard] },
   { path: 'contact', component: ContactUs },
   {

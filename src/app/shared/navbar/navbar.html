@@ -1,143 +1,141 @@
-<nav class="bg-cyan-900 border-gray-200">
-  <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a routerLink="" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <span class="self-center text-2xl font-semibold whitespace-nowrap text-cyan-50"
-        >Cinema App</span
-      >
-    </a>
-    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      @if (isAuthenticated) {
-        <button
-          type="button"
-          class="flex text-sm rounded-full md:me-0 cursor-pointer"
-          id="user-menu-button"
-          aria-expanded="false"
-          data-dropdown-toggle="user-dropdown"
-          data-dropdown-placement="bottom"
+<div class="bg-cyan-900 border-gray-200">
+  <nav class="max-w-7xl p-4 mx-auto">
+    <div class="flex items-center justify-between">
+      <a routerLink="" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <span class="self-center text-2xl font-semibold whitespace-nowrap text-cyan-50"
+          >Cinema App</span
         >
-          <ng-icon name="ionPersonCircleOutline" color="white" size="40"></ng-icon>
-        </button>
-        <!-- Dropdown menu -->
+      </a>
+      <div class="flex">
+        <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          @if (isAuthenticated) {
+            <div class="relative pl-4">
+              <button
+                type="button"
+                id="user-menu-button"
+                class="flex text-sm rounded-full cursor-pointer"
+                [attr.aria-expanded]="dropdownOpen()"
+                aria-haspopup="true"
+                (click)="toggleDropdown()"
+              >
+                <ng-icon name="ionPersonCircleOutline" color="white" size="40"></ng-icon>
+              </button>
+
+              @if (dropdownOpen()) {
+                <div
+                  id="user-dropdown"
+                  class="absolute right-0 mt-2 z-50 text-base list-none bg-cyan-800 divide-y divide-cyan-700 rounded-lg shadow-lg border border-cyan-700 min-w-48"
+                >
+                  <div class="px-4 py-3">
+                    <span class="block text-sm text-cyan-100 truncate font-medium">{{
+                      email()
+                    }}</span>
+                  </div>
+                  <ul class="py-2">
+                    <li>
+                      <a
+                        routerLink="/profile"
+                        (click)="dropdownOpen.set(false)"
+                        class="block px-4 py-2 text-sm text-cyan-100 hover:bg-cyan-700 cursor-pointer rounded-md mx-1 transition-colors"
+                        >Perfil</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        (click)="logout()"
+                        class="block px-4 py-2 text-sm text-cyan-100 hover:bg-cyan-700 cursor-pointer rounded-md mx-1 transition-colors"
+                        >Cerrar sesión</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              }
+            </div>
+          }
+
+          <button
+            type="button"
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-cyan-100 rounded-lg md:hidden hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-600 cursor-pointer"
+            [attr.aria-expanded]="mobileMenuOpen()"
+            aria-controls="navbar-user"
+            (click)="toggleMobileMenu()"
+          >
+            <span class="sr-only">Open main menu</span>
+            <svg
+              class="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
+        </div>
         <div
-          class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm"
-          id="user-dropdown"
+          class="items-center justify-between w-full md:flex md:w-auto md:order-1"
+          [class.hidden]="!mobileMenuOpen()"
+          [class.flex]="mobileMenuOpen()"
+          id="navbar-user"
         >
-          <div class="px-4 py-3">
-            <!-- <span class="block text-sm text-gray-900">{{ user()?.name }}</span> -->
-            <span class="block text-sm text-gray-500 truncate">{{ email() }}</span>
-          </div>
-          <ul class="py-2" aria-labelledby="user-menu-button">
-            <!-- <li>
+          <ul
+            class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0"
+          >
+            <li>
               <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                >Dashboard</a
+                routerLink=""
+                class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
+                >Home</a
               >
             </li>
             <li>
               <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                >Settings</a
+                routerLink="contact"
+                class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
+                >Contact Us</a
+              >
+            </li>
+            @if (rol === 'ROLE_ADMIN' || rol === 'ROLE_MODERATOR') {
+              <li>
+                <a
+                  routerLink="panel"
+                  class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
+                  >Panel</a
+                >
+              </li>
+            }
+            <li>
+              <a
+                routerLink="memberships"
+                class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
+                >Membresías</a
               >
             </li>
             <li>
               <a
-                href="#"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                >Earnings</a
-              >
-            </li> -->
-            <li>
-              <a
-                (click)="logout()"
-                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                >Cerrar sesión</a
+                routerLink="about"
+                class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
+                >About Us</a
               >
             </li>
+            @if (!isAuthenticated) {
+              <li>
+                <a
+                  routerLink="login"
+                  class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
+                  >Iniciar sesion</a
+                >
+              </li>
+            }
           </ul>
         </div>
-      }
-
-      <button
-        data-collapse-toggle="navbar-user"
-        type="button"
-        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-        aria-controls="navbar-user"
-        aria-expanded="false"
-      >
-        <span class="sr-only">Open main menu</span>
-        <svg
-          class="w-5 h-5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 17 14"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M1 1h15M1 7h15M1 13h15"
-          />
-        </svg>
-      </button>
+      </div>
     </div>
-    <div
-      class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
-      id="navbar-user"
-    >
-      <ul
-        class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0"
-      >
-        @if (!isAuthenticated) {
-          <li>
-            <a
-              routerLink="login"
-              class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
-              >Iniciar sesion</a
-            >
-          </li>
-        }
-        <li>
-          <a
-            routerLink=""
-            class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
-            >Home</a
-          >
-        </li>
-        <!-- <li>
-          <a
-            routerLink="booking"
-            class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
-            >Booking</a
-          >
-        </li> -->
-        <li>
-          <a
-            routerLink="contact"
-            class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
-            >Contact Us</a
-          >
-        </li>
-        @if (rol === 'ROLE_ADMIN' || rol === 'ROLE_MODERATOR') {
-          <li>
-            <a
-              routerLink="panel"
-              class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
-              >Panel</a
-            >
-          </li>
-        }
-        <li>
-          <a
-            routerLink="about"
-            class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
-            >About Us</a
-          >
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  </nav>
+</div>

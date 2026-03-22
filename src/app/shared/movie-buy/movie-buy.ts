@@ -13,14 +13,15 @@ import { SeatNumber } from '../../features/bookings/bookings';
 import { Button } from '../button/button';
 import { Ticket } from '../../models/ticket';
 import { TicketService } from '../../service/ticket-service';
-import {Router} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ionStar } from '@ng-icons/ionicons';
 
 @Component({
   selector: 'app-movie-buy',
-  imports: [Badge, NgIconComponent, Button],
+  imports: [Badge, NgIconComponent, Button, RouterLink],
   templateUrl: './movie-buy.html',
   providers: [
-    provideIcons({ ionLocation, ionCalendar, ionClose, ionArrowForward, ionPlayCircleOutline }),
+    provideIcons({ ionLocation, ionCalendar, ionClose, ionArrowForward, ionPlayCircleOutline, ionStar }),
   ],
   styleUrl: './movie-buy.css',
 })
