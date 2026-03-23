@@ -6,7 +6,7 @@
       <h2 class="font-semibold text-3xl">{{ movie.title }}</h2>
       <p class="text-cyan-50/60 text-sm">{{ movie.category?.name }} • {{ movie.time }}</p>
       <a
-        href="{{ movie.trailer }}"
+        [href]="movie.trailer"
         target="_blank"
         rel="noopener noreferrer"
         class="flex items-center gap-2 cursor-pointer"
@@ -80,7 +80,6 @@
     <app-button
       (click)="buyTicket()"
       title="Proceder al pago"
-      [animation]="false"
       [suffixIcon]="goIcon"
       [shadow]="selectedSeats.length > 0 ? 'shadow-xl shadow-cyan-500/40' : 'shadow-none'"
       [animation]="true"
@@ -92,4 +91,13 @@
   <p class="text-xs text-center text-cyan-50/50">
     Al presionar en "Proceder al pago" estás aceptando nuestros términos y políticas de cancelación
   </p>
+  <div class="mt-4 flex justify-center">
+    <a
+      [routerLink]="['/reviews', movie.id]"
+      class="text-cyan-500 hover:text-cyan-400 text-sm font-medium transition-colors cursor-pointer flex items-center gap-1"
+    >
+      <ng-icon name="ionStar" color="#facc15" size="16"></ng-icon>
+      Ver reseñas
+    </a>
+  </div>
 </div>

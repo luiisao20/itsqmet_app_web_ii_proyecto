@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { lastValueFrom, map, Observable } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { UserModel } from '../models/user';
 
 @Injectable({
@@ -9,10 +9,14 @@ import { UserModel } from '../models/user';
 export class UserService {
   private http = inject(HttpClient);
 
-  private API_USER = 'http://localhost:8080/users';
+  private API_URL = 'http://localhost:8080/users';
 
   getUsers(): Observable<UserModel[]> {
-    return this.http.get<UserModel[]>(`${this.API_USER}`);
+    return this.http.get<UserModel[]>(`${this.API_URL}`);
+  }
+
+  getUserByUuid(uuid: string): Observable<UserModel> {
+    return this.http.get<UserModel>(`${this.API_URL}/${uuid}`);
   }
 
   putUser(id: string, usuario: UserModel): Promise<String> {
@@ -20,6 +24,6 @@ export class UserService {
   }
 
   deleteUser(id: string): Promise<void> {
-    return lastValueFrom(this.http.delete<void>(`${this.API_USER}/delete/${id}`));
+    return lastValueFrom(this.http.delete<void>(`${this.API_URL}/delete/${id}`));
   }
 }

@@ -1,0 +1,21 @@
+<div class="flex items-center gap-3">
+  @for (tab of tabs; track tab.id) {
+    <app-button
+      [title]="tab.name"
+      [shadow]="tab.active ? 'shadow-md shadow-cyan-500/20' : ''"
+      [background]="
+        tab.active ? 'bg-cyan-500' : 'bg-white/5 dark:bg-white/10 hover:bg-cyan-500/5'
+      "
+      [border]="!tab.active"
+      [borderColor]="tab.active ? '' : 'border-white/10 hover:border-cyan-500/30'"
+      paddingHorizontal="px-6"
+      paddingVertical="py-2"
+      [textStyle]="
+        tab.active
+          ? 'text-white text-sm font-bold'
+          : 'text-slate-600 dark:text-slate-300 text-sm font-medium group-hover:text-cyan-500 transition-colors'
+      "
+      (click)="selectTab(tab)"
+    ></app-button>
+  }
+</div>

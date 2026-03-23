@@ -1,15 +1,12 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { User } from 'firebase/auth';
-import { Observable, lastValueFrom, map, tap } from 'rxjs';
+import { Observable, map, tap, lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import {UserModel} from '../models/user';
+import { UserModel } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  user: User | null = null;
-
   private API_URL = 'http://localhost:8080/auth';
   private http = inject(HttpClient);
 
@@ -23,11 +20,18 @@ export class AuthService {
           localStorage.setItem('token', res.jwt);
           localStorage.setItem('rol', res.role);
           localStorage.setItem('email', res.email);
+          localStorage.setItem('uuid', res.uuid);
           this.currentRol.set(res.role);
           this.isAuthenticated.set(true);
         }
       }),
-      map((res) => !!(res && res.token)),
+      map((res) => !!(res && res.jwt)),
+    );
+  }
+
+  register(user: UserModel): Promise<string> {
+    return lastValueFrom(
+      this.http.post(`${this.API_URL}/register`, user, { responseType: 'text' }),
     );
   }
 
@@ -41,6 +45,7 @@ export class AuthService {
     localStorage.removeItem('rol');
     localStorage.removeItem('token');
     localStorage.removeItem('email');
+    localStorage.removeItem('uuid');
     this.isAuthenticated.set(false);
     this.currentRol.set(null);
   }

@@ -57,11 +57,12 @@ export class RegisterForm {
         name: this.registerForm.value.name!,
         email: this.registerForm.value.email!,
         password: this.registerForm.value.password!,
-        role: 'ROLE_USER',
         cellphone: this.registerForm.value.cellphone || '',
       };
 
-      this.authService.postUser(user).then(() => this.router.navigate(['/login']));
+      this.authService.register(user).then(() => {
+        this.router.navigate(['/login']);
+      });
     }
   }
 }
