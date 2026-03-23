@@ -35,6 +35,10 @@ export class AuthService {
     );
   }
 
+  postUser(user: UserModel): Promise<String> {
+    return lastValueFrom(this.http.post<String>(`${this.API_URL}/register`, user));
+  }
+
   logout() {
     localStorage.removeItem('session');
     localStorage.removeItem('user');

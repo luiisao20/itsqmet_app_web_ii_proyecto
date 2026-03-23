@@ -8,6 +8,7 @@ import { AuthService } from '../../service/auth-service';
 import { ionPerson } from '@ng-icons/ionicons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { UserTable } from '../user-table/user-table';
+import {AuthService} from '../../service/auth-service';
 
 @Component({
   selector: 'app-users-form',

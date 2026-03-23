@@ -29,7 +29,7 @@ export class MovieTable {
 
   query = injectQuery(() => ({
     queryKey: ['movies'],
-    queryFn: () => lastValueFrom(this.movieService.getMovies()),
+    queryFn: () => this.movieService.getMovies(),
   }));
 
   deleteMovie(id: number) {

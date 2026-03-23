@@ -6,14 +6,14 @@ export interface Movie {
   overview?: string;
   releaseDate?: string;
   status?: Status;
-  category?: Category;
+  categories?: Category[];
   rating?: string;
   trailer?: string;
 }
 
 export interface Category {
   id: number;
-  name?: string;
+  name: string;
 }
 
 export interface Status {

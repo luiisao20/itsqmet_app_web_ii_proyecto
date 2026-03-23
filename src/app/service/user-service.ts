@@ -19,10 +19,8 @@ export class UserService {
     return this.http.get<UserModel>(`${this.API_URL}/${uuid}`);
   }
 
-  putUser(id: string, usuario: UserModel): Promise<string> {
-    return lastValueFrom(
-      this.http.put(`${this.API_URL}/update/${id}`, usuario, { responseType: 'text' }),
-    );
+  putUser(id: string, usuario: UserModel): Promise<String> {
+    return lastValueFrom(this.http.put<String>(`${this.API_USER}/update/${id}`, usuario));
   }
 
   deleteUser(id: string): Promise<void> {

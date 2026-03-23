@@ -7,6 +7,26 @@
         <div class="flex items-center gap-4 flex-wrap">
           <app-establishment-filter></app-establishment-filter>
           <app-date-filter></app-date-filter>
+        <div class="w-3/4">
+          <app-categories></app-categories>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-sm text-slate-500 font-medium">Ordenar por:</span>
+          <button
+            class="flex items-center gap-2 bg-white dark:bg-white/5 px-4 py-2 rounded-lg text-sm border border-slate-200 dark:border-white/10 cursor-pointer"
+          >
+            <span class="font-bold">Populares</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="size-4 text-white"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+            </svg>
+          </button>
         </div>
         <app-billboard-tabs></app-billboard-tabs>
       </div>

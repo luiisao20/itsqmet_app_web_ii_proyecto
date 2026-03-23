@@ -86,7 +86,6 @@
       <label class="flex flex-col gap-2">
         <p class="text-white/80 text-sm font-medium">Categoria</p>
         <select
-          [(ngModel)]="newMovie.category"
           name="category"
           class="w-full bg-cyan-950/20 dark:bg-cyan-950/20 border-transparent rounded-lg focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2.5 outline-none transition-all"
         >
@@ -149,7 +148,6 @@
             newMovie.overview === '' ||
             newMovie.imageUrl === '' ||
             newMovie.trailer === '' ||
-            newMovie.category === '0' ||
             newMovie.status === '0' ||
             !newMovie.rating ||
             newMovie.rating === '0' ||
@@ -164,7 +162,6 @@
             newMovie.overview === '' ||
             newMovie.imageUrl === '' ||
             newMovie.trailer === '' ||
-            newMovie.category === '0' ||
             newMovie.status === '0' ||
             !newMovie.rating ||
             newMovie.rating === '0' ||

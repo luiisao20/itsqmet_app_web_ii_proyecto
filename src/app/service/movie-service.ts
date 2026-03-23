@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, map, Observable } from 'rxjs';
-import { Movie } from '../models/movie';
+import { Category, Movie } from '../models/movie';
 
 @Injectable({
   providedIn: 'root',

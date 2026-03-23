@@ -1,17 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { MovieService } from '../../service/movie-service';
-import { Movie } from '../../models/movie';
+import { Movie, Category } from '../../models/movie';
 import { FormsModule } from '@angular/forms';
 import { Button } from '../button/button';
 import { MovieTable } from '../movie-table/movie-table';
 import { injectMutation, injectQuery, QueryClient } from '@tanstack/angular-query-experimental';
 import { CategoryService } from '../../service/category-service';
 import { StatusService } from '../../service/status-service';
-import { lastValueFrom } from 'rxjs';
 
 interface MovieModel {
   id?: number;
-  category: string;
+  categories: Category[];
   imageUrl: string;
   overview: string;
   releaseDate: string;
@@ -35,7 +34,7 @@ export class MovieForm {
   private statusService = inject(StatusService);
 
   newMovie: MovieModel = {
-    category: '0',
+    categories: [],
     imageUrl: '',
     overview: '',
     releaseDate: '',
@@ -49,21 +48,19 @@ export class MovieForm {
 
   queryCategory = injectQuery(() => ({
     queryKey: ['categories'],
-    queryFn: () => lastValueFrom(this.categoryService.get()),
+    queryFn: () => this.categoryService.get(),
   }));
 
   queryStatus = injectQuery(() => ({
     queryKey: ['statuses'],
-    queryFn: () => lastValueFrom(this.statusService.get()),
+    queryFn: () => this.statusService.get(),
   }));
 
   mutation = injectMutation(() => ({
     mutationFn: () => {
       const movieToSave: Movie = {
         id: this.newMovie.id,
-        category: {
-          id: parseInt(this.newMovie.category),
-        },
+        categories: this.newMovie.categories,
         imageUrl: this.newMovie.imageUrl,
         overview: this.newMovie.overview,
         releaseDate: this.newMovie.releaseDate,
@@ -95,7 +92,7 @@ export class MovieForm {
 
   resetForm() {
     this.newMovie = {
-      category: '0',
+      categories: [],
       imageUrl: '',
       overview: '',
       releaseDate: '',
@@ -109,7 +106,7 @@ export class MovieForm {
 
   setMovieToEdit(movie: Movie) {
     this.newMovie.id = movie.id;
-    this.newMovie.category = movie.category ? movie.category.id.toString() : '0';
+    this.newMovie.categories = movie.categories ?? [];
     this.newMovie.imageUrl = movie.imageUrl;
     this.newMovie.overview = movie.overview || '';
     this.newMovie.releaseDate = movie.releaseDate || '';
