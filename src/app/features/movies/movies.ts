@@ -55,7 +55,7 @@ export class Movies {
     { label: 'Películas', icon: 'heroFilm', route: 'movies' },
     { label: 'Reseñas', icon: 'heroStar', route: 'reviews' },
     { label: 'Contactos', icon: 'heroEnvelope', route: 'contacts' },
-    { label: 'Funciones', icon: 'boxCameraMovie', route: 'schedules' },
+    { label: 'Funciones', icon: 'boxCameraMovie', route: 'schedules/new' },
   ];
 
   toggleSidebar() {

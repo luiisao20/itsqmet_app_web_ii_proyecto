@@ -1,0 +1,28 @@
+<div class="grid md:grid-cols-2 gap-4">
+  <div
+    class="border-gray-500 border-2 rounded-xl p-4 grid grid-cols-1 space-y-3 place-content-start"
+  >
+    @for (item of queryStablishments.data(); track $index) {
+      <div
+        (click)="onSelectStablishment(item)"
+        [class]="
+          `hover:bg-gray-800 p-2 rounded-xl cursor-pointer transition hover:scale-105 hover:text-main ${stablishment()?.id === item.id && 'text-main bg-gray-800'}`
+        "
+      >
+        <h2 class="text-lg font-semibold">{{ item.name }}</h2>
+        <div class="px-4 flex flex-col gap-2">
+          <p class="text-sm text-gray-400">{{ item.address.city }}</p>
+          <p class="text-sm text-gray-400">{{ item.address.description }}</p>
+        </div>
+      </div>
+    }
+  </div>
+  <div
+    class="border-gray-500 border-2 rounded-xl p-4 grid grid-cols-1 space-y-3 place-content-start overflow-y-scroll max-h-200"
+  >
+    <h2 class="text-lg font-semibold self-start">Funciones disponibles</h2>
+    @for (item of queryMovies.data(); track $index) {
+      <app-movie-function [item]="item" [stablishmentId]="stablishment()?.id!"></app-movie-function>
+    }
+  </div>
+</div>

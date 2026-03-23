@@ -1,0 +1,87 @@
+<div class="space-y-2">
+  <details class="group [&amp;_summary::-webkit-details-marker]:hidden">
+    <summary
+      (click)="onShowFunctions()"
+      class="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-200 bg-white px-4 py-3 font-medium text-gray-900 hover:bg-gray-50"
+    >
+      <div class="flex gap-4 font-semibold">
+        <div class="w-20 h-24 rounded-lg overflow-hidden border border-slate-700 bg-slate-800">
+          <img class="w-full h-full object-cover" [src]="item.imageUrl" alt="10Dance" />
+        </div>
+        <div>
+          <h2>{{ item.title }}</h2>
+          <td class="py-2 text-sm text-slate-400 text-center">
+            Estreno: {{ item.releaseDate | customDate }}
+          </td>
+        </div>
+        <ng-icon name="matKeyboardArrowDown"></ng-icon>
+      </div>
+
+      <svg
+        class="size-5 shrink-0 transition-transform duration-300 group-open:-rotate-180"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 9l-7 7-7-7"
+        ></path>
+      </svg>
+    </summary>
+    <div class="bg-gray-800 p-4 flex flex-col gap-4">
+      @for (item of queryFunctions.data(); track $index) {
+        <div
+          class="bg-gray-800 border border-gray-700 rounded-2xl p-4 shadow-md hover:shadow-lg transition-all duration-300 flex flex-col gap-3"
+        >
+          <div class="flex justify-between items-center">
+            <p class="text-sm text-gray-400">Fecha</p>
+            <p class="text-sm font-semibold text-white">
+              {{ item.date | customDateTime }}
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 mt-2">
+            <div class="bg-gray-700 rounded-xl p-3 text-center">
+              <p class="text-xs text-gray-300">Disponibles</p>
+              <p class="text-lg font-bold text-green-400">
+                {{ item.availableSeats }}
+              </p>
+            </div>
+
+            <div class="bg-gray-700 rounded-xl p-3 text-center">
+              <p class="text-xs text-gray-300">Ocupados</p>
+              <p class="text-lg font-bold text-red-400">
+                {{ item.occupiedSeats }}
+              </p>
+            </div>
+          </div>
+
+          <div class="flex justify-between mt-2 text-sm text-gray-300">
+            <p>
+              Sala: <span class="text-white font-medium">{{ item.room }}</span>
+            </p>
+            <p>
+              Tipo: <span class="text-white font-medium">{{ item.type }}</span>
+            </p>
+          </div>
+          <div class="flex gap-4 self-end">
+            <button (click)="onEditSchedule(item)" class="cursor-pointer">
+              <ng-icon name="boxEdit" color="#00b8db" size="25"></ng-icon>
+            </button>
+            <button
+              [disabled]="loadingDelete()"
+              (click)="onDeleteSchedule(item)"
+              [class]="`cursor-pointer ${loadingDelete() && 'cursor-progress'}`"
+            >
+              <ng-icon name="boxTrash" color="red" size="25"></ng-icon>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </details>
+</div>
