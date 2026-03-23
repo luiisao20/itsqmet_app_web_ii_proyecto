@@ -4,11 +4,11 @@ import { heroPencilSquare, heroTrash } from '@ng-icons/heroicons/outline';
 import { MovieService } from '../../service/movie-service';
 import { Movie } from '../../models/movie';
 import { injectMutation, injectQuery, QueryClient } from '@tanstack/angular-query-experimental';
-import { lastValueFrom } from 'rxjs';
+import { CustomDatePipe } from '../../pipes/custom-date-pipe';
 
 @Component({
   selector: 'app-movie-table',
-  imports: [NgIconComponent],
+  imports: [NgIconComponent, CustomDatePipe],
   templateUrl: './movie-table.html',
   providers: provideIcons({ heroPencilSquare, heroTrash }),
   styleUrl: './movie-table.css',

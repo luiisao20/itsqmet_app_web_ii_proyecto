@@ -16,6 +16,7 @@ import {
   heroXMark,
   heroStar,
 } from '@ng-icons/heroicons/outline';
+import { boxCameraMovie } from '@ng-icons/boxicons/regular';
 
 @Component({
   selector: 'app-movies',
@@ -33,6 +34,7 @@ import {
     heroBars3,
     heroXMark,
     heroStar,
+    boxCameraMovie,
   }),
   templateUrl: './movies.html',
   styleUrl: './movies.css',
@@ -53,6 +55,7 @@ export class Movies {
     { label: 'Películas', icon: 'heroFilm', route: 'movies' },
     { label: 'Reseñas', icon: 'heroStar', route: 'reviews' },
     { label: 'Contactos', icon: 'heroEnvelope', route: 'contacts' },
+    { label: 'Funciones', icon: 'boxCameraMovie', route: 'schedules' },
   ];
 
   toggleSidebar() {
