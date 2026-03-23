@@ -12,8 +12,12 @@ export class MovieService {
   // private API_MOVIES = 'https://aula-virtual-geapsi-default-rtdb.firebaseio.com/movies';
   private API_MOVIES = 'http://localhost:8080/movies';
 
-  getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(`${this.API_MOVIES}`);
+  getMovies(): Promise<Movie[]> {
+    return lastValueFrom(this.http.get<Movie[]>(`${this.API_MOVIES}`));
+  }
+
+  getMoviesByCategory(category: Category): Promise<Movie[]> {
+    return lastValueFrom(this.http.get<Movie[]>(`${this.API_MOVIES}/category/${category.id}`));
   }
 
   postMovie(movie: Movie): Promise<Movie> {

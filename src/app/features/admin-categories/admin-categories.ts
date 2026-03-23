@@ -25,7 +25,7 @@ export class AdminCategories {
 
   query = injectQuery(() => ({
     queryKey: ['admin-categories'],
-    queryFn: () => lastValueFrom(this.categoryService.get()),
+    queryFn: () => this.categoryService.get(),
   }));
 
   mutation = injectMutation(() => ({

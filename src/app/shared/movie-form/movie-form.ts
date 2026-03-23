@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { MovieService } from '../../service/movie-service';
-import { Movie, Category } from '../../models/movie';
+import { Movie, Category, Status } from '../../models/movie';
 import { FormsModule } from '@angular/forms';
 import { Button } from '../button/button';
 import { MovieTable } from '../movie-table/movie-table';
 import { injectMutation, injectQuery, QueryClient } from '@tanstack/angular-query-experimental';
 import { CategoryService } from '../../service/category-service';
-import { StatusService } from '../../service/status-service';
 
 interface MovieModel {
   id?: number;
@@ -31,7 +30,6 @@ export class MovieForm {
   private movieService = inject(MovieService);
   private queryClient = inject(QueryClient);
   private categoryService = inject(CategoryService);
-  private statusService = inject(StatusService);
 
   newMovie: MovieModel = {
     categories: [],
@@ -51,10 +49,16 @@ export class MovieForm {
     queryFn: () => this.categoryService.get(),
   }));
 
-  queryStatus = injectQuery(() => ({
-    queryKey: ['statuses'],
-    queryFn: () => this.statusService.get(),
-  }));
+  statuses: Status[] = [
+    {
+      id: 1,
+      name: 'Estreno',
+    },
+    {
+      id: 2,
+      name: 'Próximamente',
+    },
+  ];
 
   mutation = injectMutation(() => ({
     mutationFn: () => {
@@ -72,7 +76,7 @@ export class MovieForm {
         rating: this.newMovie.rating,
         trailer: this.newMovie.trailer,
       };
-      if (this.newMovie.id) return this.movieService.putMovie(this.newMovie.id, movieToSave)
+      if (this.newMovie.id) return this.movieService.putMovie(this.newMovie.id, movieToSave);
       return this.movieService.postMovie(movieToSave);
     },
 

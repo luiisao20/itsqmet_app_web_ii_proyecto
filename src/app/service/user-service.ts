@@ -20,7 +20,7 @@ export class UserService {
   }
 
   putUser(id: string, usuario: UserModel): Promise<String> {
-    return lastValueFrom(this.http.put<String>(`${this.API_USER}/update/${id}`, usuario));
+    return lastValueFrom(this.http.put<String>(`${this.API_URL}/update/${id}`, usuario));
   }
 
   deleteUser(id: string): Promise<void> {
