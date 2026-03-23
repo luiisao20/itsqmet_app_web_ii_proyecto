@@ -1,0 +1,14 @@
+/* Ocultar scrollbar Chrome, Safari */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ocultar scrollbar Firefox */
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Ocultar scrollbar IE */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+}
