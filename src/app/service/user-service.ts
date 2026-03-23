@@ -15,12 +15,8 @@ export class UserService {
     return this.http.get<UserModel[]>(`${this.API_USER}`);
   }
 
-  postUser(user: UserModel): Promise<UserModel> {
-    return lastValueFrom(this.http.post<UserModel>(`${this.API_USER}/register`, user));
-  }
-
-  putUser(id: string, usuario: UserModel): Promise<UserModel> {
-    return lastValueFrom(this.http.put<UserModel>(`${this.API_USER}/update/${id}`, usuario));
+  putUser(id: string, usuario: UserModel): Promise<String> {
+    return lastValueFrom(this.http.put<String>(`${this.API_USER}/update/${id}`, usuario));
   }
 
   deleteUser(id: string): Promise<void> {

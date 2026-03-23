@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, map, Observable } from 'rxjs';
-import { Movie } from '../models/movie';
+import { Category, Movie } from '../models/movie';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +12,12 @@ export class MovieService {
   // private API_MOVIES = 'https://aula-virtual-geapsi-default-rtdb.firebaseio.com/movies';
   private API_MOVIES = 'http://localhost:8080/movies';
 
-  getMovies(): Observable<Movie[]> {
-    const res = this.http.get<Movie[]>(`${this.API_MOVIES}`).subscribe(h => console.log(h));
-    return this.http.get<Movie[]>(`${this.API_MOVIES}`);
+  getMovies(): Promise<Movie[]> {
+    return lastValueFrom(this.http.get<Movie[]>(`${this.API_MOVIES}`));
+  }
+
+  getMoviesByCategory(category: Category): Promise<Movie[]> {
+    return lastValueFrom(this.http.get<Movie[]>(`${this.API_MOVIES}/category/${category.id}`));
   }
 
   postMovie(movie: Movie): Promise<Movie> {

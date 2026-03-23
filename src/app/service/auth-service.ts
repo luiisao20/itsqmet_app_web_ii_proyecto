@@ -1,7 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { User } from 'firebase/auth';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, lastValueFrom, map, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import {UserModel} from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,6 @@ export class AuthService {
   login(email: string, password: string): Observable<boolean> {
     return this.http.post<any>(`${this.API_URL}/login`, { email, password }).pipe(
       tap((res) => {
-
         if (res && res.jwt) {
           localStorage.setItem('token', res.jwt);
           localStorage.setItem('rol', res.role);
@@ -29,6 +29,10 @@ export class AuthService {
       }),
       map((res) => !!(res && res.token)),
     );
+  }
+
+  postUser(user: UserModel): Promise<String> {
+    return lastValueFrom(this.http.post<String>(`${this.API_URL}/register`, user));
   }
 
   logout() {
