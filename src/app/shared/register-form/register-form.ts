@@ -8,7 +8,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { UserService } from '../../service/user-service';
+import { AuthService } from '../../service/auth-service';
 import { UserModel } from '../../models/user';
 
 @Component({
@@ -18,7 +18,7 @@ import { UserModel } from '../../models/user';
   styleUrl: './register-form.css',
 })
 export class RegisterForm {
-  private userService = inject(UserService);
+  private authService = inject(AuthService);
   private router = inject(Router);
 
   private fb = inject(FormBuilder);
@@ -60,7 +60,7 @@ export class RegisterForm {
         cellphone: this.registerForm.value.cellphone || '',
       };
 
-      this.userService.postUser(user).then(() => {
+      this.authService.register(user).then(() => {
         this.router.navigate(['/login']);
       });
     }

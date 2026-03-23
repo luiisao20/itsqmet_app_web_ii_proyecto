@@ -9,26 +9,23 @@ import { UserModel } from '../models/user';
 export class UserService {
   private http = inject(HttpClient);
 
-  private API_USER = 'http://localhost:8080/auth';
-  private API_USERS = 'http://localhost:8080/users';
+  private API_URL = 'http://localhost:8080/users';
 
   getUsers(): Observable<UserModel[]> {
-    return this.http.get<UserModel[]>(`${this.API_USER}`);
+    return this.http.get<UserModel[]>(`${this.API_URL}`);
   }
 
   getUserByUuid(uuid: string): Observable<UserModel> {
-    return this.http.get<UserModel>(`${this.API_USERS}/${uuid}`);
-  }
-
-  postUser(user: UserModel): Promise<string> {
-    return lastValueFrom(this.http.post(`${this.API_USER}/register`, user, { responseType: 'text' }));
+    return this.http.get<UserModel>(`${this.API_URL}/${uuid}`);
   }
 
   putUser(id: string, usuario: UserModel): Promise<string> {
-    return lastValueFrom(this.http.put(`${this.API_USER}/update/${id}`, usuario, { responseType: 'text' }));
+    return lastValueFrom(
+      this.http.put(`${this.API_URL}/update/${id}`, usuario, { responseType: 'text' }),
+    );
   }
 
   deleteUser(id: string): Promise<void> {
-    return lastValueFrom(this.http.delete<void>(`${this.API_USER}/delete/${id}`));
+    return lastValueFrom(this.http.delete<void>(`${this.API_URL}/delete/${id}`));
   }
 }

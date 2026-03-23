@@ -11,8 +11,16 @@ export class ReviewService {
 
   private API_REVIEWS = 'http://localhost:8080/reviews';
 
+  getAll(): Observable<Review[]> {
+    return this.http.get<Review[]>(this.API_REVIEWS);
+  }
+
   getReviewsByMovie(movieId: number): Observable<Review[]> {
     return this.http.get<Review[]>(`${this.API_REVIEWS}/movie/${movieId}`);
+  }
+
+  getReviewsByUser(uuid: string): Observable<Review[]> {
+    return this.http.get<Review[]>(`${this.API_REVIEWS}/user/${uuid}`);
   }
 
   saveReview(review: Review): Observable<Review> {

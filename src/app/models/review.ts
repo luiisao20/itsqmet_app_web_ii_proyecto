@@ -3,6 +3,7 @@ export interface Review {
   title: string;
   description: string;
   rating: number;
-  movie: { id: number };
+  createdAt?: string;
+  movie: { id: number; title?: string };
   user: { uuid: string; name?: string; email?: string };
 }

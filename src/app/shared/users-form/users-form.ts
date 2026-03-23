@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { injectMutation, QueryClient } from '@tanstack/angular-query-experimental';
 import { UserModel } from '../../models/user';
 import { UserService } from '../../service/user-service';
+import { AuthService } from '../../service/auth-service';
 import { ionPerson } from '@ng-icons/ionicons';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { UserTable } from '../user-table/user-table';
@@ -17,6 +18,7 @@ import { UserTable } from '../user-table/user-table';
 })
 export class UsersForm {
   private userService = inject(UserService);
+  private authService = inject(AuthService);
   private queryClient = inject(QueryClient);
   private cdr = inject(ChangeDetectorRef);
 
@@ -34,7 +36,7 @@ export class UsersForm {
     mutationFn: () =>
       this.newUser.uuid
         ? this.userService.putUser(this.newUser.uuid, this.newUser)
-        : this.userService.postUser(this.newUser),
+        : this.authService.register(this.newUser),
 
     onSuccess: () => {
       this.queryClient.invalidateQueries({ queryKey: ['users'] });

@@ -1,6 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map, tap, lastValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { UserModel } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,12 @@ export class AuthService {
         }
       }),
       map((res) => !!(res && res.jwt)),
+    );
+  }
+
+  register(user: UserModel): Promise<string> {
+    return lastValueFrom(
+      this.http.post(`${this.API_URL}/register`, user, { responseType: 'text' }),
     );
   }
 
