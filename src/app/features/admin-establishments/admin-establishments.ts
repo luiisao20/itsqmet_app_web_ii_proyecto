@@ -2,16 +2,13 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EstablishmentService } from '../../service/establishment-service';
 import { Establishment } from '../../models/establishment';
-import { injectMutation, injectQuery, QueryClient } from '@tanstack/angular-query-experimental';
-import { lastValueFrom } from 'rxjs';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { heroPencilSquare, heroTrash } from '@ng-icons/heroicons/outline';
+import { injectMutation, QueryClient } from '@tanstack/angular-query-experimental';
 import { Button } from '../../shared/button/button';
+import { StablishmentsTable } from "../../shared/stablishments-table/stablishments-table";
 
 @Component({
   selector: 'app-admin-establishments',
-  imports: [FormsModule, NgIconComponent, Button],
-  providers: provideIcons({ heroPencilSquare, heroTrash }),
+  imports: [FormsModule, Button, StablishmentsTable],
   templateUrl: './admin-establishments.html',
 })
 export class AdminEstablishments {
@@ -24,11 +21,6 @@ export class AdminEstablishments {
   description = '';
   editId: number | null = null;
   edit = false;
-
-  query = injectQuery(() => ({
-    queryKey: ['admin-establishments'],
-    queryFn: () => lastValueFrom(this.establishmentService.getEstablishments()),
-  }));
 
   mutation = injectMutation(() => ({
     mutationFn: () => {

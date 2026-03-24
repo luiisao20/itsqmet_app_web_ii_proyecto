@@ -8,8 +8,10 @@
           <th class="px-6 py-4">Titulo</th>
           <th class="px-6 py-4">Categoria</th>
           <th class="px-6 py-4">Fecha de estreno</th>
-          <th class="px-6 py-4">Estado</th>
-          <th class="px-6 py-4">Puntuacion</th>
+          @if (!isForm) {
+            <th class="px-6 py-4">Estado</th>
+            <th class="px-6 py-4">Puntuacion</th>
+          }
           <th class="px-6 py-4">Acciones</th>
         </tr>
       </thead>
@@ -32,40 +34,52 @@
             </td>
             <td class="px-6 py-2 text-center grid grid-cols-2 gap-2">
               @for (subitem of item.categories; track $index) {
-                <span
-                  class="px-2.5 py-1 text-slate-400 text-xs font-semibold self-center-safe"
-                  >{{ subitem.name }}</span
-                >
+                <span class="px-2.5 py-1 text-slate-400 text-xs font-semibold self-center-safe">{{
+                  subitem.name
+                }}</span>
               }
             </td>
-            <td class="px-6 py-2 text-sm text-slate-400 text-center">{{ item.releaseDate | customDate}}</td>
-            <td class="px-6 py-2 text-sm text-center">
-              <span
-                class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100"
-                >{{ item.status }}</span
-              >
+            <td class="px-6 py-2 text-sm text-slate-400 text-center">
+              {{ item.releaseDate | customDate }}
             </td>
-            <td class="px-6 py-2 text-sm">
-              <div class="flex items-center justify-center gap-1">
-                <span class="text-sm font-bold">{{ item.rating }}</span>
-              </div>
-            </td>
-            <td class="px-6 py-4">
-              <div class="flex items-center justify-evenly gap-2">
-                <button
-                  (click)="onSelectMovieToEdit(item)"
-                  class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+            @if (!isForm) {
+              <td class="px-6 py-2 text-sm text-center">
+                <span
+                  class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100"
+                  >{{ item.status }}</span
                 >
-                  <ng-icon name="heroPencilSquare" class="icon-main" size="20"></ng-icon>
-                </button>
-                <button
-                  (click)="deleteMovie(item.id!)"
-                  class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+              </td>
+              <td class="px-6 py-2 text-sm">
+                <div class="flex items-center justify-center gap-1">
+                  <span class="text-sm font-bold">{{ item.rating }}</span>
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <div class="flex items-center justify-evenly gap-2">
+                  <button
+                    (click)="onSelectMovieToEdit(item)"
+                    class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+                  >
+                    <ng-icon name="heroPencilSquare" class="icon-main" size="20"></ng-icon>
+                  </button>
+                  <button
+                    (click)="deleteMovie(item.id!)"
+                    class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+                  >
+                    <ng-icon name="heroTrash" color="red" size="20"></ng-icon>
+                  </button>
+                </div>
+              </td>
+            } @else {
+              <td>
+                <a
+                  (click)="onSelectMovieForSchedule(item)"
+                  class="text-main hover:underline hover:underline-offset-2 cursor-pointer"
                 >
-                  <ng-icon name="heroTrash" color="red" size="20"></ng-icon>
-                </button>
-              </div>
-            </td>
+                  Escoger
+                </a>
+              </td>
+            }
           </tr>
         }
       </tbody>
