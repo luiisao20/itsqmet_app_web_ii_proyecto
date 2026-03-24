@@ -1,1 +1,17 @@
-<p>new-schedule works!</p>
+<app-stepper-schedule [currentIndex]="index()"></app-stepper-schedule>
+<div class="my-4 px-8">
+  @if (index() === 0) {
+    <app-schedule-movie-form (setMovie)="onSetMovie($event)"></app-schedule-movie-form>
+  } @else if (index() === 1) {
+    <app-schedule-stablishment-select
+      (setStablishment)="onSetStablishment($event)"
+      (returnForm)="onReturnToMovie()"
+    ></app-schedule-stablishment-select>
+  } @else if (index() === 2) {
+    <app-schedule-form
+      [movie]="scheduleInfo()?.movie"
+      [stablishment]="scheduleInfo()?.stablishment"
+      (returnStablishment)="onReturnToStablishment()"
+    ></app-schedule-form>
+  }
+</div>

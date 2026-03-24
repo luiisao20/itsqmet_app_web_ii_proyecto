@@ -1,7 +1,7 @@
 <div class="relative">
   <button
     (click)="toggleDropdown()"
-    class="flex items-center gap-2 bg-white dark:bg-white/5 px-4 py-2.5 rounded-lg text-sm border border-slate-200 dark:border-white/10 min-w-[220px] transition-colors"
+    class="flex items-center gap-2 bg-white dark:bg-white/5 px-4 py-2.5 rounded-lg text-sm border border-slate-200 dark:border-white/10 min-w-55 transition-colors"
     [class.cursor-pointer]="!query.isPending()"
     [class.cursor-not-allowed]="query.isPending()"
     [class.opacity-60]="query.isPending()"

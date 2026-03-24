@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroPencilSquare, heroTrash } from '@ng-icons/heroicons/outline';
 import { MovieService } from '../../service/movie-service';
@@ -15,6 +15,8 @@ import { CustomDatePipe } from '../../pipes/custom-date-pipe';
 })
 export class MovieTable {
   @Output() selectMovieToEdit = new EventEmitter<Movie>();
+  @Input() isForm: boolean = false;
+  @Output() selectMovieForSchedule = new EventEmitter<Movie>();
 
   private movieService = inject(MovieService);
   private queryClient = inject(QueryClient);
@@ -36,6 +38,10 @@ export class MovieTable {
     if (confirm('¿Estás seguro de eliminar el registro?')) {
       this.mutation.mutate(id);
     }
+  }
+
+  onSelectMovieForSchedule(movie: Movie) {
+    this.selectMovieForSchedule.emit(movie);
   }
 
   onSelectMovieToEdit(movie: Movie) {

@@ -1,0 +1,39 @@
+<div class="flex flex-col items-center justify-center">
+  <div class="w-3/4">
+    @if (movieSelected()) {
+      <div class="flex flex-col justify-center">
+        <div class="flex justify-center items-center gap-4 mt-4">
+          <img
+            class="w-20 h-28 object-cover rounded-lg"
+            [src]="movieSelected()?.imageUrl"
+            alt="{{ movieSelected()?.title }}"
+          />
+          <div>
+            <h3 class="text-lg font-bold text-white">{{ movieSelected()?.title }}</h3>
+            <p class="text-sm text-gray-400">{{ movieSelected()?.releaseDate | customDate }}</p>
+          </div>
+        </div>
+        <ng-icon></ng-icon>
+        <div class="self-end">
+          <app-button
+            [disabled]="movieSelected() === null"
+            title="Siguiente"
+            (click)="onNext()"
+            [shadow]="movieSelected() !== null ? 'shadow-md shadow-cyan-500/20' : ''"
+            [background]="movieSelected() === null ? 'bg-gray-800' : 'bg-cyan-500'"
+            [border]="true"
+            [borderColor]="'border-white/10 hover:border-cyan-500/30'"
+            paddingHorizontal="px-6"
+            paddingVertical="py-2"
+            textStyle="text-white text-sm font-bold"
+          ></app-button>
+        </div>
+      </div>
+    } @else {
+      <app-movie-table
+        (selectMovieForSchedule)="onSelectMovie($event)"
+        [isForm]="true"
+      ></app-movie-table>
+    }
+  </div>
+</div>

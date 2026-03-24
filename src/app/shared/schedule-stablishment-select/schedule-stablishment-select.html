@@ -1,0 +1,43 @@
+<div class="flex flex-col items-center justify-center">
+  <div class="w-3/4">
+    @if (stablishmentSelected()) {
+      <div class="flex justify-center items-center gap-4 mt-4">
+        <ng-icon name="heroBuildingOffice" size="40"></ng-icon>
+        <div>
+          <h3 class="text-lg font-bold text-white">{{ stablishmentSelected()?.name }}</h3>
+          <p class="text-sm text-gray-400">{{ stablishmentSelected()?.address?.city }}</p>
+        </div>
+      </div>
+    } @else {
+      <app-stablishments-table
+        [isForm]="true"
+        (selectItem)="selectStablishment($event)"
+      ></app-stablishments-table>
+    }
+    <div class="flex justify-between w-full mt-6">
+      <app-button
+        title="Anterior"
+        (click)="onPrev()"
+        shadow="shadow-md shadow-cyan-500/20"
+        background="bg-cyan-500"
+        [border]="true"
+        [borderColor]="'border-white/10 hover:border-cyan-500/30'"
+        paddingHorizontal="px-6"
+        paddingVertical="py-2"
+        textStyle="text-white text-sm font-bold"
+      ></app-button>
+      <app-button
+        [disabled]="stablishmentSelected() === null"
+        title="Siguiente"
+        (click)="onNext()"
+        [shadow]="stablishmentSelected() !== null ? 'shadow-md shadow-cyan-500/20' : ''"
+        [background]="stablishmentSelected() === null ? 'bg-gray-800' : 'bg-cyan-500'"
+        [border]="true"
+        [borderColor]="'border-white/10 hover:border-cyan-500/30'"
+        paddingHorizontal="px-6"
+        paddingVertical="py-2"
+        textStyle="text-white text-sm font-bold"
+      ></app-button>
+    </div>
+  </div>
+</div>

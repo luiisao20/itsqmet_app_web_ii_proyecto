@@ -10,7 +10,7 @@ export class AuthService {
   private API_URL = 'http://localhost:8080/auth';
   private http = inject(HttpClient);
 
-  isAuthenticated = signal<boolean>(localStorage.getItem('token') !== null);
+  isAuthenticated = signal<boolean>(false);
   currentRol = signal<string | null>(localStorage.getItem('rol'));
 
   login(email: string, password: string): Observable<boolean> {
@@ -48,5 +48,26 @@ export class AuthService {
     localStorage.removeItem('uuid');
     this.isAuthenticated.set(false);
     this.currentRol.set(null);
+  }
+
+  async checkAuthStatus(): Promise<boolean> {
+    if (this.isAuthenticated()) return true;
+
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      this.logout();
+      this.isAuthenticated.set(false);
+      return false;
+    }
+
+    try {
+      await lastValueFrom(this.http.get(`${this.API_URL}/validate`));
+      this.isAuthenticated.set(true);
+      return true;
+    } catch (error) {
+      this.logout();
+      return false;
+    }
   }
 }

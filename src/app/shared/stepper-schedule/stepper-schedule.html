@@ -1,0 +1,35 @@
+<div>
+  <h2 class="sr-only">Steps</h2>
+
+  <div>
+    <ol
+      class="grid grid-cols-1 divide-x overflow-hidden rounded-lg border text-sm sm:grid-cols-3 divide-gray-700 border-gray-700 text-gray-300"
+    >
+      @for (item of steps; track $index) {
+        <li
+          [class]="
+            `relative flex items-center justify-center gap-2 p-4 ${currentIndex === $index && 'bg-gray-800'}`
+          "
+        >
+          @if ($index === 1) {
+            <span
+              class="absolute top-1/2 -left-2 hidden size-4 -translate-y-1/2 rotate-45 border sm:block ltr:border-s-0 ltr:border-b-0 rtl:border-e-0 rtl:border-t-0 border-gray-700 ltr:bg-gray-900 rtl:bg-gray-800"
+            >
+            </span>
+            <span
+              class="absolute top-1/2 -right-2 hidden size-4 -translate-y-1/2 rotate-45 border sm:block ltr:border-s-0 ltr:border-b-0 rtl:border-e-0 rtl:border-t-0 border-gray-700 ltr:bg-gray-800 rtl:bg-gray-900"
+            >
+            </span>
+          }
+
+          <ng-icon [name]="item.icon" size="25"></ng-icon>
+
+          <p class="leading-none">
+            <strong class="block font-medium text-white"> {{ item.title }} </strong>
+            <small class="mt-1"> {{ item.label }} </small>
+          </p>
+        </li>
+      }
+    </ol>
+  </div>
+</div>

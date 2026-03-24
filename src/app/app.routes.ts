@@ -24,8 +24,8 @@ import { AdminReviews } from './features/admin-reviews/admin-reviews';
 import { AdminContacts } from './features/admin-contacts/admin-contacts';
 import { AdminSchedules } from './features/admin-schedules/admin-schedules';
 import { NewSchedule } from './features/new-schedule/new-schedule';
-import { MoviesSchedule } from './features/movies-schedule/movies-schedule';
 import { StablishmentSchedule } from './features/stablishment-schedule/stablishment-schedule';
+import {SchedulesList} from './features/schedules-list/schedules-list';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -55,8 +55,8 @@ export const routes: Routes = [
         component: AdminSchedules,
         children: [
           { path: 'new', component: NewSchedule },
-          { path: 'movies', component: MoviesSchedule },
           { path: 'stablishments', component: StablishmentSchedule },
+          { path: 'list', component: SchedulesList },
         ],
       },
     ],
