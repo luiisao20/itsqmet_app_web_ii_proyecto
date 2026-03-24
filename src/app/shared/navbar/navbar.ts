@@ -3,7 +3,6 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../service/auth-service';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { ionPersonCircleOutline } from '@ng-icons/ionicons';
-
 @Component({
   selector: 'app-navbar',
   imports: [RouterLink, NgIconComponent],

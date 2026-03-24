@@ -1,8 +1,8 @@
-<div class="bg-cyan-500/10 my-6 p-10 border-2 border-cyan-100/20 rounded-xl">
+<div class="bg-cyan-500/10 p-10 border-2 border-cyan-100/20 rounded-xl w-110 shrink-0">
   <div class="grid grid-cols-3 gap-6">
     <img [src]="movie.imageUrl" alt="" class="w-40 border-8 border-white rounded-2xl" />
     <div class="col-span-2 flex flex-col justify-center gap-4">
-      <app-badge title="IMAX 3D" [select]="true"></app-badge>
+      <app-badge [title]="schedule?.type ?? 'NORMAL'" [select]="true"></app-badge>
       <h2 class="font-semibold text-3xl">{{ movie.title }}</h2>
       <p class="text-cyan-50/60 text-sm">{{ movie.categories?.[0]?.name }} • {{ movie.time }}</p>
       <a
@@ -17,15 +17,15 @@
     <div class="flex gap-4 col-span-3 items-center">
       <ng-icon name="ionLocation" color="" size="30"></ng-icon>
       <div>
-        <p class="text-base text-cyan-50 font-medium mt-1">Cinemex Plaza Satélite</p>
-        <p class="text-cyan-50/60 text-sm">Sala 4</p>
+        <p class="text-base text-cyan-50 font-medium mt-1">{{ establishment?.name ?? 'Sin establecimiento' }}</p>
+        <p class="text-cyan-50/60 text-sm">Sala {{ schedule?.room ?? '-' }}</p>
       </div>
     </div>
     <div class="flex gap-4 col-span-3 items-center">
       <ng-icon name="ionCalendar" color="" size="30"></ng-icon>
       <div>
-        <p class="text-base text-cyan-50 font-medium mt-1">18 de febrero</p>
-        <p class="text-cyan-50/60 text-sm">Empieza a las 19h30</p>
+        <p class="text-base text-cyan-50 font-medium mt-1">{{ formattedDate || 'Selecciona una función' }}</p>
+        <p class="text-cyan-50/60 text-sm">Empieza a las {{ formattedTime || '--:--' }}</p>
       </div>
     </div>
   </div>
@@ -36,21 +36,17 @@
     <ng-template #seatIcon>
       <ng-icon name="ionClose" color="" size="20"></ng-icon>
     </ng-template>
-    <div class="grid grid-cols-4 gap-4">
+    <div class="flex flex-wrap gap-2">
       @for (item of selectedSeats; track $index) {
-        <app-button
+        <button
           (click)="onDeleteSeat(item)"
-          [title]="`${item.row}-${item.number}`"
-          shadow="shadow-md shadow-cyan-500/20"
-          background="bg-white/5 dark:bg-white/10 hover:bg-cyan-500/5"
-          borderColor="border-white/10 hover:border-cyan-500/30"
-          paddingHorizontal="px-6"
-          paddingVertical="py-2"
-          [suffixIcon]="seatIcon"
-          textStyle="
-        text-slate-600 dark:text-slate-300 text-sm font-medium group-hover:text-cyan-500 transition-colors
-        "
-        ></app-button>
+          class="flex items-center gap-1.5 pl-3 pr-2 py-1.5 rounded-lg bg-white/5 border border-white/10 text-slate-300 text-sm font-medium hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-400 transition-all cursor-pointer group"
+        >
+          {{ item.row }}-{{ item.number }}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-3.5 text-slate-500 group-hover:text-red-400 transition-colors">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </button>
       }
     </div>
   } @else {
