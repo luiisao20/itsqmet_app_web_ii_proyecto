@@ -3,6 +3,15 @@
   @if (index() === 0) {
     <app-schedule-movie-form (setMovie)="onSetMovie($event)"></app-schedule-movie-form>
   } @else if (index() === 1) {
-    <app-schedule-stablishment-select></app-schedule-stablishment-select>
+    <app-schedule-stablishment-select
+      (setStablishment)="onSetStablishment($event)"
+      (returnForm)="onReturnToMovie()"
+    ></app-schedule-stablishment-select>
+  } @else if (index() === 2) {
+    <app-schedule-form
+      [movie]="scheduleInfo()?.movie"
+      [stablishment]="scheduleInfo()?.stablishment"
+      (returnStablishment)="onReturnToStablishment()"
+    ></app-schedule-form>
   }
 </div>

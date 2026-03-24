@@ -1,0 +1,124 @@
+<div class="bg-cyan-950/20 p-8 rounded-xl border border-cyan-500/10 shadow-2xl mb-10">
+  <h2 class="text-3xl font-bold tracking-tight">Crear Función</h2>
+  <form class="shadow-lg p-6 space-y-5 flex flex-col" [formGroup]="form">
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <label class="block text-sm font-semibold text-white/80 mb-2"> Pelicula </label>
+        <input
+          type="text"
+          disabled
+          [value]="movie?.title ?? 'text'"
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-white/80 mb-2">Establecimiento </label>
+        <input
+          type="text"
+          disabled
+          [value]="stablishment?.name ?? 'text'"
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+        />
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-white/80 mb-2"> Fecha </label>
+        <input
+          type="date"
+          name="date"
+          id="date"
+          formControlName="date"
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+        />
+        @if (getErrorMessage('date')) {
+          <p class="text-xs mt-2 text-red-500">{{ getErrorMessage('date') }}</p>
+        }
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-white/80 mb-2"> Sala </label>
+        <input
+          type="number"
+          name="room"
+          id="room"
+          formControlName="room"
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+        />
+        @if (getErrorMessage('room')) {
+          <p class="text-xs mt-2 text-red-500">{{ getErrorMessage('room') }}</p>
+        }
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-white/80 mb-2"> Hora </label>
+        <input
+          type="time"
+          name="time"
+          id="time"
+          formControlName="time"
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+        />
+        @if (getErrorMessage('time')) {
+          <p class="text-xs mt-2 text-red-500">{{ getErrorMessage('time') }}</p>
+        }
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-white/80 mb-2"> Asientos disponibles </label>
+        <input
+          type="number"
+          min="1"
+          name="available"
+          id="available"
+          formControlName="available"
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+          placeholder="Ej: 120"
+        />
+        @if (getErrorMessage('available')) {
+          <p class="text-xs mt-2 text-red-500">{{ getErrorMessage('available') }}</p>
+        }
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold text-white/80 mb-2"> Tipo de sala </label>
+        <select
+          name="type"
+          id="type"
+          formControlName="type"
+          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+        >
+          <option value="">Seleccione tipo</option>
+          <option value="IMAX">IMAX</option>
+          <option value="VIP">VIP</option>
+          <option value="NORMAL">Normal</option>
+        </select>
+        @if (getErrorMessage('type')) {
+          <p class="text-xs mt-2 text-red-500">{{ getErrorMessage('type') }}</p>
+        }
+      </div>
+    </div>
+    <div class="flex justify-between w-full mt-6">
+      <app-button
+        title="Anterior"
+        (click)="onPrev()"
+        shadow="shadow-md shadow-cyan-500/20"
+        background="bg-cyan-500"
+        [border]="true"
+        [borderColor]="'border-white/10 hover:border-cyan-500/30'"
+        paddingHorizontal="px-6"
+        paddingVertical="py-2"
+        textStyle="text-white text-sm font-bold"
+      ></app-button>
+      <app-button
+        title="Guardar"
+        (click)="registerSchedule()"
+        shadow="shadow-md shadow-cyan-500/20"
+        background="bg-cyan-500"
+        [border]="true"
+        [borderColor]="'border-white/10 hover:border-cyan-500/30'"
+        paddingHorizontal="px-6"
+        paddingVertical="py-2"
+        textStyle="text-white text-sm font-bold"
+      ></app-button>
+    </div>
+  </form>
+</div>

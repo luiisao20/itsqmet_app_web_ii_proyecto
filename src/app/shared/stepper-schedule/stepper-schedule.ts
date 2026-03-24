@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { boxCameraMovie } from '@ng-icons/boxicons/regular';
 import { provideIcons, NgIcon } from '@ng-icons/core';
-import {heroBuildingOffice} from '@ng-icons/heroicons/outline';
-import {ionNewspaperSharp} from '@ng-icons/ionicons';
+import { heroBuildingOffice } from '@ng-icons/heroicons/outline';
+import { ionNewspaperSharp } from '@ng-icons/ionicons';
 
 interface Step {
   title: string;
@@ -29,12 +29,12 @@ export class StepperSchedule {
     {
       title: 'Establecimiento',
       label: 'Selecciona un establecimiento',
-      icon: 'heroBuildingOffice'
+      icon: 'heroBuildingOffice',
     },
     {
       title: 'Datos',
       label: 'Ingresa los datos de la función',
-      icon: 'ionNewspaperSharp'
-    }
+      icon: 'ionNewspaperSharp',
+    },
   ];
 }

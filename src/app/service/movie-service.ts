@@ -9,7 +9,6 @@ import { Category, Movie } from '../models/movie';
 export class MovieService {
   private http = inject(HttpClient);
 
-  // private API_MOVIES = 'https://aula-virtual-geapsi-default-rtdb.firebaseio.com/movies';
   private API_MOVIES = 'http://localhost:8080/movies';
 
   getMovies(): Promise<Movie[]> {

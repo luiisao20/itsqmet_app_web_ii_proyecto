@@ -1,0 +1,79 @@
+<div>
+  <div class="">
+    <label class="block text-sm font-semibold text-white/80 mb-2"
+      >Buscar por establecimiento
+    </label>
+    <input
+      type="text"
+      (input)="stablishmentName.set($event.target.value)"
+      class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+    />
+  </div>
+</div>
+
+<table class="w-full">
+  <thead>
+    <tr
+      class="bg-slate-800/50 text-slate-500 text-xs font-bold uppercase tracking-wide border-b border-slate-800"
+    >
+      <th class="px-6 py-4">Establecimiento</th>
+      <th class="px-6 py-4">Película</th>
+      <th class="px-6 py-4">Fecha</th>
+      <th class="px-6 py-4">Tipo</th>
+      <th class="px-6 py-4">Asientos disponibles / ocupados</th>
+      <th class="px-6 py-4">Sala</th>
+      <th class="px-6 py-4">Acciones</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-slate-800">
+    @for (item of scheduleQuery.data(); track item.id) {
+      <tr class="group hover:bg-cyan-500/5 transition-colors">
+        <td class="px-6 py-2 text-sm text-slate-400 text-center">
+          {{ item.stablishment?.name }}
+        </td>
+        <td class="px-6 py-2 text-sm text-slate-400 text-center">
+          <div class="flex flex-col">
+            <span class="font-bold text-white group-hover:text-cyan-500 transition-colors">{{
+              item.movie?.title
+            }}</span>
+          </div>
+        </td>
+        <td class="py-2 text-center gap-2">
+          {{ item.date | customDateTime }}
+        </td>
+        <td class="py-2 text-sm text-slate-400 text-center">
+          {{ item.type }}
+        </td>
+        <td class="py-2 text-sm text-center">
+          <span
+            class="px-2.5 py-0.5 rounded-full mr-4 text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100"
+            >{{ item.availableSeats }}</span
+          >
+          <span
+            class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-50 text-red-700 border border-red-100"
+            >{{ item.occupiedSeats }}</span
+          >
+        </td>
+        <td class="py-2 text-sm">
+          <div class="flex items-center justify-center gap-1">
+            <span class="text-sm font-bold">{{ item.room }}</span>
+          </div>
+        </td>
+        <td class="py-4">
+          <div class="flex items-center justify-evenly gap-2">
+            <button
+              class="py-1 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+            >
+              <ng-icon name="heroPencilSquare" class="icon-main" size="20"></ng-icon>
+            </button>
+            <button
+              class="py-1 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+            >
+              <ng-icon name="heroTrash" color="red" size="20"></ng-icon>
+            </button>
+          </div>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

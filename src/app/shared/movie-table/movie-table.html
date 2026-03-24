@@ -32,9 +32,9 @@
                 </div>
               </div>
             </td>
-            <td class="px-6 py-2 text-center grid grid-cols-2 gap-2">
+            <td class="px-6 py-2 text-center grid grid-cols-1 gap-0.5 place-content-center-safe">
               @for (subitem of item.categories; track $index) {
-                <span class="px-2.5 py-1 text-slate-400 text-xs font-semibold self-center-safe">{{
+                <span class="text-slate-400 text-xs font-semibold self-center-safe">{{
                   subitem.name
                 }}</span>
               }
