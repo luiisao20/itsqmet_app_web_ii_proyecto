@@ -10,4 +10,5 @@ import { NgClass } from '@angular/common';
 export class Seat {
   @Input() seatNumber!: number;
   @Input() isSelected?: boolean;
+  @Input() isOccupied?: boolean;
 }

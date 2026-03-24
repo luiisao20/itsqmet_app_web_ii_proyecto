@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { Button } from '../button/button';
 import { CategoryService } from '../../service/category-service';
 import { injectQuery } from '@tanstack/angular-query-experimental';
@@ -21,7 +21,24 @@ interface CategoryButton {
 export class Categories {
   private categoryService = inject(CategoryService);
 
+  scrollContainer = viewChild<ElementRef>('scrollContainer');
+
   categories = signal<CategoryButton[]>([]);
+
+  isAllSelected = computed(() => this.categoryService.categorySelected() === null);
+
+  selectAll() {
+    this.categories.update((prev) => prev.map((c) => ({ ...c, selectCategory: false })));
+    this.categoryService.categorySelected.set(null);
+  }
+
+  scrollLeft() {
+    this.scrollContainer()?.nativeElement.scrollBy({ left: -200, behavior: 'smooth' });
+  }
+
+  scrollRight() {
+    this.scrollContainer()?.nativeElement.scrollBy({ left: 200, behavior: 'smooth' });
+  }
 
   selectCategory(item: CategoryButton) {
     this.categories.update((prev) =>
@@ -40,6 +57,7 @@ export class Categories {
           selectCategory: false,
         }));
         this.categories.set(categoriesButton);
+        return categoriesButton;
       }),
   }));
 }

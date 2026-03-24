@@ -4,14 +4,10 @@
   <section class="py-8 bg-slate-100 dark:bg-white/5 border-b border-white/5">
     <div class="max-w-7xl mx-auto px-6 lg:px-20">
       <div class="flex flex-wrap items-center justify-between gap-6">
-        <div class="flex items-center gap-4 flex-wrap">
-          <app-establishment-filter></app-establishment-filter>
-          <app-date-filter></app-date-filter>
-        </div>
-        <div class="w-3/4">
+        <div class="w-full">
           <app-categories></app-categories>
         </div>
-        <div class="flex items-center gap-4">
+        <!-- <div class="flex items-center gap-4">
           <span class="text-sm text-slate-500 font-medium">Ordenar por:</span>
           <button
             class="flex items-center gap-2 bg-white dark:bg-white/5 px-4 py-2 rounded-lg text-sm border border-slate-200 dark:border-white/10 cursor-pointer"
@@ -28,16 +24,16 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
             </svg>
           </button>
-        </div>
-        <app-billboard-tabs></app-billboard-tabs>
+        </div> -->
+        <!-- <app-billboard-tabs></app-billboard-tabs> -->
       </div>
     </div>
   </section>
 
-  <div class="w-full py-16 max-w-7xl mx-auto px-6 lg:px-20">
+  <div class="w-full py-10 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-20">
     <div class="flex items-center justify-between">
       <div>
-        <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-3">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-3">
           <span class="w-2 h-8 bg-(--main-color) rounded-full"></span>
           EN CARTELERA
         </h2>
@@ -45,7 +41,7 @@
           Mira los últimos éxitos de taquilla en la pantalla grande
         </p>
       </div>
-      <a
+      <!-- <a
         class="text-(--main-color) font-bold hover:underline flex items-center justify-center gap-1 group"
         href="#"
       >
@@ -64,7 +60,7 @@
             d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
           />
         </svg>
-      </a>
+      </a> -->
     </div>
   </div>
   <app-movies-grid></app-movies-grid>

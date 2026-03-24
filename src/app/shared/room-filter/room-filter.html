@@ -1,0 +1,20 @@
+@if (schedules().length === 0) {
+  <p class="text-slate-400 text-sm py-2">No hay funciones disponibles para esta fecha</p>
+} @else {
+  <div class="flex items-center gap-2 flex-wrap">
+    @for (schedule of schedules(); track schedule.id) {
+      <button
+        (click)="selectSchedule(schedule)"
+        class="flex items-center px-4 py-2 rounded-lg cursor-pointer transition-all duration-200 text-sm"
+        [class]="selectedSchedule()?.id === schedule.id
+          ? 'bg-cyan-500 text-white shadow-md shadow-cyan-500/30'
+          : 'bg-white/5 border border-white/10 text-slate-300 hover:border-cyan-500/30 hover:bg-cyan-500/5'"
+      >
+        <span class="font-bold">{{ formatTime(schedule.date) }}</span>
+        <span class="ml-2 text-xs" [class]="selectedSchedule()?.id === schedule.id ? 'text-white/80' : 'text-slate-400'">
+          {{ schedule.type }}
+        </span>
+      </button>
+    }
+  </div>
+}

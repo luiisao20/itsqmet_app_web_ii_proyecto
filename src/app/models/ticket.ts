@@ -1,13 +1,22 @@
+export interface TicketSeat {
+  fila: string;
+  columna: number;
+}
+
 export interface Ticket {
   id?: number;
   price: number;
-  seats: string;
+  seats: TicketSeat[];
   room: number;
-  createdAt?: Date;
+  numberSeats: number;
+  createdAt?: string;
   user: {
-    email: string;
+    uuid: string;
+    name?: string;
+    email?: string;
+    role?: string;
   };
-  movie: {
+  schedule: {
     id: number;
   };
 }

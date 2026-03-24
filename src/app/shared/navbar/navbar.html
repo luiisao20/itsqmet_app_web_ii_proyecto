@@ -6,136 +6,174 @@
           >Cinema App</span
         >
       </a>
-      <div class="flex">
-        <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          @if (isAuthenticated) {
-            <div class="relative pl-4">
-              <button
-                type="button"
-                id="user-menu-button"
-                class="flex text-sm rounded-full cursor-pointer"
-                [attr.aria-expanded]="dropdownOpen()"
-                aria-haspopup="true"
-                (click)="toggleDropdown()"
-              >
-                <ng-icon name="ionPersonCircleOutline" color="white" size="40"></ng-icon>
-              </button>
 
-              @if (dropdownOpen()) {
-                <div
-                  id="user-dropdown"
-                  class="absolute right-0 mt-2 z-50 text-base list-none bg-cyan-800 divide-y divide-cyan-700 rounded-lg shadow-lg border border-cyan-700 min-w-48"
-                >
-                  <div class="px-4 py-3">
-                    <span class="block text-sm text-cyan-100 truncate font-medium">{{
-                      email()
-                    }}</span>
-                  </div>
-                  <ul class="py-2">
-                    <li>
-                      <a
-                        routerLink="/profile"
-                        (click)="dropdownOpen.set(false)"
-                        class="block px-4 py-2 text-sm text-cyan-100 hover:bg-cyan-700 cursor-pointer rounded-md mx-1 transition-colors"
-                        >Perfil</a
-                      >
-                    </li>
-                    <li>
-                      <a
-                        (click)="logout()"
-                        class="block px-4 py-2 text-sm text-cyan-100 hover:bg-cyan-700 cursor-pointer rounded-md mx-1 transition-colors"
-                        >Cerrar sesión</a
-                      >
-                    </li>
-                  </ul>
-                </div>
-              }
-            </div>
-          }
-
-          <button
-            type="button"
-            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-cyan-100 rounded-lg md:hidden hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-600 cursor-pointer"
-            [attr.aria-expanded]="mobileMenuOpen()"
-            aria-controls="navbar-user"
-            (click)="toggleMobileMenu()"
+      <div class="flex items-center gap-2">
+        <!-- Desktop nav links -->
+        <div class="hidden md:flex items-center md:space-x-8 rtl:space-x-reverse">
+          <a routerLink="" class="text-cyan-50 font-medium hover:text-cyan-400 transition-colors"
+            >Home</a
           >
-            <span class="sr-only">Open main menu</span>
-            <svg
-              class="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 17 14"
+          <a
+            routerLink="contact"
+            class="text-cyan-50 font-medium hover:text-cyan-400 transition-colors"
+            >Contact Us</a
+          >
+          @if (rol === 'ROLE_ADMIN' || rol === 'ROLE_MODERATOR') {
+            <a
+              routerLink="panel"
+              class="text-cyan-50 font-medium hover:text-cyan-400 transition-colors"
+              >Panel</a
             >
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 1h15M1 7h15M1 13h15"
-              />
-            </svg>
-          </button>
-        </div>
-        <div
-          class="items-center justify-between w-full md:flex md:w-auto md:order-1"
-          [class.hidden]="!mobileMenuOpen()"
-          [class.flex]="mobileMenuOpen()"
-          id="navbar-user"
-        >
-          <ul
-            class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0"
+          }
+          <a
+            routerLink="memberships"
+            class="text-cyan-50 font-medium hover:text-cyan-400 transition-colors"
+            >Membresías</a
           >
-            <li>
-              <a
-                routerLink=""
-                class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
-                >Home</a
-              >
-            </li>
-            <li>
-              <a
-                routerLink="contact"
-                class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
-                >Contact Us</a
-              >
-            </li>
-            @if (rol === 'ROLE_ADMIN' || rol === 'ROLE_MODERATOR') {
-              <li>
-                <a
-                  routerLink="panel"
-                  class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
-                  >Panel</a
-                >
-              </li>
-            }
-            <li>
-              <a
-                routerLink="memberships"
-                class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
-                >Membresías</a
-              >
-            </li>
-            <li>
-              <a
-                routerLink="about"
-                class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
-                >About Us</a
-              >
-            </li>
-            @if (!isAuthenticated) {
-              <li>
-                <a
-                  routerLink="login"
-                  class="block py-2 px-3 text-cyan-50 rounded-sm md:hover:bg-transparent md:hover:text-cyan-400 md:p-0"
-                  >Iniciar sesion</a
-                >
-              </li>
-            }
-          </ul>
+          <a
+            routerLink="about"
+            class="text-cyan-50 font-medium hover:text-cyan-400 transition-colors mr-2"
+            >About Us</a
+          >
+          @if (!isAuthenticated) {
+            <a
+              routerLink="login"
+              class="text-cyan-50 font-medium hover:text-cyan-400 transition-colors"
+              >Iniciar sesion</a
+            >
+          }
         </div>
+        @if (isAuthenticated) {
+          <div class="relative">
+            <button
+              type="button"
+              id="user-menu-button"
+              class="flex text-sm rounded-full cursor-pointer"
+              [attr.aria-expanded]="dropdownOpen()"
+              aria-haspopup="true"
+              (click)="toggleDropdown()"
+            >
+              <ng-icon name="ionPersonCircleOutline" color="white" size="40"></ng-icon>
+            </button>
+
+            @if (dropdownOpen()) {
+              <div
+                id="user-dropdown"
+                class="absolute right-0 mt-2 z-50 text-base list-none bg-cyan-800 divide-y divide-cyan-700 rounded-lg shadow-lg border border-cyan-700 min-w-48"
+              >
+                <div class="px-4 py-3">
+                  <span class="block text-sm text-cyan-100 truncate font-medium">{{
+                    email()
+                  }}</span>
+                </div>
+                <ul class="py-2">
+                  <li>
+                    <a
+                      routerLink="/profile"
+                      (click)="dropdownOpen.set(false)"
+                      class="block px-4 py-2 text-sm text-cyan-100 hover:bg-cyan-700 cursor-pointer rounded-md mx-1 transition-colors"
+                      >Perfil</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      (click)="logout()"
+                      class="block px-4 py-2 text-sm text-cyan-100 hover:bg-cyan-700 cursor-pointer rounded-md mx-1 transition-colors"
+                      >Cerrar sesión</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            }
+          </div>
+        }
+
+        <!-- Mobile hamburger -->
+        <button
+          type="button"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-cyan-100 rounded-lg md:hidden hover:bg-cyan-800 focus:outline-none focus:ring-2 focus:ring-cyan-600 cursor-pointer"
+          [attr.aria-expanded]="mobileMenuOpen()"
+          aria-controls="navbar-mobile"
+          (click)="toggleMobileMenu()"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="w-5 h-5"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 17 14"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M1 1h15M1 7h15M1 13h15"
+            />
+          </svg>
+        </button>
       </div>
     </div>
+
+    <!-- Mobile menu -->
+    @if (mobileMenuOpen()) {
+      <div id="navbar-mobile" class="md:hidden mt-4">
+        <ul class="flex flex-col gap-1 font-medium">
+          <li>
+            <a
+              routerLink=""
+              (click)="mobileMenuOpen.set(false)"
+              class="block py-2 px-3 text-cyan-50 rounded-md hover:bg-cyan-800 transition-colors"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="contact"
+              (click)="mobileMenuOpen.set(false)"
+              class="block py-2 px-3 text-cyan-50 rounded-md hover:bg-cyan-800 transition-colors"
+              >Contact Us</a
+            >
+          </li>
+          @if (rol === 'ROLE_ADMIN' || rol === 'ROLE_MODERATOR') {
+            <li>
+              <a
+                routerLink="panel"
+                (click)="mobileMenuOpen.set(false)"
+                class="block py-2 px-3 text-cyan-50 rounded-md hover:bg-cyan-800 transition-colors"
+                >Panel</a
+              >
+            </li>
+          }
+          <li>
+            <a
+              routerLink="memberships"
+              (click)="mobileMenuOpen.set(false)"
+              class="block py-2 px-3 text-cyan-50 rounded-md hover:bg-cyan-800 transition-colors"
+              >Membresías</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="about"
+              (click)="mobileMenuOpen.set(false)"
+              class="block py-2 px-3 text-cyan-50 rounded-md hover:bg-cyan-800 transition-colors"
+              >About Us</a
+            >
+          </li>
+          @if (!isAuthenticated) {
+            <li>
+              <a
+                routerLink="login"
+                (click)="mobileMenuOpen.set(false)"
+                class="block py-2 px-3 text-cyan-50 rounded-md hover:bg-cyan-800 transition-colors"
+                >Iniciar sesion</a
+              >
+            </li>
+          }
+        </ul>
+      </div>
+    }
   </nav>
 </div>
