@@ -86,15 +86,30 @@
       <label class="flex flex-col gap-2">
         <p class="text-white/80 text-sm font-medium">Categoria</p>
         <select
+          (change)="onCategoryChange($event)"
           name="category"
           class="w-full bg-cyan-950/20 dark:bg-cyan-950/20 border-transparent rounded-lg focus:ring-cyan-500 focus:border-cyan-500 px-4 py-2.5 outline-none transition-all"
         >
-          <option value="0" class="text-white" disabled>Escoge una opción</option>
+          <option value="0" class="text-white" selected disabled>Escoge una opción</option>
           @for (item of queryCategory.data(); track $index) {
-            <option [value]="item.id" class="text-gray-600">{{ item.name }}</option>
+            <option [value]="item.id" class="text-gray-600">
+              {{ item.name }}
+            </option>
           }
         </select>
       </label>
+      <div class="grid grid-cols-3 gap-4">
+        @for (item of categoriesSelected(); track $index) {
+          <div (click)="onDeselectCategory(item)"
+            class="px-2.5 py-1 self-center-auto flex items-center justify-center justify-self-auto gap-4 bg-slate-800/90 text-white font-semibold rounded-md self-center-safe cursor-pointer"
+          >
+            <p>
+              {{ item.name }}
+            </p>
+            <ng-icon name="ionCloseCircleOutline" size="25"></ng-icon>
+          </div>
+        }
+      </div>
       <label class="flex flex-col gap-2">
         <p class="text-white/80 text-sm font-medium">Estado</p>
         <select
@@ -150,7 +165,6 @@
             newMovie.trailer === '' ||
             newMovie.status === '0' ||
             !newMovie.rating ||
-            newMovie.rating === '0' ||
             !newMovie.time ||
             newMovie.time === '0' ||
             newMovie.releaseDate === ''

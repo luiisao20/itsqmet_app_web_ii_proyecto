@@ -20,6 +20,10 @@ export class MovieService {
     return lastValueFrom(this.http.get<Movie[]>(`${this.API_MOVIES}/category/${category.id}`));
   }
 
+  getMoviesByStablishment(id: number): Promise<Movie[]> {
+    return lastValueFrom(this.http.get<Movie[]>(`${this.API_MOVIES}/stablishment/${id}`));
+  }
+
   postMovie(movie: Movie): Promise<Movie> {
     return lastValueFrom(this.http.post<Movie>(`${this.API_MOVIES}/save`, movie));
   }

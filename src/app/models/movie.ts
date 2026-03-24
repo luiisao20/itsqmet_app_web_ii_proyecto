@@ -5,7 +5,7 @@ export interface Movie {
   time: string;
   overview?: string;
   releaseDate?: string;
-  status?: Status;
+  status?: string;
   categories?: Category[];
   rating?: string;
   trailer?: string;

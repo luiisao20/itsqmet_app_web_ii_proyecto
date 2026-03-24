@@ -22,6 +22,10 @@ import { AdminEstablishments } from './features/admin-establishments/admin-estab
 import { AdminMemberships } from './features/admin-memberships/admin-memberships';
 import { AdminReviews } from './features/admin-reviews/admin-reviews';
 import { AdminContacts } from './features/admin-contacts/admin-contacts';
+import { AdminSchedules } from './features/admin-schedules/admin-schedules';
+import { NewSchedule } from './features/new-schedule/new-schedule';
+import { MoviesSchedule } from './features/movies-schedule/movies-schedule';
+import { StablishmentSchedule } from './features/stablishment-schedule/stablishment-schedule';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -46,6 +50,15 @@ export const routes: Routes = [
       { path: 'memberships', component: AdminMemberships },
       { path: 'reviews', component: AdminReviews },
       { path: 'contacts', component: AdminContacts },
+      {
+        path: 'schedules',
+        component: AdminSchedules,
+        children: [
+          { path: 'new', component: NewSchedule },
+          { path: 'movies', component: MoviesSchedule },
+          { path: 'stablishments', component: StablishmentSchedule },
+        ],
+      },
     ],
   },
   { path: 'login', component: Login, canActivate: [guestGuard] },

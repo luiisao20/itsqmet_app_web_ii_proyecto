@@ -1,11 +1,18 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MovieService } from '../../service/movie-service';
-import { Movie, Category, Status } from '../../models/movie';
+import { Movie, Category } from '../../models/movie';
 import { FormsModule } from '@angular/forms';
 import { Button } from '../button/button';
 import { MovieTable } from '../movie-table/movie-table';
 import { injectMutation, injectQuery, QueryClient } from '@tanstack/angular-query-experimental';
 import { CategoryService } from '../../service/category-service';
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { ionCloseCircleOutline } from '@ng-icons/ionicons';
+
+interface Status {
+  id: string;
+  name: string;
+}
 
 interface MovieModel {
   id?: number;
@@ -22,9 +29,10 @@ interface MovieModel {
 
 @Component({
   selector: 'app-movie-form',
-  imports: [FormsModule, Button, MovieTable],
+  imports: [FormsModule, Button, MovieTable, NgIcon],
   templateUrl: './movie-form.html',
   styleUrl: './movie-form.css',
+  providers: provideIcons({ ionCloseCircleOutline }),
 })
 export class MovieForm {
   private movieService = inject(MovieService);
@@ -44,6 +52,8 @@ export class MovieForm {
   };
   edit: boolean = false;
 
+  categoriesSelected = signal<Category[]>([]);
+
   queryCategory = injectQuery(() => ({
     queryKey: ['categories'],
     queryFn: () => this.categoryService.get(),
@@ -51,26 +61,40 @@ export class MovieForm {
 
   statuses: Status[] = [
     {
-      id: 1,
+      id: 'ESTRENO',
       name: 'Estreno',
     },
     {
-      id: 2,
+      id: 'PROXIMAMENTE',
       name: 'Próximamente',
     },
   ];
 
+  onDeselectCategory(item: Category) {
+    this.categoriesSelected.update((prev) => prev.filter((c) => c.id !== item.id));
+  }
+
+  onCategoryChange(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedId = Number(selectElement.value);
+
+    const item = this.queryCategory.data()?.find((c) => c.id === selectedId);
+
+    if (item && !this.categoriesSelected().includes(item)) {
+      this.categoriesSelected.update((prev) => [...prev, item]);
+    }
+  }
+
   mutation = injectMutation(() => ({
     mutationFn: () => {
+      const release = new Date(this.newMovie.releaseDate).toISOString();
       const movieToSave: Movie = {
         id: this.newMovie.id,
-        categories: this.newMovie.categories,
+        categories: this.categoriesSelected(),
         imageUrl: this.newMovie.imageUrl,
         overview: this.newMovie.overview,
-        releaseDate: this.newMovie.releaseDate,
-        status: {
-          id: parseInt(this.newMovie.status),
-        },
+        releaseDate: release,
+        status: this.newMovie.status,
         time: this.newMovie.time,
         title: this.newMovie.title,
         rating: this.newMovie.rating,
@@ -114,7 +138,7 @@ export class MovieForm {
     this.newMovie.imageUrl = movie.imageUrl;
     this.newMovie.overview = movie.overview || '';
     this.newMovie.releaseDate = movie.releaseDate || '';
-    this.newMovie.status = movie.status ? movie.status.id.toString() : '0';
+    this.newMovie.status = movie.status!;
     this.newMovie.time = movie.time;
     this.newMovie.title = movie.title;
     this.newMovie.rating = movie.rating || '0';

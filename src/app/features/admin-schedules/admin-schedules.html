@@ -1,0 +1,68 @@
+<nav aria-label="Breadcrumb" class="flex justify-center mb-6">
+  <ol class="flex items-center gap-1 text-sm text-gray-200">
+    <li>
+      <a
+        routerLink="new"
+        [routerLinkActive]="['text-main']"
+        class="flex justify-center items-center gap-2 hover:text-main"
+      >
+        <ng-icon name="heroPencilSquare" size="20"></ng-icon>
+        <span class="block font-bold transition-colors"> Crear </span>
+      </a>
+    </li>
+
+    <li class="rtl:rotate-180">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="size-4"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+    </li>
+
+    <li>
+      <a
+        routerLink="stablishments"
+        [routerLinkActive]="['text-main']"
+        class="flex justify-center items-center gap-2 hover:text-main"
+      >
+        <ng-icon name="heroBuildingOffice" size="20"></ng-icon>
+        <span class="block font-bold transition-colors">Por establecimientos</span>
+      </a>
+    </li>
+
+    <li class="rtl:rotate-180">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="size-4"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+    </li>
+
+    <li>
+      <a
+        routerLink="movies"
+        class="flex justify-center items-center gap-2 hover:text-main"
+        [routerLinkActive]="['text-main']"
+      >
+        <ng-icon name="heroVideoCamera" size="20"></ng-icon>
+        <span class="block font-bold transition-colors"> Por películas </span>
+      </a>
+    </li>
+  </ol>
+</nav>
+
+<router-outlet></router-outlet>
