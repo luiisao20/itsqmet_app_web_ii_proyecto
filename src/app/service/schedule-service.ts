@@ -3,6 +3,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Schedule } from '../models/schedule';
 import { lastValueFrom, Observable } from 'rxjs';
 
+export interface PageResponse<T> {
+  content: T[];
+  last: boolean;
+  totalElements: number;
+  totalPages: number;
+  number: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,8 +32,27 @@ export class ScheduleService {
     );
   }
 
-  getAll(): Promise<Schedule[]> {
-    return lastValueFrom(this.http.get<Schedule[]>(`${this.URL_SCHEDULE}`));
+  getAll(page: number = 0, size: number = 10): Promise<PageResponse<Schedule>> {
+    const params = new HttpParams().set('page', page.toString()).set('size', size.toString());
+
+    return lastValueFrom(this.http.get<PageResponse<Schedule>>(`${this.URL_SCHEDULE}`, { params }));
+  }
+
+  getTimeAvaiable({
+    movieId,
+    stablishmentId,
+    date,
+  }: {
+    movieId: number;
+    stablishmentId: number;
+    date: string;
+  }): Promise<string[]> {
+    const params = new HttpParams()
+      .set('movieId', movieId.toString())
+      .set('stablishmentId', stablishmentId.toString())
+      .set('date', date.toString());
+
+    return lastValueFrom(this.http.get<string[]>(`${this.URL_SCHEDULE}/time-available`, { params }));
   }
 
   getSchedulesByMovie(id: number): Promise<Schedule[]> {
