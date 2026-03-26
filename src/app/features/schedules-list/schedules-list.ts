@@ -19,11 +19,18 @@ export class SchedulesList {
 
   scheduleQuery = injectInfiniteQuery(() => ({
     queryKey: ['schedules', 'infinite', this.stablishmentName()],
-    queryFn: ({ pageParam }) => this.scheduleService.getAll(pageParam, 10),
+    queryFn: ({ pageParam }) =>
+      this.stablishmentName() === null
+        ? this.scheduleService.getAll(pageParam, 10)
+        : this.scheduleService.getSchedulesByStablishmentName({
+            name: this.stablishmentName()!,
+            page: pageParam,
+            size: 10,
+          }),
     staleTime: 1000 * 60 * 60,
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
-      return lastPage.last ? undefined : lastPage.number;
+      return lastPage.last ? undefined : lastPage.number + 1;
     },
   }));
 

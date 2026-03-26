@@ -16,72 +16,76 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-slate-800">
-        @for (item of query.data(); track item.id) {
-          <tr class="group hover:bg-cyan-500/5 transition-colors">
-            <td class="px-6 py-2">
-              <div class="flex items-center gap-4">
-                <div
-                  class="w-12 h-16 rounded-lg overflow-hidden border border-slate-700 bg-slate-800"
-                >
-                  <img class="w-full h-full object-cover" [src]="item.imageUrl" alt="10Dance" />
+        @for (page of query.data()?.pages; track $index) {
+          @for (item of page.content; track item.id) {
+            <tr class="group hover:bg-cyan-500/5 transition-colors">
+              <td class="px-6 py-2">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-12 h-16 rounded-lg overflow-hidden border border-slate-700 bg-slate-800"
+                  >
+                    <img class="w-full h-full object-cover" [src]="item.imageUrl" alt="10Dance" />
+                  </div>
+                  <div class="flex flex-col">
+                    <span
+                      class="font-bold text-white group-hover:text-cyan-500 transition-colors"
+                      >{{ item.title }}</span
+                    >
+                  </div>
                 </div>
-                <div class="flex flex-col">
-                  <span class="font-bold text-white group-hover:text-cyan-500 transition-colors">{{
-                    item.title
+              </td>
+              <td class="px-6 py-2 text-center grid grid-cols-1 gap-0.5 place-content-center-safe">
+                @for (subitem of item.categories; track $index) {
+                  <span class="text-slate-400 text-xs font-semibold self-center-safe">{{
+                    subitem.name
                   }}</span>
-                </div>
-              </div>
-            </td>
-            <td class="px-6 py-2 text-center grid grid-cols-1 gap-0.5 place-content-center-safe">
-              @for (subitem of item.categories; track $index) {
-                <span class="text-slate-400 text-xs font-semibold self-center-safe">{{
-                  subitem.name
-                }}</span>
+                }
+              </td>
+              <td class="px-6 py-2 text-sm text-slate-400 text-center">
+                {{ item.releaseDate | customDate }}
+              </td>
+              @if (!isForm) {
+                <td class="px-6 py-2 text-sm text-center">
+                  <span
+                    class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100"
+                    >{{ item.status }}</span
+                  >
+                </td>
+                <td class="px-6 py-2 text-sm">
+                  <div class="flex items-center justify-center gap-1">
+                    <span class="text-sm font-bold">{{ item.rating }}</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4">
+                  <div class="flex items-center justify-evenly gap-2">
+                    <button
+                      (click)="onSelectMovieToEdit(item)"
+                      class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+                    >
+                      <ng-icon name="heroPencilSquare" class="icon-main" size="20"></ng-icon>
+                    </button>
+                    <button
+                      (click)="deleteMovie(item.id!)"
+                      class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+                    >
+                      <ng-icon name="heroTrash" color="red" size="20"></ng-icon>
+                    </button>
+                  </div>
+                </td>
+              } @else {
+                <td>
+                  <a
+                    (click)="onSelectMovieForSchedule(item)"
+                    class="text-main hover:underline hover:underline-offset-2 cursor-pointer"
+                  >
+                    Escoger
+                  </a>
+                </td>
               }
-            </td>
-            <td class="px-6 py-2 text-sm text-slate-400 text-center">
-              {{ item.releaseDate | customDate }}
-            </td>
-            @if (!isForm) {
-              <td class="px-6 py-2 text-sm text-center">
-                <span
-                  class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100"
-                  >{{ item.status }}</span
-                >
-              </td>
-              <td class="px-6 py-2 text-sm">
-                <div class="flex items-center justify-center gap-1">
-                  <span class="text-sm font-bold">{{ item.rating }}</span>
-                </div>
-              </td>
-              <td class="px-6 py-4">
-                <div class="flex items-center justify-evenly gap-2">
-                  <button
-                    (click)="onSelectMovieToEdit(item)"
-                    class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
-                  >
-                    <ng-icon name="heroPencilSquare" class="icon-main" size="20"></ng-icon>
-                  </button>
-                  <button
-                    (click)="deleteMovie(item.id!)"
-                    class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
-                  >
-                    <ng-icon name="heroTrash" color="red" size="20"></ng-icon>
-                  </button>
-                </div>
-              </td>
-            } @else {
-              <td>
-                <a
-                  (click)="onSelectMovieForSchedule(item)"
-                  class="text-main hover:underline hover:underline-offset-2 cursor-pointer"
-                >
-                  Escoger
-                </a>
-              </td>
-            }
-          </tr>
+            </tr>
+          }
         }
+        <div #infiniteAnchor style="height: 10px"></div>
       </tbody>
     </table>
   </div>

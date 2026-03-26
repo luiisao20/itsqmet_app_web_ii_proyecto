@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { lastValueFrom, Observable } from 'rxjs';
 import { Membership } from '../models/membership';
+import { PageResponse } from '../models/Pages';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,9 @@ export class MembershipService {
 
   private API_MEMBERSHIPS = 'http://localhost:8080/memberships';
 
-  getAll(): Observable<Membership[]> {
-    return this.http.get<Membership[]>(this.API_MEMBERSHIPS);
+  getAll(page = 0, size = 10): Observable<PageResponse<Membership>> {
+    const params = new HttpParams().set('page', page.toString()).set('size', size.toString());
+    return this.http.get<PageResponse<Membership>>(this.API_MEMBERSHIPS, { params });
   }
 
   getById(id: number): Observable<Membership> {

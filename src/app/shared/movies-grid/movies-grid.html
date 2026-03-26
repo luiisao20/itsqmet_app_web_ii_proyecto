@@ -1,7 +1,10 @@
 <section class="max-w-7xl mx-auto px-6 lg:px-20 pb-20">
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-    @for (movie of query.data(); track $index) {
-      <app-movies-card [movie]="movie"></app-movies-card>
+    @for (page of query.data()?.pages; track $index) {
+      @for (movie of page.content; track $index) {
+        <app-movies-card [movie]="movie"></app-movies-card>
+      }
     }
+    <div #infiniteAnchor style="height: 10px"></div>
   </div>
 </section>

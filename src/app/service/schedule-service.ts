@@ -2,14 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Schedule } from '../models/schedule';
 import { lastValueFrom, Observable } from 'rxjs';
-
-export interface PageResponse<T> {
-  content: T[];
-  last: boolean;
-  totalElements: number;
-  totalPages: number;
-  number: number;
-}
+import { PageResponse } from '../models/Pages';
 
 @Injectable({
   providedIn: 'root',
@@ -25,10 +18,19 @@ export class ScheduleService {
     );
   }
 
-  getSchedulesByStablishmentName(name: string) {
-    const params = new HttpParams().set('name', name);
+  getSchedulesByStablishmentName(params: {
+    name: string;
+    page: number;
+    size: number;
+  }): Promise<PageResponse<Schedule>> {
+    const newParams = new HttpParams()
+      .set('name', params.name)
+      .set('page', params.page.toString())
+      .set('size', params.size.toString());
     return lastValueFrom(
-      this.http.get<Schedule[]>(`${this.URL_SCHEDULE}/stablishmentName`, { params }),
+      this.http.get<PageResponse<Schedule>>(`${this.URL_SCHEDULE}/stablishmentName`, {
+        params: newParams,
+      }),
     );
   }
 
@@ -52,7 +54,9 @@ export class ScheduleService {
       .set('stablishmentId', stablishmentId.toString())
       .set('date', date.toString());
 
-    return lastValueFrom(this.http.get<string[]>(`${this.URL_SCHEDULE}/time-available`, { params }));
+    return lastValueFrom(
+      this.http.get<string[]>(`${this.URL_SCHEDULE}/time-available`, { params }),
+    );
   }
 
   getSchedulesByMovie(id: number): Promise<Schedule[]> {
