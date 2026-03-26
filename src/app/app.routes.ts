@@ -25,7 +25,8 @@ import { AdminContacts } from './features/admin-contacts/admin-contacts';
 import { AdminSchedules } from './features/admin-schedules/admin-schedules';
 import { NewSchedule } from './features/new-schedule/new-schedule';
 import { StablishmentSchedule } from './features/stablishment-schedule/stablishment-schedule';
-import {SchedulesList} from './features/schedules-list/schedules-list';
+import { SchedulesList } from './features/schedules-list/schedules-list';
+import { PurchaseHistory } from './features/purchase-history/purchase-history';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -33,6 +34,7 @@ export const routes: Routes = [
   { path: 'booking/:id', component: Bookings, canActivate: [authGuard] },
   { path: 'reviews/:id', component: Reviews, canActivate: [authGuard] },
   { path: 'profile', component: Profile, canActivate: [authGuard] },
+  { path: 'purchase-history', component: PurchaseHistory, canActivate: [authGuard] },
   { path: 'memberships', component: Memberships },
   { path: 'contact', component: ContactAdmin, canMatch: [matchContactGuard] },
   { path: 'contact', component: ContactUs },
