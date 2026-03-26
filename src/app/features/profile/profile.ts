@@ -7,10 +7,11 @@ import { UserModel } from '../../models/user';
 import { Membership } from '../../models/membership';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { ionPersonCircleOutline } from '@ng-icons/ionicons';
+import { PasswordForm } from "../../shared/password-form/password-form";
 
 @Component({
   selector: 'app-profile',
-  imports: [FormsModule, NgIconComponent, RouterLink],
+  imports: [FormsModule, NgIconComponent, PasswordForm, RouterLink],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
   providers: [provideIcons({ ionPersonCircleOutline })],

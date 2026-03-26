@@ -7,7 +7,7 @@ import { Schedule } from '../../models/schedule';
 import { ScheduleService } from '../../service/schedule-service';
 import { injectMutation, QueryClient } from '@tanstack/angular-query-experimental';
 import { lastValueFrom } from 'rxjs';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-schedule-form',
@@ -66,7 +66,7 @@ export class ScheduleForm {
       return;
     }
     this.loading.set(true);
-    const date = new Date(`${this.form.get('date')?.value}T${this.form.get('time')?.value}`)
+    const date = new Date(`${this.form.get('date')?.value}T${this.form.get('time')?.value}`);
     const newSchedule: Schedule = {
       movie: this.movie!,
       stablishment: this.stablishment!,

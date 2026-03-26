@@ -40,6 +40,18 @@ export class AuthService {
     return lastValueFrom(this.http.post<String>(`${this.API_URL}/register`, user));
   }
 
+  updatePassword(oldPassword: string, newPassword: string) {
+    const email = localStorage.getItem('email') ?? '';
+    console.log();
+    
+
+    return this.http.post<{ message: string }>(`${this.API_URL}/change-password`, {
+      email,
+      oldPassword,
+      newPassword,
+    });
+  }
+
   logout() {
     localStorage.removeItem('session');
     localStorage.removeItem('user');
