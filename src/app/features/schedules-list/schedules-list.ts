@@ -4,11 +4,10 @@ import { injectQuery } from '@tanstack/angular-query-experimental';
 import { CustomDateTimePipe } from '../../pipes/custom-date-time-pipe';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { heroPencilSquare, heroTrash } from '@ng-icons/heroicons/outline';
-import { Button } from '../../shared/button/button';
 
 @Component({
   selector: 'app-schedules-list',
-  imports: [CustomDateTimePipe, NgIcon, Button],
+  imports: [CustomDateTimePipe, NgIcon],
   templateUrl: './schedules-list.html',
   styleUrl: './schedules-list.css',
   providers: provideIcons({ heroPencilSquare, heroTrash }),

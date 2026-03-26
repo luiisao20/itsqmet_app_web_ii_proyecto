@@ -1,21 +1,26 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { UserService } from '../../service/user-service';
+import { MembershipService } from '../../service/membership-service';
 import { UserModel } from '../../models/user';
+import { Membership } from '../../models/membership';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { ionPersonCircleOutline } from '@ng-icons/ionicons';
 
 @Component({
   selector: 'app-profile',
-  imports: [FormsModule, NgIconComponent],
+  imports: [FormsModule, NgIconComponent, RouterLink],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
   providers: [provideIcons({ ionPersonCircleOutline })],
 })
 export class Profile {
   private userService = inject(UserService);
+  private membershipService = inject(MembershipService);
 
   user = signal<UserModel | null>(null);
+  membership = signal<Membership | null>(null);
   loading = signal(true);
 
   currentPassword = '';
@@ -27,9 +32,12 @@ export class Profile {
 
   ngOnInit() {
     if (this.uuid) {
-      this.userService.getUserByUuid(this.uuid).subscribe({
-        next: (user) => {
-          this.user.set(user);
+      this.membershipService.getByUser(this.uuid).subscribe({
+        next: (membership) => {
+          this.membership.set(membership);
+          if (membership.userDTO) {
+            this.user.set(membership.userDTO);
+          }
           this.loading.set(false);
         },
         error: () => {

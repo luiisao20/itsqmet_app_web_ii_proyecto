@@ -27,6 +27,9 @@ export class RegisterForm {
   regexPassword = '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$';
   regexPhone = '^[0-9]+$';
 
+  showPassword = false;
+  showConfirmPassword = false;
+
   registerForm = this.fb.group(
     {
       name: ['', [Validators.required]],

@@ -1,3 +1,5 @@
+import { Schedule } from './schedule';
+
 export interface TicketSeat {
   fila: string;
   columna: number;
@@ -15,8 +17,6 @@ export interface Ticket {
     name?: string;
     email?: string;
     role?: string;
-  };
-  schedule: {
-    id: number;
-  };
+  } | null;
+  schedule: Schedule | { id: number };
 }

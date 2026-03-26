@@ -12,19 +12,36 @@ import { Router, RouterLink } from '@angular/router';
 export class Login {
   email: string | null = null;
   password: string | null = null;
+  showPassword = false;
+  rememberMe = false;
 
   private authService = inject(AuthService);
-
   private router = inject(Router);
 
+  ngOnInit() {
+    const savedEmail = localStorage.getItem('rememberedEmail');
+    if (savedEmail) {
+      this.email = savedEmail;
+      this.rememberMe = true;
+    }
+  }
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+
   onLogin() {
+    if (this.rememberMe) {
+      localStorage.setItem('rememberedEmail', this.email ?? '');
+    } else {
+      localStorage.removeItem('rememberedEmail');
+    }
+
     this.authService.login(this.email ?? '', this.password ?? '').subscribe({
-      //Se activa si la respuesta de la api fue 200 OK.
       next: () => {
         alert('Inicio de sesión exitoso');
         this.router.navigate(['']);
       },
-      //Se activa si la api rechazó la petición 403, 404, 500.
       error: () => alert('Usuario o contraseña incorrectos'),
     });
   }
