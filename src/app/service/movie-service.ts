@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { lastValueFrom, map, Observable } from 'rxjs';
 import { Category, Movie } from '../models/movie';
+import { PageResponse } from '../models/Pages';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +12,20 @@ export class MovieService {
 
   private API_MOVIES = 'http://localhost:8080/movies';
 
-  getMovies(): Promise<Movie[]> {
-    return lastValueFrom(this.http.get<Movie[]>(`${this.API_MOVIES}`));
+  getMovies(page: number = 0, size: number = 10): Promise<PageResponse<Movie>> {
+    const params = new HttpParams().set('page', page.toString()).set('size', size.toString());
+    return lastValueFrom(this.http.get<PageResponse<Movie>>(`${this.API_MOVIES}`, { params }));
   }
 
-  getMoviesByCategory(category: Category): Promise<Movie[]> {
-    return lastValueFrom(this.http.get<Movie[]>(`${this.API_MOVIES}/category/${category.id}`));
+  getMoviesByCategory(
+    category: Category,
+    page: number = 0,
+    size: number = 10,
+  ): Promise<PageResponse<Movie>> {
+    const params = new HttpParams().set('page', page.toString()).set('size', size.toString());
+    return lastValueFrom(
+      this.http.get<PageResponse<Movie>>(`${this.API_MOVIES}/category/${category.id}`, { params }),
+    );
   }
 
   getMoviesByStablishment(id: number): Promise<Movie[]> {

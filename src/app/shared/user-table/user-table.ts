@@ -1,7 +1,19 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import {
+  Component,
+  effect,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Output,
+  viewChild,
+} from '@angular/core';
 import { UserModel } from '../../models/user';
 import { UserService } from '../../service/user-service';
-import { injectMutation, injectQuery, QueryClient } from '@tanstack/angular-query-experimental';
+import {
+  injectInfiniteQuery,
+  injectMutation,
+  QueryClient,
+} from '@tanstack/angular-query-experimental';
 import { lastValueFrom } from 'rxjs';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroPencilSquare, heroTrash } from '@ng-icons/heroicons/outline';
@@ -28,9 +40,11 @@ export class UserTable {
     },
   }));
 
-  query = injectQuery(() => ({
+  query = injectInfiniteQuery(() => ({
     queryKey: ['users'],
-    queryFn: () => lastValueFrom(this.userService.getUsers()),
+    queryFn: ({ pageParam }) => lastValueFrom(this.userService.getUsers(pageParam, 10)),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => (lastPage.last ? undefined : lastPage.number + 1),
   }));
 
   deleteUser(id: string) {
@@ -41,5 +55,28 @@ export class UserTable {
 
   onSelectUserToEdit(user: UserModel) {
     this.selectUserToEdit.emit(user);
+  }
+
+  loadMore() {
+    if (this.query.hasNextPage() && !this.query.isFetchingNextPage()) {
+      this.query.fetchNextPage();
+    }
+  }
+
+  anchor = viewChild<ElementRef>('infiniteAnchor');
+
+  constructor() {
+    effect(() => {
+      const el = this.anchor()?.nativeElement;
+      if (!el) return;
+
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          this.loadMore();
+        }
+      });
+
+      observer.observe(el);
+    });
   }
 }

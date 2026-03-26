@@ -1,7 +1,7 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, ElementRef, Input, effect, inject, viewChild } from '@angular/core';
 import { MoviesCard } from '../movies-card/movies-card';
 import { MovieService } from '../../service/movie-service';
-import { injectQuery } from '@tanstack/angular-query-experimental';
+import { injectInfiniteQuery } from '@tanstack/angular-query-experimental';
 import { CategoryService } from '../../service/category-service';
 
 @Component({
@@ -16,11 +16,42 @@ export class MoviesGrid {
 
   @Input() buyCard?: boolean;
 
-  query = injectQuery(() => ({
+  query = injectInfiniteQuery(() => ({
     queryKey: ['movies', this.categoryService.categorySelected()],
-    queryFn: () =>
+    queryFn: ({ pageParam }) =>
       this.categoryService.categorySelected() === null
-        ? this.movieService.getMovies()
-        : this.movieService.getMoviesByCategory(this.categoryService.categorySelected()!),
+        ? this.movieService.getMovies(pageParam, 8)
+        : this.movieService.getMoviesByCategory(
+            this.categoryService.categorySelected()!,
+            pageParam,
+            8,
+          ),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      return lastPage.last ? undefined : lastPage.number + 1;
+    },
   }));
+
+  loadMore() {
+    if (this.query.hasNextPage() && !this.query.isFetchingNextPage()) {
+      this.query.fetchNextPage();
+    }
+  }
+
+  anchor = viewChild<ElementRef>('infiniteAnchor');
+
+  constructor() {
+    effect(() => {
+      const el = this.anchor()?.nativeElement;
+      if (!el) return;
+
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          this.loadMore();
+        }
+      });
+
+      observer.observe(el);
+    });
+  }
 }

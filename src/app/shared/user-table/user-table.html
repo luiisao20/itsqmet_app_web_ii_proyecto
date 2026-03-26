@@ -13,52 +13,55 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-slate-800">
-        @for (item of query.data(); track item.uuid) {
-          <tr class="group hover:bg-cyan-500/5 transition-colors">
-            <td class="px-6 py-2 text-center">
-              <span
-                class="px-2.5 py-1 bg-slate-800/90 text-slate-400 text-xs font-semibold rounded-md"
-                >{{ item.name }}</span
-              >
-            </td>
-            <td class="px-6 py-2 text-center">
-              <span
-                class="px-2.5 py-1 bg-slate-800/90 text-slate-400 text-xs font-semibold rounded-md"
-                >{{ item.email }}</span
-              >
-            </td>
-            <td class="px-6 py-2 text-sm text-slate-400 text-center">{{ item.cellphone }}</td>
-            <td class="px-6 py-2 text-sm text-center">
-              <span
-                class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100"
-                [ngClass]="
-                  item.role === 'ROLE_ADMIN'
-                    ? 'bg-sky-50 text-sky-700 border-sky-100'
-                    : item.role === 'ROLE_MODERATOR'
-                      ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
-                      : 'bg-red-50 text-red-700 border-red-100'
-                "
-                >{{ item.role }}</span
-              >
-            </td>
-            <td class="px-6 py-4">
-              <div class="flex items-center justify-evenly gap-2">
-                <button
-                  (click)="onSelectUserToEdit(item)"
-                  class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+        @for (page of query.data()?.pages; track $index) {
+          @for (item of page.content; track item.uuid) {
+            <tr class="group hover:bg-cyan-500/5 transition-colors">
+              <td class="px-6 py-2 text-center">
+                <span
+                  class="px-2.5 py-1 bg-slate-800/90 text-slate-400 text-xs font-semibold rounded-md"
+                  >{{ item.name }}</span
                 >
-                  <ng-icon name="heroPencilSquare" class="icon-main" size="20"></ng-icon>
-                </button>
-                <!-- <button
+              </td>
+              <td class="px-6 py-2 text-center">
+                <span
+                  class="px-2.5 py-1 bg-slate-800/90 text-slate-400 text-xs font-semibold rounded-md"
+                  >{{ item.email }}</span
+                >
+              </td>
+              <td class="px-6 py-2 text-sm text-slate-400 text-center">{{ item.cellphone }}</td>
+              <td class="px-6 py-2 text-sm text-center">
+                <span
+                  class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100"
+                  [ngClass]="
+                    item.role === 'ROLE_ADMIN'
+                      ? 'bg-sky-50 text-sky-700 border-sky-100'
+                      : item.role === 'ROLE_MODERATOR'
+                        ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
+                        : 'bg-red-50 text-red-700 border-red-100'
+                  "
+                  >{{ item.role }}</span
+                >
+              </td>
+              <td class="px-6 py-4">
+                <div class="flex items-center justify-evenly gap-2">
+                  <button
+                    (click)="onSelectUserToEdit(item)"
+                    class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
+                  >
+                    <ng-icon name="heroPencilSquare" class="icon-main" size="20"></ng-icon>
+                  </button>
+                  <!-- <button
                   (click)="deleteUser(item.id!)"
                   class="py-1 px-2 text-slate-400 hover:text-cyan-500 hover:bg-cyan-900/20 rounded-lg transition-all cursor-pointer"
                 >
                   <ng-icon name="heroTrash" color="red" size="20"></ng-icon>
                 </button> -->
-              </div>
-            </td>
-          </tr>
+                </div>
+              </td>
+            </tr>
+          }
         }
+        <div #infiniteAnchor style="height: 10px"></div>
       </tbody>
     </table>
   </div>

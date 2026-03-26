@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Review } from '../models/review';
+import { PageResponse } from '../models/Pages';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,9 @@ export class ReviewService {
 
   private API_REVIEWS = 'http://localhost:8080/reviews';
 
-  getAll(): Observable<Review[]> {
-    return this.http.get<Review[]>(this.API_REVIEWS);
+  getAll(page = 0, size = 10): Observable<PageResponse<Review>> {
+    const params = new HttpParams().set('page', page.toString()).set('size', size.toString());
+    return this.http.get<PageResponse<Review>>(this.API_REVIEWS, { params });
   }
 
   getReviewsByMovie(movieId: number): Observable<Review[]> {

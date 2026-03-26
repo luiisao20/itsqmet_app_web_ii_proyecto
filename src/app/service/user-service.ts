@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { lastValueFrom, Observable } from 'rxjs';
 import { UserModel } from '../models/user';
+import { PageResponse } from '../models/Pages';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,9 @@ export class UserService {
 
   private API_URL = 'http://localhost:8080/users';
 
-  getUsers(): Observable<UserModel[]> {
-    return this.http.get<UserModel[]>(`${this.API_URL}`);
+  getUsers(page = 0, size = 10): Observable<PageResponse<UserModel>> {
+    const params = new HttpParams().set('page', page.toString()).set('size', size.toString());
+    return this.http.get<PageResponse<UserModel>>(`${this.API_URL}`, { params });
   }
 
   getUserByUuid(uuid: string): Observable<UserModel> {

@@ -66,6 +66,7 @@ export class ScheduleForm {
       return;
     }
     this.loading.set(true);
+    const datetd = this.form.get('date')?.value;
     const date = new Date(`${this.form.get('date')?.value}T${this.form.get('time')?.value}`);
     const newSchedule: Schedule = {
       movie: this.movie!,
@@ -77,7 +78,14 @@ export class ScheduleForm {
       room: this.form.get('room')?.value!,
       type: this.form.get('type')?.value!,
     };
-    this.mutation.mutate(newSchedule);
+    this.scheduleService
+      .getTimeAvaiable({
+        movieId: this.movie?.id!,
+        stablishmentId: this.stablishment?.id!,
+        date: datetd!,
+      })
+      .then((res) => console.log(res))
+      .catch((error) => alert(error));
   }
 
   onPrev() {

@@ -1,9 +1,22 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import {
+  Component,
+  effect,
+  ElementRef,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+  viewChild,
+} from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroPencilSquare, heroTrash } from '@ng-icons/heroicons/outline';
 import { MovieService } from '../../service/movie-service';
 import { Movie } from '../../models/movie';
-import { injectMutation, injectQuery, QueryClient } from '@tanstack/angular-query-experimental';
+import {
+  injectInfiniteQuery,
+  injectMutation,
+  QueryClient,
+} from '@tanstack/angular-query-experimental';
 import { CustomDatePipe } from '../../pipes/custom-date-pipe';
 
 @Component({
@@ -29,9 +42,11 @@ export class MovieTable {
     },
   }));
 
-  query = injectQuery(() => ({
+  query = injectInfiniteQuery(() => ({
     queryKey: ['movies'],
-    queryFn: () => this.movieService.getMovies(),
+    queryFn: ({ pageParam }) => this.movieService.getMovies(pageParam, 10),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => (lastPage.last ? undefined : lastPage.number + 1),
   }));
 
   deleteMovie(id: number) {
@@ -46,5 +61,28 @@ export class MovieTable {
 
   onSelectMovieToEdit(movie: Movie) {
     this.selectMovieToEdit.emit(movie);
+  }
+
+  loadMore() {
+    if (this.query.hasNextPage() && !this.query.isFetchingNextPage()) {
+      this.query.fetchNextPage();
+    }
+  }
+
+  anchor = viewChild<ElementRef>('infiniteAnchor');
+
+  constructor() {
+    effect(() => {
+      const el = this.anchor()?.nativeElement;
+      if (!el) return;
+
+      const observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          this.loadMore();
+        }
+      });
+
+      observer.observe(el);
+    });
   }
 }
