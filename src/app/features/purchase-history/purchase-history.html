@@ -1,0 +1,39 @@
+<div class="max-w-2xl mx-auto py-8 px-4">
+  <div class="flex items-center gap-3 mb-8">
+    <a routerLink="/profile" class="text-cyan-50/60 hover:text-cyan-50 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+      </svg>
+    </a>
+    <h1 class="text-2xl font-bold text-cyan-50">Historial de compras</h1>
+  </div>
+
+  @if (loading()) {
+    <div class="space-y-4">
+      @for (item of [1, 2, 3]; track item) {
+        <div class="flex gap-4 bg-cyan-500/10 border-2 border-cyan-100/20 rounded-xl p-4 animate-pulse">
+          <div class="w-20 h-28 bg-white/10 rounded-lg flex-shrink-0"></div>
+          <div class="flex flex-col flex-1 gap-2">
+            <div class="h-5 w-3/4 bg-white/10 rounded"></div>
+            <div class="h-3 w-1/2 bg-white/10 rounded"></div>
+            <div class="h-3 w-2/3 bg-white/10 rounded mt-auto"></div>
+            <div class="h-4 w-1/4 bg-white/10 rounded"></div>
+          </div>
+        </div>
+      }
+    </div>
+  } @else if (tickets().length === 0) {
+    <div class="bg-cyan-500/10 border-2 border-cyan-100/20 rounded-xl p-12 text-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12 text-cyan-50/30 mx-auto mb-4">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
+      </svg>
+      <p class="text-cyan-50/50 text-sm">Aún no tienes compras registradas</p>
+    </div>
+  } @else {
+    <div class="space-y-4">
+      @for (ticket of tickets(); track ticket.id) {
+        <app-ticket-card [ticket]="ticket"></app-ticket-card>
+      }
+    </div>
+  }
+</div>

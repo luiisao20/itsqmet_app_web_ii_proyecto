@@ -18,5 +18,8 @@ export class TicketService {
   getTicket(id: number): Observable<Ticket> {
     return this.http.get<Ticket>(`${this.API_TICKET}/${id}`);
   }
-  
+
+  getTicketsByUser(uuid: string): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(`${this.API_TICKET}/user/${uuid}`);
+  }
 }

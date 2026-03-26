@@ -11,12 +11,12 @@
         <!-- Desktop nav links -->
         <div class="hidden md:flex items-center md:space-x-8 rtl:space-x-reverse">
           <a routerLink="" class="text-cyan-50 font-medium hover:text-cyan-400 transition-colors"
-            >Home</a
+            >Inicio</a
           >
           <a
             routerLink="contact"
             class="text-cyan-50 font-medium hover:text-cyan-400 transition-colors"
-            >Contact Us</a
+            >Contacto</a
           >
           @if (rol === 'ROLE_ADMIN' || rol === 'ROLE_MODERATOR') {
             <a
@@ -33,12 +33,12 @@
           <a
             routerLink="about"
             class="text-cyan-50 font-medium hover:text-cyan-400 transition-colors mr-2"
-            >About Us</a
+            >Nosotros</a
           >
           @if (!isAuthenticated) {
             <a
               routerLink="login"
-              class="text-cyan-50 font-medium hover:text-cyan-400 transition-colors"
+              class="text-cyan-50 font-medium hover:text-cyan-400 transition-colors ml-6"
               >Iniciar sesion</a
             >
           }

@@ -46,9 +46,74 @@
         </div>
         <div>
           <label class="block text-xs text-cyan-50/50 uppercase tracking-wider mb-1">Membresía</label>
-          <!-- TODO: Mostrar membresia asignada -->
-          <p class="text-cyan-50 font-medium">{{ u.cardId || 'No asignado' }}</p>
+          @if (membership(); as m) {
+            <p class="text-cyan-50 font-medium">{{ m.cardType }}</p>
+            <p class="text-cyan-50/60 text-xs mt-1">{{ m.currentVisits }} / {{ m.topVisits }} visitas</p>
+          } @else {
+            <p class="text-cyan-50 font-medium">No asignado</p>
+          }
         </div>
+      </div>
+    </div>
+
+    <a
+      routerLink="/purchase-history"
+      class="flex items-center justify-between bg-cyan-500/10 border-2 border-cyan-100/20 rounded-xl p-6 mb-8 hover:border-cyan-500/30 transition-all group cursor-pointer"
+    >
+      <div class="flex items-center gap-4">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-cyan-400">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
+        </svg>
+        <span class="text-cyan-50 font-semibold">Historial de compras</span>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-5 text-cyan-50/40 group-hover:text-cyan-50 transition-colors">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+    </a>
+
+    <div class="bg-cyan-500/10 border-2 border-cyan-100/20 rounded-xl p-8">
+      <h2 class="text-lg font-semibold text-cyan-50 mb-6">Cambiar contraseña</h2>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm text-cyan-50/80 mb-2">Contraseña actual</label>
+          <input
+            type="password"
+            [(ngModel)]="currentPassword"
+            placeholder="Ingresa tu contraseña actual"
+            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-cyan-50 placeholder-cyan-50/30 focus:outline-none focus:border-cyan-500/50 transition-colors"
+          />
+        </div>
+        <div>
+          <label class="block text-sm text-cyan-50/80 mb-2">Nueva contraseña</label>
+          <input
+            type="password"
+            [(ngModel)]="newPassword"
+            placeholder="Mínimo 8 caracteres"
+            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-cyan-50 placeholder-cyan-50/30 focus:outline-none focus:border-cyan-500/50 transition-colors"
+          />
+        </div>
+        <div>
+          <label class="block text-sm text-cyan-50/80 mb-2">Confirmar nueva contraseña</label>
+          <input
+            type="password"
+            [(ngModel)]="confirmPassword"
+            placeholder="Repite la nueva contraseña"
+            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-cyan-50 placeholder-cyan-50/30 focus:outline-none focus:border-cyan-500/50 transition-colors"
+          />
+        </div>
+
+        <button
+          (click)="changePassword()"
+          [disabled]="changingPassword()"
+          class="bg-(--main-color) hover:bg-(--main-color)/90 text-white font-semibold px-6 py-2.5 rounded-lg transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+        >
+          @if (changingPassword()) {
+            Guardando...
+          } @else {
+            Cambiar contraseña
+          }
+        </button>
       </div>
     </div>
   }

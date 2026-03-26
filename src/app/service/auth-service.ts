@@ -16,6 +16,7 @@ export class AuthService {
   login(email: string, password: string): Observable<boolean> {
     return this.http.post<any>(`${this.API_URL}/login`, { email, password }).pipe(
       tap((res) => {
+        console.log('Login response:', res);
         if (res && res.jwt) {
           localStorage.setItem('token', res.jwt);
           localStorage.setItem('rol', res.role);

@@ -54,5 +54,6 @@ export class Navbar {
   logout() {
     this.dropdownOpen.set(false);
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
