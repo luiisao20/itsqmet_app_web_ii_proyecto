@@ -1,0 +1,67 @@
+<h2 class="font-semibold text-center text-xl mb-6">Reporte de películas</h2>
+<button
+  (click)="reloadQuery()"
+  class="absolute bg-main top-20 rounded-xl p-2 hover:bg-main/60 cursor-pointer"
+>
+  Recargar informacion
+</button>
+<div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-sm mb-10">
+  <div class="overflow-x-auto">
+    <table class="w-full">
+      <thead>
+        <tr
+          class="bg-slate-800/50 text-slate-500 text-xs font-bold uppercase tracking-wide border-b border-slate-800"
+        >
+          <th class="px-6 py-4">Título</th>
+          <th class="px-6 py-4">Categoría</th>
+          <th class="px-6 py-4">Fecha de estreno</th>
+          <th class="px-6 py-4">Estado</th>
+          <th class="px-6 py-4">Puntuación</th>
+          <th class="px-6 py-4">Duración</th>
+          <th class="px-6 py-4">Número de reseñas</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-800">
+        @for (page of query.data()?.pages; track $index) {
+          @for (item of page.content; track $index) {
+            <tr class="group hover:bg-cyan-500/5 transition-colors">
+              <td class="px-6 py-2">
+                <div class="flex flex-col">
+                  <span class="font-bold text-white group-hover:text-cyan-500 transition-colors">
+                    {{ item.title }}
+                  </span>
+                </div>
+              </td>
+              <td class="px-6 py-2 text-center gap-0.5">
+                <span class="text-slate-400 text-sm font-semibold">
+                  {{ item.categories }}
+                </span>
+              </td>
+              <td class="px-6 py-2 text-sm text-slate-400 text-center">
+                {{ item.releaseDate | customDate }}
+              </td>
+              <td class="px-6 py-2 text-sm text-center">
+                <span
+                  class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-100"
+                  >{{ item.status }}</span
+                >
+              </td>
+              <td class="px-6 py-2 text-sm">
+                <div class="flex items-center justify-center gap-1">
+                  <span class="text-sm font-bold">{{ item.rating }}</span>
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <div class="flex items-center justify-evenly gap-2">{{ item.duration }}</div>
+              </td>
+              <td class="px-6 py-4">
+                <div class="flex items-center justify-evenly gap-2">{{ item.totalReviews }}</div>
+              </td>
+            </tr>
+          }
+        }
+        <div #infiniteAnchor style="height: 10px"></div>
+      </tbody>
+    </table>
+  </div>
+</div>

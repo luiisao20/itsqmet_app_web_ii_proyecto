@@ -34,10 +34,23 @@ export class ScheduleService {
     );
   }
 
-  getAll(page: number = 0, size: number = 10): Promise<PageResponse<Schedule>> {
-    const params = new HttpParams().set('page', page.toString()).set('size', size.toString());
+  getAll(newParams: {
+    page: number;
+    size: number;
+    stabName?: string;
+    movieTitle?: string;
+    startDate?: string;
+    endDate?: string;
+  }): Promise<PageResponse<Schedule>> {
+    const params = new HttpParams()
+      .set('page', newParams.page.toString())
+      .set('size', newParams.size.toString())
+      .set('stabName', newParams.stabName ?? '')
+      .set('movieTitle', newParams.movieTitle ?? '')
+      .set('startDate', newParams.startDate ?? '')
+      .set('endDate', newParams.endDate ?? '');
 
-    return lastValueFrom(this.http.get<PageResponse<Schedule>>(`${this.URL_SCHEDULE}`, { params }));
+    return lastValueFrom(this.http.get<PageResponse<Schedule>>(`${this.URL_SCHEDULE}/filters`, { params }));
   }
 
   getTimeAvaiable({

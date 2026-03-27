@@ -2,18 +2,22 @@
   <div class="w-3/4">
     @if (movieSelected()) {
       <div class="flex flex-col justify-center">
-        <div class="flex justify-center items-center gap-4 mt-4">
-          <img
-            class="w-20 h-28 object-cover rounded-lg"
-            [src]="movieSelected()?.imageUrl"
-            alt="{{ movieSelected()?.title }}"
-          />
-          <div>
-            <h3 class="text-lg font-bold text-white">{{ movieSelected()?.title }}</h3>
-            <p class="text-sm text-gray-400">{{ movieSelected()?.releaseDate | customDate }}</p>
+        <div class="flex justify-center items-center gap-10">
+          <div class="flex justify-center items-center gap-4 mt-4">
+            <img
+              class="w-20 h-28 object-cover rounded-lg"
+              [src]="movieSelected()?.imageUrl"
+              alt="{{ movieSelected()?.title }}"
+            />
+            <div>
+              <h3 class="text-lg font-bold text-white">{{ movieSelected()?.title }}</h3>
+              <p class="text-sm text-gray-400">{{ movieSelected()?.releaseDate | customDate }}</p>
+            </div>
           </div>
+          <button (click)="onDeselectMovie()" class="text-white hover:text-main cursor-pointer">
+            <ng-icon name="ionCloseCircleSharp" size="50"></ng-icon>
+          </button>
         </div>
-        <ng-icon></ng-icon>
         <div class="self-end">
           <app-button
             [disabled]="movieSelected() === null"

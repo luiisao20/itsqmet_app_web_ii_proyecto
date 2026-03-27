@@ -27,6 +27,7 @@
           name="date"
           id="date"
           formControlName="date"
+          (change)="onDateChange($event)"
           class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
         />
         @if (getErrorMessage('date')) {
@@ -34,68 +35,77 @@
         }
       </div>
 
-      <div>
-        <label class="block text-sm font-semibold text-white/80 mb-2"> Sala </label>
-        <input
-          type="number"
-          name="room"
-          id="room"
-          formControlName="room"
-          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
-        />
-        @if (getErrorMessage('room')) {
-          <p class="text-xs mt-2 text-red-500">{{ getErrorMessage('room') }}</p>
+      @if (showComplete()) {
+        @if (timeAvailable() !== null) {
+          <div class="self-center font-semibold">
+            Puedes guardar funciones a partir de esta hora: {{ timeAvailable()! | customTimePipe }}
+          </div>
         }
-      </div>
+        <div>
+          <label class="block text-sm font-semibold text-white/80 mb-2"> Sala </label>
+          <input
+            type="number"
+            name="room"
+            id="room"
+            formControlName="room"
+            class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+          />
+          @if (getErrorMessage('room')) {
+            <p class="text-xs mt-2 text-red-500">{{ getErrorMessage('room') }}</p>
+          }
+        </div>
 
-      <div>
-        <label class="block text-sm font-semibold text-white/80 mb-2"> Hora </label>
-        <input
-          type="time"
-          name="time"
-          id="time"
-          [min]="'20:00'"
-          formControlName="time"
-          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
-        />
-        @if (getErrorMessage('time')) {
-          <p class="text-xs mt-2 text-red-500">{{ getErrorMessage('time') }}</p>
-        }
-      </div>
+        <div>
+          <label class="block text-sm font-semibold text-white/80 mb-2"> Hora </label>
+          <input
+            type="time"
+            name="time"
+            id="time"
+            [min]="'20:00'"
+            formControlName="time"
+            class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+          />
+          @if (getErrorMessage('time')) {
+            <p class="text-xs mt-2 text-red-500">{{ getErrorMessage('time') }}</p>
+          }
+        </div>
 
-      <div>
-        <label class="block text-sm font-semibold text-white/80 mb-2"> Asientos disponibles </label>
-        <input
-          type="number"
-          min="1"
-          name="available"
-          id="available"
-          formControlName="available"
-          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
-          placeholder="Ej: 120"
-        />
-        @if (getErrorMessage('available')) {
-          <p class="text-xs mt-2 text-red-500">{{ getErrorMessage('available') }}</p>
-        }
-      </div>
+        <div>
+          <label class="block text-sm font-semibold text-white/80 mb-2">
+            Asientos disponibles
+          </label>
+          <input
+            type="number"
+            min="1"
+            name="available"
+            id="available"
+            formControlName="available"
+            class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+            placeholder="Ej: 120"
+          />
+          @if (getErrorMessage('available')) {
+            <p class="text-xs mt-2 text-red-500">{{ getErrorMessage('available') }}</p>
+          }
+        </div>
 
-      <div>
-        <label class="block text-sm font-semibold text-white/80 mb-2"> Tipo de sala </label>
-        <select
-          name="type"
-          id="type"
-          formControlName="type"
-          class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
-        >
-          <option value="">Seleccione tipo</option>
-          <option value="IMAX">IMAX</option>
-          <option value="VIP">VIP</option>
-          <option value="NORMAL">Normal</option>
-        </select>
-        @if (getErrorMessage('type')) {
-          <p class="text-xs mt-2 text-red-500">{{ getErrorMessage('type') }}</p>
-        }
-      </div>
+        <div>
+          <label class="block text-sm font-semibold text-white/80 mb-2"> Tipo de sala </label>
+          <select
+            name="type"
+            id="type"
+            formControlName="type"
+            class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+          >
+            <option value="">Seleccione tipo</option>
+            <option value="IMAX">IMAX</option>
+            <option value="VIP">VIP</option>
+            <option value="NORMAL">Normal</option>
+          </select>
+          @if (getErrorMessage('type')) {
+            <p class="text-xs mt-2 text-red-500">{{ getErrorMessage('type') }}</p>
+          }
+        </div>
+      }
     </div>
     <div class="flex justify-between w-full mt-6">
       <app-button

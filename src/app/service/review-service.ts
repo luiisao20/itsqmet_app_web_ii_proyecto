@@ -17,8 +17,17 @@ export class ReviewService {
     return this.http.get<PageResponse<Review>>(this.API_REVIEWS, { params });
   }
 
-  getReviewsByMovie(movieId: number): Observable<Review[]> {
-    return this.http.get<Review[]>(`${this.API_REVIEWS}/movie/${movieId}`);
+  getReviewsByMovie(params: {
+    movieId: number;
+    page: number;
+    size: number;
+  }): Observable<PageResponse<Review>> {
+    const newParams = new HttpParams()
+      .set('page', params.page.toString())
+      .set('size', params.size.toString());
+    return this.http.get<PageResponse<Review>>(`${this.API_REVIEWS}/movie/${params.movieId}`, {
+      params: newParams,
+    });
   }
 
   getReviewsByUser(uuid: string): Observable<Review[]> {

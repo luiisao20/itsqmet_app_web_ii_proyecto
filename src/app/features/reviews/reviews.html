@@ -9,7 +9,11 @@
 
   @if (movie(); as m) {
     <div class="flex items-center gap-4 mb-8">
-      <img [src]="m.imageUrl" [alt]="m.title" class="w-20 h-28 object-cover rounded-lg border-2 border-cyan-500/30" />
+      <img
+        [src]="m.imageUrl"
+        [alt]="m.title"
+        class="w-20 h-28 object-cover rounded-lg border-2 border-cyan-500/30"
+      />
       <div>
         <h1 class="text-2xl font-bold text-cyan-50">{{ m.title }}</h1>
         <p class="text-cyan-50/60 text-sm mt-1">{{ m.categories?.[0]?.name }} • {{ m.time }} min</p>
@@ -107,39 +111,43 @@
       }
     </div>
   } @else {
-    @if (reviews().length === 0) {
-      <div class="bg-cyan-500/5 border border-cyan-100/5 rounded-xl p-8 text-center">
-        <p class="text-cyan-50/50">No hay reseñas aún. Sé el primero en opinar.</p>
-      </div>
-    } @else {
-      <div class="space-y-4">
-        @for (review of reviews(); track review.id) {
-          <div class="bg-cyan-500/5 border border-cyan-100/5 rounded-xl p-5">
-            <div class="flex items-center gap-3 mb-3">
-              <div
-                class="w-10 h-10 rounded-full bg-(--main-color)/20 flex items-center justify-center text-(--main-color) font-bold text-sm"
-              >
-                {{ review.user.name?.charAt(0)?.toUpperCase() || review.user.email?.charAt(0)?.toUpperCase() || 'U' }}
-              </div>
-              <div class="flex-1">
-                <p class="text-cyan-50 font-medium text-sm">{{ review.user.name || review.user.email || 'Usuario' }}</p>
-                <div class="flex items-center gap-1">
-                  @for (star of starsArray; track star) {
-                    <ng-icon
-                      [name]="star <= review.rating ? 'ionStar' : 'ionStarOutline'"
-                      [color]="star <= review.rating ? '#facc15' : '#4b5563'"
-                      size="14"
-                    ></ng-icon>
-                  }
-                  <span class="text-cyan-50/40 text-xs ml-1">{{ review.rating }}/5</span>
-                </div>
+    <div class="space-y-4">
+      @for (review of reviews(); track $index) {
+        <div class="bg-cyan-500/5 border border-cyan-100/5 rounded-xl p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <div
+              class="w-10 h-10 rounded-full bg-(--main-color)/20 flex items-center justify-center text-(--main-color) font-bold text-sm"
+            >
+              {{
+                review.user.name?.charAt(0)?.toUpperCase() ||
+                  review.user.email?.charAt(0)?.toUpperCase() ||
+                  'U'
+              }}
+            </div>
+            <div class="flex-1">
+              <p class="text-cyan-50 font-medium text-sm">
+                {{ review.user.name || review.user.email || 'Usuario' }}
+              </p>
+              <div class="flex items-center gap-1">
+                @for (star of starsArray; track star) {
+                  <ng-icon
+                    [name]="star <= review.rating ? 'ionStar' : 'ionStarOutline'"
+                    [color]="star <= review.rating ? '#facc15' : '#4b5563'"
+                    size="14"
+                  ></ng-icon>
+                }
+                <span class="text-cyan-50/40 text-xs ml-1">{{ review.rating }}/5</span>
               </div>
             </div>
-            <h3 class="text-cyan-50 font-semibold text-sm mb-1">{{ review.title }}</h3>
-            <p class="text-cyan-50/60 text-sm">{{ review.description }}</p>
           </div>
-        }
-      </div>
-    }
+          <h3 class="text-cyan-50 font-semibold text-sm mb-1">{{ review.title }}</h3>
+          <p class="text-cyan-50/60 text-sm">{{ review.description }}</p>
+        </div>
+      } @empty {
+        <div class="bg-cyan-500/5 border border-cyan-100/5 rounded-xl p-8 text-center">
+          <p class="text-cyan-50/50">No hay reseñas aún. Sé el primero en opinar.</p>
+        </div>
+      }
+    </div>
   }
 </div>

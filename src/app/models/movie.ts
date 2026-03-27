@@ -7,8 +7,9 @@ export interface Movie {
   releaseDate?: string;
   status?: string;
   categories?: Category[];
-  rating?: string;
+  rating?: number;
   trailer?: string;
+  totalReviews?: number;
 }
 
 export interface Category {

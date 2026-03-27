@@ -17,6 +17,7 @@ import {
   heroStar,
 } from '@ng-icons/heroicons/outline';
 import { boxCameraMovie } from '@ng-icons/boxicons/regular';
+import { ionAnalyticsSharp, ionBinocularsSharp, ionPeopleSharp } from '@ng-icons/ionicons';
 
 @Component({
   selector: 'app-movies',
@@ -35,6 +36,9 @@ import { boxCameraMovie } from '@ng-icons/boxicons/regular';
     heroXMark,
     heroStar,
     boxCameraMovie,
+    ionAnalyticsSharp,
+    ionBinocularsSharp,
+    ionPeopleSharp
   }),
   templateUrl: './movies.html',
   styleUrl: './movies.css',
@@ -56,6 +60,12 @@ export class Movies {
     { label: 'Reseñas', icon: 'heroStar', route: 'reviews' },
     { label: 'Contactos', icon: 'heroEnvelope', route: 'contacts' },
     { label: 'Funciones', icon: 'boxCameraMovie', route: 'schedules/new' },
+  ];
+
+  reportItems = [
+    { label: 'Películas', icon: 'ionBinocularsSharp', route: 'movie-details' },
+    { label: 'Financiero', icon: 'ionAnalyticsSharp', route: 'financial-details' },
+    { label: 'Usuarios', icon: 'ionPeopleSharp', route: 'users-details' },
   ];
 
   toggleSidebar() {

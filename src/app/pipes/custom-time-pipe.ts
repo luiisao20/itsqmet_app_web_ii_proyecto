@@ -1,18 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'customDate',
-  standalone: true
+  name: 'customTimePipe',
 })
-export class CustomDatePipe implements PipeTransform {
+export class CustomTimePipe implements PipeTransform {
   transform(value: string | Date | undefined): string {
     if (!value) return '';
     const date = new Date(value);
     return new Intl.DateTimeFormat('es-ES', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-      timeZone: 'UTC'
+      hour: '2-digit',
+      minute: '2-digit',
     })
       .format(date)
       .replace('.', '');

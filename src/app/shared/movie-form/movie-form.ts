@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, signal } from '@angular/core';
 import { MovieService } from '../../service/movie-service';
 import { Movie, Category } from '../../models/movie';
 import { FormsModule } from '@angular/forms';
@@ -8,6 +8,7 @@ import { injectMutation, injectQuery, QueryClient } from '@tanstack/angular-quer
 import { CategoryService } from '../../service/category-service';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { ionCloseCircleOutline } from '@ng-icons/ionicons';
+import { formatDateForInput } from '../../helper/format-date-for-input.helper';
 
 interface Status {
   id: string;
@@ -23,8 +24,9 @@ interface MovieModel {
   status: string;
   time: string;
   title: string;
-  rating: string;
+  rating: number;
   trailer: string;
+  totalReviews: number;
 }
 
 @Component({
@@ -38,6 +40,7 @@ export class MovieForm {
   private movieService = inject(MovieService);
   private queryClient = inject(QueryClient);
   private categoryService = inject(CategoryService);
+  private cdr = inject(ChangeDetectorRef);
 
   newMovie: MovieModel = {
     categories: [],
@@ -47,8 +50,9 @@ export class MovieForm {
     status: '0',
     time: '0',
     title: '',
-    rating: '0',
+    rating: 0,
     trailer: '',
+    totalReviews: 0,
   };
   edit: boolean = false;
 
@@ -99,6 +103,7 @@ export class MovieForm {
         title: this.newMovie.title,
         rating: this.newMovie.rating,
         trailer: this.newMovie.trailer,
+        totalReviews: this.newMovie.totalReviews,
       };
       if (this.newMovie.id) return this.movieService.putMovie(this.newMovie.id, movieToSave);
       return this.movieService.postMovie(movieToSave);
@@ -110,11 +115,8 @@ export class MovieForm {
 
     onSuccess: () => {
       this.queryClient.invalidateQueries({ queryKey: ['movies'] });
-
-      if (this.edit) alert('El registro se ha actualizado exitosamente');
-      else alert('El registro se ha creado exitosamente');
-
       this.resetForm();
+      this.cdr.detectChanges();
     },
   }));
 
@@ -127,22 +129,24 @@ export class MovieForm {
       status: '0',
       time: '0',
       title: '',
-      rating: '0',
+      rating: 0,
       trailer: '',
+      totalReviews: 0
     };
   }
 
   setMovieToEdit(movie: Movie) {
     this.newMovie.id = movie.id;
-    this.newMovie.categories = movie.categories ?? [];
+    this.categoriesSelected.set(movie.categories ?? []);
     this.newMovie.imageUrl = movie.imageUrl;
     this.newMovie.overview = movie.overview || '';
-    this.newMovie.releaseDate = movie.releaseDate || '';
+    this.newMovie.releaseDate = formatDateForInput(movie.releaseDate!) || '';
     this.newMovie.status = movie.status!;
     this.newMovie.time = movie.time;
     this.newMovie.title = movie.title;
-    this.newMovie.rating = movie.rating || '0';
+    this.newMovie.rating = movie.rating || 0;
     this.newMovie.trailer = movie.trailer || '';
+    this.newMovie.totalReviews = movie.totalReviews || 0;
     this.edit = true;
   }
 }
