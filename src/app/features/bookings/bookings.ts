@@ -64,8 +64,8 @@ export class Bookings {
     return schedules.filter((s) => {
       const scheduleDate = new Date(s.date);
       const y = scheduleDate.getUTCFullYear();
-      const m = String(scheduleDate.getUTCMonth() + 1).padStart(2, '0');
-      const d = String(scheduleDate.getUTCDate()).padStart(2, '0');
+      const m = String(scheduleDate.getMonth() + 1).padStart(2, '0');
+      const d = String(scheduleDate.getDate()).padStart(2, '0');
       return `${y}-${m}-${d}` === selectedDate;
     });
   });

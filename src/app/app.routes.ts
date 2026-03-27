@@ -27,6 +27,9 @@ import { NewSchedule } from './features/new-schedule/new-schedule';
 import { StablishmentSchedule } from './features/stablishment-schedule/stablishment-schedule';
 import { SchedulesList } from './features/schedules-list/schedules-list';
 import { PurchaseHistory } from './features/purchase-history/purchase-history';
+import { ReportMovies } from './features/report-movies/report-movies';
+import { ReportFinancial } from './features/report-financial/report-financial';
+import { ReportUsers } from './features/report-users/report-users';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -61,6 +64,9 @@ export const routes: Routes = [
           { path: 'list', component: SchedulesList },
         ],
       },
+      { path: 'movie-details', component: ReportMovies },
+      { path: 'financial-details', component: ReportFinancial },
+      { path: 'users-details', component: ReportUsers },
     ],
   },
   { path: 'login', component: Login, canActivate: [guestGuard] },

@@ -36,9 +36,11 @@
       </div>
 
       @if (showComplete()) {
-        <div class="self-center font-semibold">
-          Puedes guardar funciones a partir de esta hora: {{ timeAvailable()! | customTimePipe }}
-        </div>
+        @if (timeAvailable() !== null) {
+          <div class="self-center font-semibold">
+            Puedes guardar funciones a partir de esta hora: {{ timeAvailable()! | customTimePipe }}
+          </div>
+        }
         <div>
           <label class="block text-sm font-semibold text-white/80 mb-2"> Sala </label>
           <input

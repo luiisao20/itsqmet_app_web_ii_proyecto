@@ -12,6 +12,7 @@ export class CustomDatePipe implements PipeTransform {
       day: 'numeric',
       month: 'short',
       year: 'numeric',
+      timeZone: 'UTC'
     })
       .format(date)
       .replace('.', '');

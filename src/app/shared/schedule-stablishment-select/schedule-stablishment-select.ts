@@ -4,12 +4,13 @@ import { Establishment } from '../../models/establishment';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { StablishmentsTable } from '../stablishments-table/stablishments-table';
 import { heroBuildingOffice } from '@ng-icons/heroicons/outline';
+import {ionCloseCircleSharp} from '@ng-icons/ionicons';
 
 @Component({
   selector: 'app-schedule-stablishment-select',
   imports: [Button, NgIcon, StablishmentsTable],
   templateUrl: './schedule-stablishment-select.html',
-  providers: provideIcons({ heroBuildingOffice }),
+  providers: provideIcons({ heroBuildingOffice, ionCloseCircleSharp }),
   styleUrl: './schedule-stablishment-select.css',
 })
 export class ScheduleStablishmentSelect {
@@ -31,5 +32,9 @@ export class ScheduleStablishmentSelect {
     if (this.stablishmentSelected()) {
       this.setStablishment.emit(this.stablishmentSelected()!);
     }
+  }
+
+  onDeselectStablishment() {
+    this.stablishmentSelected.set(null);
   }
 }

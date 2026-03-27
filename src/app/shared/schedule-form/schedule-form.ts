@@ -101,9 +101,9 @@ export class ScheduleForm {
         date: datetd!,
       })
       .then((res) => {
-        console.log(res);
-        
-        this.timeAvailable.set(res[0]);
+        if (res.length > 0) this.timeAvailable.set(res[0]);
+        else this.timeAvailable.set(null);
+
         this.showComplete.set(true);
       })
       .catch((error) => alert(error));

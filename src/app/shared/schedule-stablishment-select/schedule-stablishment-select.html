@@ -7,6 +7,9 @@
           <h3 class="text-lg font-bold text-white">{{ stablishmentSelected()?.name }}</h3>
           <p class="text-sm text-gray-400">{{ stablishmentSelected()?.address?.city }}</p>
         </div>
+        <button (click)="onDeselectStablishment()" class="text-white hover:text-main cursor-pointer">
+          <ng-icon name="ionCloseCircleSharp" size="50"></ng-icon>
+        </button>
       </div>
     } @else {
       <app-stablishments-table
