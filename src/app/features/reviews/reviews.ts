@@ -33,10 +33,6 @@ export class Reviews {
   private userUuid = localStorage.getItem('uuid') ?? '';
   private movieId = 0;
 
-  hasReviewed = computed(() =>
-    this.reviews().some((r) => r.user?.uuid === this.userUuid),
-  );
-
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
@@ -48,11 +44,17 @@ export class Reviews {
     }
   }
 
+  hasReviewed = computed(() => {
+    if (this.reviews().length > 0)
+      return this.reviews().some((r) => r.user?.uuid === this.userUuid);
+    return false;
+  });
+
   loadReviews() {
     this.loading.set(true);
-    this.reviewService.getReviewsByMovie(this.movieId).subscribe({
+    this.reviewService.getReviewsByMovie({ movieId: this.movieId, page: 0, size: 10 }).subscribe({
       next: (reviews) => {
-        this.reviews.set(reviews);
+        this.reviews.set(reviews.content);
         this.loading.set(false);
       },
       error: () => {

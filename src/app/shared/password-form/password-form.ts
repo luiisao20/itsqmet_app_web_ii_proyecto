@@ -45,8 +45,6 @@ export class PasswordForm {
     const oldPassword = this.form.get('currentPassword')?.value;
     const confirmPassword = this.form.get('confirmPassword')?.value;
 
-    console.log(oldPassword);
-
     this.loading.set(true);
     this.authService.updatePassword(oldPassword!, confirmPassword!).subscribe({
       next: (res) => {

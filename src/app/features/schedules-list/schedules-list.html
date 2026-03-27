@@ -1,13 +1,55 @@
-<div>
-  <div class="">
-    <label class="block text-sm font-semibold text-white/80 mb-2"
-      >Buscar por establecimiento
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-6">
+  <div>
+    <label class="block text-sm font-semibold text-white/80 mb-2">
+      Buscar por establecimiento
     </label>
     <input
       type="text"
-      (input)="stablishmentName.set($event.target.value)"
+      (input)="stablishment.set($event.target.value)"
       class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+      placeholder="Ej: Cine Escala"
     />
+  </div>
+
+  <div>
+    <label class="block text-sm font-semibold text-white/80 mb-2"> Buscar por película </label>
+    <input
+      type="text"
+      (input)="movie.set($event.target.value)"
+      class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2 placeholder:text-white/30"
+      placeholder="Ej: Avatar"
+    />
+  </div>
+
+  <div>
+    <label class="block text-sm font-semibold text-white/80 mb-2"> Fecha desde </label>
+    <input
+      type="date"
+      (input)="startDate.set($event.target.value)"
+      class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2"
+    />
+  </div>
+
+  <div>
+    <label class="block text-sm font-semibold text-white/80 mb-2"> Fecha hasta </label>
+    <input
+      type="date"
+      (input)="endDate.set($event.target.value)"
+      class="w-full rounded-lg bg-cyan-900/50 border-2 border-transparent focus:border-cyan-500 outline-none text-white px-4 py-2"
+    />
+  </div>
+  <div class="col-span-2 place-self-center">
+    <app-button
+      title="Limpiar campos"
+      (click)="clean()"
+      shadow="shadow-md shadow-cyan-500/20"
+      background="bg-cyan-500"
+      [border]="true"
+      [borderColor]="'border-white/10 hover:border-cyan-500/30'"
+      paddingHorizontal="px-6"
+      paddingVertical="py-2"
+      textStyle="text-white text-sm font-bold"
+    ></app-button>
   </div>
 </div>
 
