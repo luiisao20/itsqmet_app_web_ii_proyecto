@@ -50,7 +50,9 @@
       >
         {{ movie.title }}
       </h3>
-      <p class="text-xs text-gray-500 mb-4">{{ movie.categories?.[0]?.name }} • {{ movie.time }} min</p>
+      <p class="text-xs text-gray-500 mb-4">
+        {{ movie.categories?.[0]?.name }} • {{ movie.time }} min
+      </p>
       <ng-template #ticketIcon>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -100,6 +102,6 @@
     <h3 class="text-lg font-bold group-hover:text-(--main-color) transition-colors line-clamp-1">
       {{ movie.title }}
     </h3>
-    <p class="text-sm text-slate-500 font-medium">{{ movie.categories }} • {{ movie.time }} min</p>
+    <p class="text-sm text-slate-500 font-medium">{{ movie.categories?.[0]?.name }} • {{ movie.time }} min</p>
   </div>
 }
